@@ -1,6 +1,6 @@
-# Sistema_de_Controle_de_Estoque
+# Sistema de Controle de Estoque
 
-Construção de sistema utilizando interface gráfica, POO e arquivos para gerenciamentendo de estoque e venda de mercadoria.
+Construção de sistema utilizando interface gráfica, POO e arquivos para gerenciamentendo de estoque e venda de mercadoria. O sistema criado é utilizado para gerenciamento de um mercado.
 
 **Instituição:** Universidade Federal de Sergipe - UFS
 
