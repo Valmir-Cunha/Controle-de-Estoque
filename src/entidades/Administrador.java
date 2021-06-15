@@ -1,19 +1,19 @@
 package entidades;
 
-public class Vendedor extends Pessoa {
+public class Administrador extends Pessoa {
 	private String login;
 	private String senha;
 	private int codigoVendedor;
 	
-	public Vendedor() {
+	public Administrador() {
 		super();
 	}
-	
-	public Vendedor(String nome, String endereco, long numeroTelefone, String login, String senha,int codigoVendedor) {
+
+	public Administrador(String nome, String endereco, long numeroTelefone, String login, String senha,int codigoVendedor) {
 		super(nome, endereco, numeroTelefone);
-		this.codigoVendedor = codigoVendedor;
 		this.login = login;
 		this.senha = senha;
+		this.codigoVendedor = codigoVendedor;
 	}
 
 	public String getLogin() {
@@ -49,5 +49,19 @@ public class Vendedor extends Pessoa {
 		this.codigoVendedor = codigoVendedor;
 	}
 	
+	public void cadastrarCliente() {
+		
+	}
 	
+	public void excluirCliente() {
+			
+	}
+	public void cadastrarVendedor() {
+		
+	}
+	
+	public void excluirVendedor() {
+		
+	}
+
 }
