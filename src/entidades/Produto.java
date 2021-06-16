@@ -1,5 +1,9 @@
 package entidades;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Produto {
 	private int codigoProduto;
 	private String nome;
@@ -66,4 +70,19 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+        public String cadastrarProduto() throws IOException{
+            FileWriter fw = new FileWriter ("Produtos.txt",true);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.println("Codigo: "+this.codigoProduto);
+            pw.println("Nome: "+this.nome);
+            pw.println("Marca: "+this.marca);
+            pw.println("Preço: "+this.preco);
+            pw.println("Quantidade: "+this.quantidadeEstoque);
+            pw.println("Categoria: "+this.categoria);
+            pw.println("----------------");
+            pw.flush();
+            pw.close();
+            fw.close();
+            return null;
+        }
 }
