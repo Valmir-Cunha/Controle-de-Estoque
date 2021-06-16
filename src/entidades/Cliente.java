@@ -9,6 +9,7 @@ public class Cliente extends Pessoa{
 
 	public Cliente(String nome, String endereco, long numeroTelefone, double codigoCliente) {
 		super(nome, endereco, numeroTelefone);
+		//Fazer um tratamento de excessão
 		if(verificarCodigoCliente(codigoCliente)) {
 			this.codigoCliente = codigoCliente;
 		}else {
@@ -33,4 +34,7 @@ public class Cliente extends Pessoa{
 		}
 	}
 	
+	public void compras() {
+		
+	}
 }
