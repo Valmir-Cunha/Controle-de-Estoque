@@ -1,8 +1,10 @@
 package entidades;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class Produto {
 	private int codigoProduto;
@@ -71,7 +73,16 @@ public class Produto {
 		this.categoria = categoria;
 	}
         public String cadastrarProduto() throws IOException{
-            FileWriter fw = new FileWriter ("Produtos.txt",true);
+            Scanner inteiro = new Scanner(System.in);
+            String nome;
+            System.out.println("Qual nome do produto?");
+            nome = inteiro.next();
+            File fw = new File (nome+(".txt"));
+            if (fw.exists()) {
+                System.out.println("O produto já está cadastrado");
+                
+            } else {
+
             PrintWriter pw = new PrintWriter(fw);
             pw.println("Codigo: "+this.codigoProduto);
             pw.println("Nome: "+this.nome);
@@ -82,7 +93,8 @@ public class Produto {
             pw.println("----------------");
             pw.flush();
             pw.close();
-            fw.close();
             return null;
+        }
+        return null;
         }
 }
