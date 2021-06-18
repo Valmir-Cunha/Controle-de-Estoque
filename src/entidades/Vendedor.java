@@ -7,8 +7,8 @@ public class Vendedor extends Funcionario {
 		super();
 	}
 	
-	public Vendedor(String nome, String endereco, long numeroTelefone, String login, String senha, int codigoVendedor) {
-		super(nome, endereco, numeroTelefone, login, senha);
+	public Vendedor(String nome, String endereco, long numeroTelefone, String login, String senha, double salario, int codigoVendedor) {
+		super(nome, endereco, numeroTelefone, login, senha, salario);
 		this.codigoVendedor = codigoVendedor;
 	}
 
