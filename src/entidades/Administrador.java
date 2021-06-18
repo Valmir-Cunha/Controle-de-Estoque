@@ -7,9 +7,9 @@ public class Administrador extends Funcionario {
 		super();
 	}
 	
-	public Administrador(String nome, String endereco, long numeroTelefone, String login, String senha,
+	public Administrador(String nome, String endereco, long numeroTelefone, String login, String senha, double salario,
 			int codigoAdministrador) {
-		super(nome, endereco, numeroTelefone, login, senha);
+		super(nome, endereco, numeroTelefone, login, senha,salario);
 		this.codigoAdministrador = codigoAdministrador;
 	}
 

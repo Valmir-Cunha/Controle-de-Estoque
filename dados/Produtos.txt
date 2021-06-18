@@ -1,0 +1,14 @@
+Codigo: 1
+Nome: Biscoito recheado
+Marca: Vitarella
+Preço: 2.5
+Quantidade: 15
+Categoria: entidades.Categoria@16b3fc9e
+----------------
+Codigo: 1
+Nome: Biscoito recheado
+Marca: Vitarella
+Preço: 2.5
+Quantidade: 15
+Categoria: entidades.Categoria@16b3fc9e
+----------------
