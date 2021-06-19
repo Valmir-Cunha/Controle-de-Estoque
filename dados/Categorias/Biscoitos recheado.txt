@@ -1,3 +1,2 @@
-Codigo: 1
-Nome: Biscoitos recheado
+Nome do produto: Biscoitos recheado
 ----------------

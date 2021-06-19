@@ -34,7 +34,7 @@ public class GestorDeEstoque extends Funcionario {
                 if(buscarCategoria(produto.getCategoria().getNomeCategoria())) {
                 	pw.println("Categoria: "+produto.getCategoria());
                 }else {
-                	cadastraCategoria(produto.getCategoria());
+                	cadastraCategoria(produto);
                 }           
                 pw.println("----------------");
             	pw.flush();
@@ -52,11 +52,10 @@ public class GestorDeEstoque extends Funcionario {
 		}
 	}
 	
-	public void cadastraCategoria(Categoria categoria) throws IOException{
-			FileWriter fw = new FileWriter ("dados\\Categorias\\"+categoria.getNomeCategoria()+".txt",true);
+	public void cadastraCategoria(Produto produto) throws IOException{
+			FileWriter fw = new FileWriter ("dados\\Categorias\\"+produto.getCategoria().getNomeCategoria()+".txt",true);
 	        PrintWriter pw = new PrintWriter(fw);
-	        pw.println("Codigo: "+categoria.getCodigoCategoria());
-	        pw.println("Nome: "+categoria.getNomeCategoria());
+	        pw.println("Nome do produto: "+produto.getCategoria().getNomeCategoria());
 	        pw.println("----------------");
 	        pw.flush();
 	        pw.close();
