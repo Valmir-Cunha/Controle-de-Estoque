@@ -64,7 +64,16 @@ public class GestorDeEstoque extends Funcionario {
 	}
 	
 	public void excluirProdutos(Produto produto) {
-		
+            Scanner ler = new Scanner(System.in);
+            String nome;
+            System.out.println("Qual produto deseja excluir?");
+            nome = ler.next();
+            File fw = new File("dados\\Produtos\\"+nome+(".txt")); 
+            if (fw.delete()) { 
+                System.out.println("O produtofoi excluido");
+            } else {
+                System.out.println("O Produto não existe");
+    } 		
 	}
 		
 	public void alterarProduto(Produto produto) {
