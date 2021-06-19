@@ -72,29 +72,4 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-        public String cadastrarProduto() throws IOException{
-            Scanner inteiro = new Scanner(System.in);
-            String nome;
-            System.out.println("Qual nome do produto?");
-            nome = inteiro.next();
-            File fw = new File (nome+(".txt"));
-            if (fw.exists()) {
-                System.out.println("O produto já está cadastrado");
-                
-            } else {
-
-            PrintWriter pw = new PrintWriter(fw);
-            pw.println("Codigo: "+this.codigoProduto);
-            pw.println("Nome: "+this.nome);
-            pw.println("Marca: "+this.marca);
-            pw.println("Preço: "+this.preco);
-            pw.println("Quantidade: "+this.quantidadeEstoque);
-            pw.println("Categoria: "+this.categoria);
-            pw.println("----------------");
-            pw.flush();
-            pw.close();
-            return null;
-        }
-        return null;
-        }
 }
