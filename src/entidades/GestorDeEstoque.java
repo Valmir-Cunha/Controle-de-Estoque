@@ -16,11 +16,11 @@ public class GestorDeEstoque extends Funcionario {
 	}
 
 	public void cadastrarProdutos(Produto produto) throws IOException {
-            Scanner inteiro = new Scanner(System.in);
+            Scanner entrada = new Scanner(System.in);
             String nome;
             System.out.println("Qual nome do produto?");
-            nome = inteiro.next();
-            File fw = new File (nome+(".txt")); //Verifica se produto já está cadastrado.
+            nome = entrada.next();
+            File fw = new File ("dados\\Produtos\\"+nome+(".txt")); //Verifica se produto já está cadastrado.
             if (fw.exists()) {
                 System.out.println("O produto já está cadastrado");
                 
@@ -31,12 +31,38 @@ public class GestorDeEstoque extends Funcionario {
                 pw.println("Marca: "+produto.getMarca());
                 pw.println("Preço: "+produto.getPreco());
                 pw.println("Quantidade: "+produto.getQuantidadeEstoque());
-                pw.println("Categoria: "+produto.getCategoria());
+                if(buscarCategoria(produto.getCategoria().getNomeCategoria())) {
+                	pw.println("Categoria: "+produto.getCategoria());
+                }else {
+                	cadastraCategoria(produto.getCategoria());
+                }           
                 pw.println("----------------");
-                pw.flush();
-                pw.close();
-        }
-        }
+            	pw.flush();
+            	pw.close();
+            	entrada.close();
+            }
+    }
+	
+	public boolean buscarCategoria(String nome) {
+		File categoria = new File ("dados\\Categoria\\"+nome+(".txt")); //Verifica a categoria já existe.
+		if(categoria.exists()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public void cadastraCategoria(Categoria categoria) throws IOException{
+			FileWriter fw = new FileWriter ("dados\\Categorias\\"+categoria.getNomeCategoria()+".txt",true);
+	        PrintWriter pw = new PrintWriter(fw);
+	        pw.println("Codigo: "+categoria.getCodigoCategoria());
+	        pw.println("Nome: "+categoria.getNomeCategoria());
+	        pw.println("----------------");
+	        pw.flush();
+	        pw.close();
+	        fw.close();
+		
+	}
 	
 	public void excluirProdutos(Produto produto) {
 		

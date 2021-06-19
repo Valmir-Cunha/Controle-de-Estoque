@@ -26,4 +26,5 @@ public class Categoria{
 		this.codigoCategoria = codigoCategoria;
 	}
 	
+	
 }
