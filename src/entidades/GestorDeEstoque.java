@@ -1,6 +1,7 @@
 package entidades;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ public class GestorDeEstoque extends Funcionario {
             Scanner entrada = new Scanner(System.in);
             String nome;
             System.out.println("Qual nome do produto?");
-            nome = entrada.next();
+            nome = entrada.nextLine();
             File fw = new File ("dados\\Produtos\\"+nome+(".txt")); //Verifica se produto já está cadastrado.
             if (fw.exists()) {
                 System.out.println("O produto já está cadastrado");
@@ -32,9 +33,10 @@ public class GestorDeEstoque extends Funcionario {
                 pw.println("Preço: "+produto.getPreco());
                 pw.println("Quantidade: "+produto.getQuantidadeEstoque());
                 if(buscarCategoria(produto.getCategoria().getNomeCategoria())) {
-                	pw.println("Categoria: "+produto.getCategoria());
+                	pw.println("Categoria: "+produto.getCategoria().getNomeCategoria());
                 }else {
                 	cadastraCategoria(produto);
+                	pw.println("Categoria: "+produto.getCategoria().getNomeCategoria());
                 }           
                 pw.println("----------------");
             	pw.flush();
@@ -55,7 +57,7 @@ public class GestorDeEstoque extends Funcionario {
 	public void cadastraCategoria(Produto produto) throws IOException{
 			FileWriter fw = new FileWriter ("dados\\Categorias\\"+produto.getCategoria().getNomeCategoria()+".txt",true);
 	        PrintWriter pw = new PrintWriter(fw);
-	        pw.println("Nome do produto: "+produto.getCategoria().getNomeCategoria());
+	        pw.println("Nome do produto: "+produto.getNome());
 	        pw.println("----------------");
 	        pw.flush();
 	        pw.close();
@@ -76,7 +78,32 @@ public class GestorDeEstoque extends Funcionario {
     } 		
 	}
 		
-	public void alterarProduto(Produto produto) {
-		
+	public void alterarProduto(Produto produto) throws FileNotFoundException {
+		try (Scanner entrada = new Scanner(System.in)) {
+			String nome;
+			System.out.println("Qual nome do produto?");
+			nome = entrada.nextLine();
+			int adicionar;
+			System.out.println("Novo estoque: ");
+			adicionar = entrada.nextInt();            
+			produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + adicionar);
+			File fw = new File ("dados\\Produtos\\"+nome+".txt");
+			if (fw.exists()) {
+			    try (PrintWriter pw = new PrintWriter(fw)) {
+			        pw.println("Codigo: "+produto.getCodigoProduto());
+			        pw.println("Nome: "+produto.getNome());
+			        pw.println("Marca: "+produto.getMarca());
+			        pw.println("Preço: "+produto.getPreco());
+			        pw.println("Quantidade: "+produto.getQuantidadeEstoque());
+			        pw.println("Categoria: "+produto.getCategoria());
+			        pw.println("----------------");
+			        pw.flush();
+			    }//Adicionar catch
+			}else {
+			    System.out.println("O produto não existe");
+			    //System.out.println("Deseja cadastrar o produto?");
+			    
+			}
+		}
 	}
 }

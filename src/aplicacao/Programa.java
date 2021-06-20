@@ -13,6 +13,7 @@ public class Programa {
 		Categoria categoria = new Categoria("Biscoitos recheado",1);
 		Produto biscoito = new Produto(1,"Biscoito recheado","Vitarella",2.5,15,categoria);
 		gestor.cadastrarProdutos(biscoito);
+		//gestor.alterarProduto(biscoito);
 		System.out.print("Feito");
 	}
 

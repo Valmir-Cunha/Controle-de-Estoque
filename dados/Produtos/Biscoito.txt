@@ -3,4 +3,5 @@ Nome: Biscoito recheado
 Marca: Vitarella
 Preço: 2.5
 Quantidade: 15
+Categoria: Biscoitos recheado
 ----------------
