@@ -5,10 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GestorDeEstoque extends Funcionario {
 	private int codigoGestorEstoque;
+        List<Produto> produtos = new ArrayList<>();
 
 	public GestorDeEstoque(String nome, String endereco, long numeroTelefone, String login, String senha,
 			double salario, int codigoGestorEstoque) {
@@ -17,32 +20,14 @@ public class GestorDeEstoque extends Funcionario {
 	}
 
 	public void cadastrarProdutos(Produto produto) throws IOException {
-            Scanner entrada = new Scanner(System.in);
-            String nome;
-            System.out.println("Qual nome do produto?");
-            nome = entrada.nextLine();
-            File fw = new File ("dados\\Produtos\\"+nome+(".txt")); //Verifica se produto já está cadastrado.
-            if (fw.exists()) {
-                System.out.println("O produto já está cadastrado");
-                
-            } else { //Cadastrado o produto e faz o arquivo dele se o produto não estiver cadastrado.
-                PrintWriter pw = new PrintWriter(fw);
-                pw.println("Codigo: "+produto.getCodigoProduto());
-                pw.println("Nome: "+produto.getNome());
-                pw.println("Marca: "+produto.getMarca());
-                pw.println("Preço: "+produto.getPreco());
-                pw.println("Quantidade: "+produto.getQuantidadeEstoque());
-                if(buscarCategoria(produto.getCategoria().getNomeCategoria())) {
-                	pw.println("Categoria: "+produto.getCategoria().getNomeCategoria());
-                }else {
-                	cadastraCategoria(produto);
-                	pw.println("Categoria: "+produto.getCategoria().getNomeCategoria());
-                }           
-                pw.println("----------------");
-            	pw.flush();
-            	pw.close();
-            	entrada.close();
-            }
+          produtos.add(produto);
+          System.out.println("Codigo: "+produto.getCodigoProduto());
+          System.out.println("Nome: "+produto.getNome());
+          System.out.println("Marca: "+produto.getMarca());
+          System.out.println("Preço: "+produto.getPreco());
+          System.out.println("Quantidade: "+produto.getQuantidadeEstoque());
+          System.out.println("Categoria: "+produto.getCategoria());
+         
     }
 	
 	public boolean buscarCategoria(String nome) {
