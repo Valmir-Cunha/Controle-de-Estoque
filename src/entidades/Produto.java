@@ -8,9 +8,11 @@ public class Produto {
 	private int quantidadeEstoque;
 	private Categoria categoria;
 
+	public Produto() {
+	}
+	
 	public Produto(int codigoProduto, String nome, String marca, double preco, int quantidadeEstoque,
 			Categoria categoria) {
-		super();
 		this.codigoProduto = codigoProduto;
 		this.nome = nome;
 		this.marca = marca;
@@ -66,4 +68,17 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	@Override
+	public String toString() {
+		return "Nome: " + nome 
+				+"\nCodigo do Produto: " + codigoProduto 
+				+"\nMarca: " + marca 
+				+"\nPreco do protudo: " + preco
+				+ "\nQuantidade no estoque: " + quantidadeEstoque 
+				+"\nCategoria: " + categoria
+				+"\n--------------------------------------------------------";
+	}
+	
+	
 }

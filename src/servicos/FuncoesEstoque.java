@@ -1,15 +1,9 @@
 package servicos;
 
-import java.util.List;
-import entidades.Produto;
-
 public interface FuncoesEstoque {
 	
-	public List<Produto> produtosCadasrados();
-	public List<Produto> produtosDisponiveis();
-	public List<Produto> produtosIndisponiveis();
-	public List<Produto> produtosExcluidos();
-	
-	
-
+	public void exibirProdutosCadastrados();
+	public void exibirProdutosDisponiveis();
+	public void exibirProdutosIndisponiveis();
+	public void exibirProdutosExcluidos();
 }

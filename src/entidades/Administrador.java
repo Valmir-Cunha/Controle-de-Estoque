@@ -5,27 +5,24 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import servicos.Estoque;
+import servicos.Administracao;
+
 public class Administrador extends Funcionario {
-	private int codigoAdministrador;
+	private Estoque estoque; 
+	private Administracao gerencia;
 	
 	public Administrador() {
 		super();
 	}
 	
-	public Administrador(String nome, String endereco, long numeroTelefone, String login, String senha, double salario,
-			int codigoAdministrador) {
-		super(nome, endereco, numeroTelefone, login, senha,salario);
-		this.codigoAdministrador = codigoAdministrador;
+	public Administrador(String nome, String endereco, long numeroTelefone, int id, String login, String senha,
+			double salario, Estoque estoque, Administracao gerencia) {
+		super(nome, endereco, numeroTelefone, id, login, senha, salario);
+		this.estoque = estoque;
+		this.gerencia = gerencia;
 	}
 
-	public int getCodigoAdministrador() {
-		return codigoAdministrador;
-	}
-
-	public void setCodigoAdministrador(int codigoAdministrador) {
-		this.codigoAdministrador = codigoAdministrador;
-	}
-	
 	public void cadastrarCliente(Cliente cliente) throws FileNotFoundException {
 		 Scanner entrada = new Scanner(System.in);
          String nome;
@@ -63,7 +60,7 @@ public class Administrador extends Funcionario {
             
         } else { //Cadastra o cliente e faz o arquivo dele se não estiver cadastrado.
             PrintWriter pw = new PrintWriter(fw);
-            pw.println("Código do vendedor: " +vendedor.getCodigoVendedor());
+            pw.println("Código do vendedor: " +vendedor.getId());
             pw.println("Nome: "+vendedor.getNome());
             pw.println("Endereço: "+vendedor.getEndereco());
             pw.println("Número de telefone: "+vendedor.getNumeroTelefone());

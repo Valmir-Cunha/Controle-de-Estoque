@@ -3,6 +3,7 @@ package entidades;
 import java.util.Scanner;
 
 public class Funcionario extends Pessoa {
+	private int id;
 	private String login;
 	private String senha;
 	private double salario;
@@ -11,11 +12,17 @@ public class Funcionario extends Pessoa {
 		super();
 	}
 	
-	public Funcionario(String nome, String endereco, long numeroTelefone, String login, String senha,double salario) {
+	public Funcionario(String nome, String endereco, long numeroTelefone, int id, String login, String senha,
+			double salario) {
 		super(nome, endereco, numeroTelefone);
+		this.id = id;
 		this.login = login;
 		this.senha = senha;
 		this.salario = salario;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getLogin() {
