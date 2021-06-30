@@ -16,30 +16,36 @@ public class GestorDeEstoque extends Funcionario {
 	private Estoque estoque; 
     //private List<Produto> produtos = new ArrayList<>();
 	
-	public GestorDeEstoque(String nome, String endereco, long numeroTelefone, int id, String login, String senha,
-			double salario, Estoque estoque) {
-		super(nome, endereco, numeroTelefone, id, login, senha, salario);
-		this.estoque = estoque;
+	public GestorDeEstoque(String nome, String endereco, long numeroTelefone, int id, String login, String senha,double salario, Estoque estoque) {
+            super(nome, endereco, numeroTelefone, id, login, senha, salario);
+            this.estoque = estoque;
 	}
 	
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
 	public void cadastrarProdutos() {
-		Scanner entrada = new Scanner(System.in);
-		Produto produto = new Produto();
-		System.out.println("Por favor, digite os dados do produto a seguir!");
+	Scanner entrada = new Scanner(System.in);
+	Produto produto = new Produto();
+	String categoria;
+	System.out.println("Por favor, digite os dados do produto a seguir!");
         System.out.println("Codigo: ");
         produto.setCodigoProduto(entrada.nextInt());
+        entrada.nextLine();
         System.out.println("Nome: ");
         produto.setNome(entrada.nextLine());
-        entrada.next();
         System.out.println("Marca: ");
         produto.setMarca(entrada.nextLine());
-        entrada.next();
         System.out.println("Preco: ");
         produto.setPreco(entrada.nextDouble());
+        entrada.nextLine();
         System.out.println("Quantidade: ");
         produto.setQuantidadeEstoque(entrada.nextInt());
+        entrada.nextLine();
         System.out.println("Digite o nome da categoria: ");
-        produto.setCategoria(buscarCategoria(entrada.nextLine()));
+        categoria = entrada.nextLine();
+        produto.setCategoria(buscarCategoria(categoria));
 		for (Produto produtoArray : estoque.getProdutosCadastrados()) {
 			if(produtoArray.getCodigoProduto() == produto.getCodigoProduto()) {
 				System.out.println("Um produto de mesmo codigo ja esta cadastrado, "

@@ -73,10 +73,10 @@ public class Produto {
 	public String toString() {
 		return "Nome: " + nome 
 				+"\nCodigo do Produto: " + codigoProduto 
-				+"\nMarca: " + marca 
+				+"\nMarca: " + marca
 				+"\nPreco do protudo: " + preco
 				+ "\nQuantidade no estoque: " + quantidadeEstoque 
-				+"\nCategoria: " + categoria
+				+"\nCategoria: " + categoria.getNomeCategoria()
 				+"\n--------------------------------------------------------";
 	}
 	

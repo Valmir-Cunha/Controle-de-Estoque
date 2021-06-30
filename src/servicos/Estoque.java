@@ -39,7 +39,7 @@ public class  Estoque implements FuncoesEstoque {
 	public void exibirProdutosCadastrados() {
 		System.out.println("Produtos cadastrados: ");
 		for (Produto produto : produtosCadastrados) {
-			System.out.println(produto);
+			System.out.println(produto.toString());
 		}
 	}
 	

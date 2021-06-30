@@ -30,16 +30,15 @@ public class Funcionario extends Pessoa {
 	}
 	
 	public void modificarLogin() {
-		Scanner entrada = new Scanner(System.in);
-		System.out.println("Digite a senha atual:");
-		if(validarSenha(entrada.nextLine())) {
-			//Busca se login está livre
-			System.out.println("Digite seu novo login: ");
-			this.login = entrada.nextLine();
-		}else {
-			System.out.print("Senhas nao conferem! \nTente navamente.");
-		}
-		entrada.close();
+            try (Scanner entrada = new Scanner(System.in)) {
+                System.out.println("Digite a senha atual:");
+                if(validarSenha(entrada.nextLine())) {
+                    System.out.println("Digite seu novo login: ");
+                    this.login = entrada.nextLine();
+                }else {
+                    System.out.print("Senhas nao conferem! \nTente navamente.");
+                }
+            }
 	}
 
 	public String getSenha() {
