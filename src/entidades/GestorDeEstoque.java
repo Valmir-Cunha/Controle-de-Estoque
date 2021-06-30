@@ -2,6 +2,9 @@ package entidades;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +126,13 @@ public class GestorDeEstoque extends Funcionario {
 			System.out.println("Categoria nao existe/ nao encontrada");
 		}
 	}
+        public void salvar() throws FileNotFoundException, IOException{
+            try (FileOutputStream f = new FileOutputStream(new File("\\dados\\Produtos.txt"),true)) {
+                ObjectOutputStream o = new ObjectOutputStream(f);
+                o.writeObject(estoque.getProdutosCadastrados().toString());
+                o.close();
+            }
+       }
 	
 	/*
 	public void cadastraCategoria(Produto produto) throws IOException{
