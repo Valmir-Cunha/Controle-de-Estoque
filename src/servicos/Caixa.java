@@ -1,11 +1,17 @@
 package servicos;
 
-import entidades.Cliente;
 import entidades.Vendas;
 
 public class Caixa {
-    Estoque estoque;
-    Vendas venda;
-	
+    private Estoque estoque;
+    private Vendas venda;
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public Vendas getVenda() {
+        return venda;
+    }
    
 }

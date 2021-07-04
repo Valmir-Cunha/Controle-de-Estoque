@@ -136,7 +136,6 @@ public class JLogin extends javax.swing.JFrame {
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         // Botao "entrar"
-        
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**
