@@ -27,18 +27,43 @@ public class jMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabelMenu = new javax.swing.JLabel();
+        jButtonAdm = new javax.swing.JButton();
+        jButtonProduto = new javax.swing.JButton();
+        jButtonEstoque = new javax.swing.JButton();
+        jButtonCaixa = new javax.swing.JButton();
+        imagem = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelMenu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelMenu.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMenu.setText("Menu");
+        getContentPane().add(jLabelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+
+        jButtonAdm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonAdm.setText("Administração");
+        getContentPane().add(jButtonAdm, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
+
+        jButtonProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonProduto.setText("Produtos");
+        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, -1, -1));
+
+        jButtonEstoque.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonEstoque.setText("Estoque");
+        getContentPane().add(jButtonEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
+
+        jButtonCaixa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonCaixa.setText("Caixa");
+        getContentPane().add(jButtonCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 80, -1));
+
+        imagem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        imagem.setForeground(new java.awt.Color(255, 255, 255));
+        imagem.setIcon(new javax.swing.ImageIcon("C:\\Users\\vinic\\Documents\\GitHub\\Controle-de-Estoque\\src\\imagem\\png-clipart-online-marketplace-marketing-e-commerce-shopping-marketplace-logo-supermarket.png")); // NOI18N
+        imagem.setText("Menu");
+        getContentPane().add(imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, 10, 750, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +104,11 @@ public class jMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel imagem;
+    private javax.swing.JButton jButtonAdm;
+    private javax.swing.JButton jButtonCaixa;
+    private javax.swing.JButton jButtonEstoque;
+    private javax.swing.JButton jButtonProduto;
+    private javax.swing.JLabel jLabelMenu;
     // End of variables declaration//GEN-END:variables
 }
