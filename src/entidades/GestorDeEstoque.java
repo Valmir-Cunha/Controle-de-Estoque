@@ -1,8 +1,10 @@
 package entidades;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
@@ -139,6 +141,16 @@ public class GestorDeEstoque extends Funcionario {
                 o.close();
             }
        }
+        public void CarregarArquivoEstoque() throws IOException{
+            File arquivo = new File("Produtos.tx");
+            try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+                String estoquetotal;
+                while (in.ready()) {
+                    estoquetotal = in.readLine();
+                    estoque.getProdutosCadastrados().add(estoquetotal); 
+                }
+            }
+        }
 	
 	/*
 	public void cadastraCategoria(Produto produto) throws IOException{
