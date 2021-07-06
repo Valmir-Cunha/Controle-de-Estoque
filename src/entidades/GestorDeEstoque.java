@@ -84,36 +84,36 @@ public class GestorDeEstoque extends Funcionario {
 
 
     public void excluirProdutos(Produto produto) {
-            for (Produto produtoArray : estoque.getProdutosCadastrados()) {
-                    if(produtoArray.equals(produto)) {
-                            estoque.getProdutosCadastrados().remove(produto);
-                            estoque.getProdutosExcluidos().add(produto);
-                            System.out.println("Produto excluido");
-                    }
+        for (Produto produtoArray : estoque.getProdutosCadastrados()) {
+            if(produtoArray.equals(produto)) {
+                estoque.getProdutosCadastrados().remove(produto);
+                estoque.getProdutosExcluidos().add(produto);
+                System.out.println("Produto excluido");
             }
+        }
     }
 
     public Categoria buscarCategoria(String nome) {
-            for (Categoria categoria: estoque.getCategorias()) {
-                    if(categoria.getNomeCategoria().equals(nome)) {
-                            return categoria;
-                    }
+        for (Categoria categoria: estoque.getCategorias()) {
+            if(categoria.getNomeCategoria().equals(nome)) {
+                    return categoria;
             }
-            return cadastrarCategoria(nome);
+        }
+        return cadastrarCategoria(nome);
     }
 
     public Categoria cadastrarCategoria(String nome) {
-            Categoria categoria = new Categoria(nome,9999); //id temporario
-            estoque.getCategorias().add(categoria);
-            return categoria;
+        Categoria categoria = new Categoria(nome,9999); //id temporario
+        estoque.getCategorias().add(categoria);
+        return categoria;
     }
 
     public void excluirCategoria(Categoria categoria) {
-            if(estoque.getCategorias().remove(categoria)) {
-                    System.out.println("Categoria excluida");
-            }else {
-                    System.out.println("Categoria nao existe/ nao encontrada");
-            }
+        if(estoque.getCategorias().remove(categoria)) {
+                System.out.println("Categoria excluida");
+        }else {
+                System.out.println("Categoria nao existe/ nao encontrada");
+        }
     }
     public void salvar() throws FileNotFoundException, IOException{
         try (FileOutputStream f = new FileOutputStream(new File("\\dados\\Produtos.txt"),true)) {
@@ -128,7 +128,7 @@ public class GestorDeEstoque extends Funcionario {
             String estoquetotal;
             while (in.ready()) {
                 estoquetotal = in.readLine();
-                estoque.getProdutosCadastrados().add(estoquetotal); 
+                //estoque.getProdutosCadastrados().add(estoquetotal); 
             }
         }
     }

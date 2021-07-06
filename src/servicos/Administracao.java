@@ -5,7 +5,6 @@ import java.util.List;
 
 import entidades.Cliente;
 import entidades.Funcionario;
-import entidades.Produto;
 import entidades.Vendas;
 
 

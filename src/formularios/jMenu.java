@@ -5,16 +5,30 @@
  */
 package formularios;
 
+import servicos.Administracao;
+import servicos.Estoque;
+
 /**
  *
  * @author vinic
  */
 public class jMenu extends javax.swing.JFrame {
-
+    Administracao adm = new Administracao();
+    Estoque est = new Estoque();
     /**
      * Creates new form jMenu
      */
     public jMenu() {
+        initComponents();
+    }
+    /**
+     * Creates new form jMenu
+     * @param adm
+     * @param estoque
+     */
+    public jMenu(Administracao adm,Estoque estoque) {
+        this.est = estoque;
+        this.adm = adm;
         initComponents();
     }
 
@@ -28,10 +42,11 @@ public class jMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelMenu = new javax.swing.JLabel();
-        jButtonAdm = new javax.swing.JButton();
+        jButtonClientes = new javax.swing.JButton();
         jButtonProduto = new javax.swing.JButton();
-        jButtonEstoque = new javax.swing.JButton();
+        jButtonCategorias = new javax.swing.JButton();
         jButtonCaixa = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
         imagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,23 +56,52 @@ public class jMenu extends javax.swing.JFrame {
         jLabelMenu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelMenu.setForeground(new java.awt.Color(255, 255, 255));
         jLabelMenu.setText("Menu");
-        getContentPane().add(jLabelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, -1, -1));
+        getContentPane().add(jLabelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, -1));
 
-        jButtonAdm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonAdm.setText("Administração");
-        getContentPane().add(jButtonAdm, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
+        jButtonClientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonClientes.setText("Clientes");
+        jButtonClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClientesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
 
         jButtonProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonProduto.setText("Produtos");
-        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, -1, -1));
+        jButtonProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProdutoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
 
-        jButtonEstoque.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonEstoque.setText("Estoque");
-        getContentPane().add(jButtonEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
+        jButtonCategorias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonCategorias.setText("Categorias");
+        jButtonCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCategoriasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
 
         jButtonCaixa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonCaixa.setText("Caixa");
+        jButtonCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCaixaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButtonCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 80, -1));
+
+        jButtonFechar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
 
         imagem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         imagem.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,6 +111,33 @@ public class jMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriasActionPerformed
+        // Botão categoria
+        JCategoria categoria = new JCategoria(est);
+        categoria.setVisible(true);
+    }//GEN-LAST:event_jButtonCategoriasActionPerformed
+
+    private void jButtonCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCaixaActionPerformed
+        //Botão do caixa
+        JCaixa caixa = new JCaixa(adm,est);
+        caixa.setVisible(true);
+    }//GEN-LAST:event_jButtonCaixaActionPerformed
+
+    private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed
+        // Botão cliente
+        JClientes clientes = new JClientes(adm);
+        clientes.setVisible(true);
+    }//GEN-LAST:event_jButtonClientesActionPerformed
+
+    private void jButtonProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoActionPerformed
+        // Botão produtos
+    }//GEN-LAST:event_jButtonProdutoActionPerformed
+
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+        // Botão fechar
+        System.exit(0);
+    }//GEN-LAST:event_jButtonFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,9 +176,10 @@ public class jMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imagem;
-    private javax.swing.JButton jButtonAdm;
     private javax.swing.JButton jButtonCaixa;
-    private javax.swing.JButton jButtonEstoque;
+    private javax.swing.JButton jButtonCategorias;
+    private javax.swing.JButton jButtonClientes;
+    private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonProduto;
     private javax.swing.JLabel jLabelMenu;
     // End of variables declaration//GEN-END:variables

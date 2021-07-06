@@ -12,13 +12,13 @@ import servicos.Estoque;
  *
  * @author vinic
  */
-public class JVenda extends javax.swing.JFrame {
+public class JCaixa extends javax.swing.JFrame {
     Administracao adm = new Administracao();
     Estoque est = new Estoque();
     /**
      * Creates new form JVendas
      */
-    public JVenda() {
+    public JCaixa() {
         initComponents();
     }
     
@@ -27,7 +27,7 @@ public class JVenda extends javax.swing.JFrame {
      * @param adm
      * @param est
      */
-    public JVenda(Administracao adm, Estoque est) {
+    public JCaixa(Administracao adm, Estoque est) {
         initComponents();
         this.adm = adm;
         this.est = est;
@@ -243,21 +243,23 @@ public class JVenda extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JCaixa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JCaixa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JCaixa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JCaixa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JVenda().setVisible(true);
+                new JCaixa().setVisible(true);
             }
         });
     }
