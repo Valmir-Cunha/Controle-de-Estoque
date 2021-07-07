@@ -18,7 +18,7 @@ public class GestorDeEstoque extends Funcionario {
     private Estoque estoque; 
     //private List<Produto> produtos = new ArrayList<>();
 
-    public GestorDeEstoque(String nome, String endereco, long numeroTelefone, int id, String login, String senha,double salario, Estoque estoque) {
+    public GestorDeEstoque(String nome, String endereco, String numeroTelefone, int id, String login, String senha,double salario, Estoque estoque) {
         super(nome, endereco, numeroTelefone, id, login, senha, salario);
         this.estoque = estoque;
     }

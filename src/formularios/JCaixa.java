@@ -33,6 +33,7 @@ public class JCaixa extends javax.swing.JFrame {
         this.est = est;
         listarClientes();
         listarProdutos();
+        
     }
 
     /**
@@ -70,7 +71,27 @@ public class JCaixa extends javax.swing.JFrame {
         jLabelNomeCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeCliente.setText("Nome cliente:");
 
+        jTextFieldCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldCodClienteFocusLost(evt);
+            }
+        });
+
         jComboBoxNomeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxNomeCliente.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxNomeClientePopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        jComboBoxNomeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxNomeClienteActionPerformed(evt);
+            }
+        });
 
         jLabelCodProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelCodProduto.setText("Código produto:");
@@ -226,6 +247,29 @@ public class JCaixa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCodProdutoActionPerformed
 
+    private void jComboBoxNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNomeClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxNomeClienteActionPerformed
+
+    private void jTextFieldCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteFocusLost
+        // Evento que carrega um cliente no box pelo codigo
+        String nome;
+        nome = adm.buscarClienteCodigo(Integer.parseInt(jTextFieldCodCliente.getText()));
+        jComboBoxNomeCliente.setSelectedItem(nome);
+    }//GEN-LAST:event_jTextFieldCodClienteFocusLost
+
+    private void jComboBoxNomeClientePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
+        // Evento que carrega um cliente no codigo pelo box
+        int i;
+        String txt;
+        if(jComboBoxNomeCliente.isPopupVisible()){
+            //jComboBoxNomeCliente.getSelectedItem().toString(); //Pegando string do combo box
+            //i = est.encontrarProdutoNome(jComboBoxNomeCliente.getSelectedItem().toString());
+            //txt = Integer.toString(i);
+            //jTextFieldCodCliente.setText(txt);
+        }
+    }//GEN-LAST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
+
     /**
      * @param args the command line arguments
      */
@@ -272,9 +316,9 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     private void listarProdutos(){
-        jComboBoxNomeCliente.removeAllItems();
-        for (int i =0 ; i < est.getProdutosDisponiveis().size(); i++){
-            jComboBoxNomeCliente.addItem(est.getProdutosDisponiveis().get(i).getNome());
+        jComboBoxNomeProduto.removeAllItems();
+        for (int i =0 ; i < est.getProdutosCadastrados().size(); i++){
+            jComboBoxNomeProduto.addItem(est.getProdutosCadastrados().get(i).getNome());
         }
     }
 

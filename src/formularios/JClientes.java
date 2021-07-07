@@ -25,8 +25,8 @@ public class JClientes extends javax.swing.JFrame {
      * @param adm
      */
     public JClientes(Administracao adm) {
-        this.adm = adm;
         initComponents();
+        this.adm = adm;
     }
 
     /**
@@ -42,8 +42,6 @@ public class JClientes extends javax.swing.JFrame {
         jButtonClientesCadastrados = new javax.swing.JButton();
         jButtonClientesExcluidos = new javax.swing.JButton();
         jButtonCadastrarClientes = new javax.swing.JButton();
-        jButtonExcluirClientes = new javax.swing.JButton();
-        jButtonEditarClientes = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,18 +51,27 @@ public class JClientes extends javax.swing.JFrame {
 
         jButtonClientesCadastrados.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonClientesCadastrados.setText("Clientes cadastrados");
+        jButtonClientesCadastrados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClientesCadastradosActionPerformed(evt);
+            }
+        });
 
         jButtonClientesExcluidos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonClientesExcluidos.setText("Clientes excluídos");
+        jButtonClientesExcluidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClientesExcluidosActionPerformed(evt);
+            }
+        });
 
         jButtonCadastrarClientes.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCadastrarClientes.setText("Cadastrar cliente");
-
-        jButtonExcluirClientes.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonExcluirClientes.setText("Excluir cliente");
-
-        jButtonEditarClientes.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonEditarClientes.setText("Editar cliente");
+        jButtonCadastrarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarClientesActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton1.setText("Voltar");
@@ -78,9 +85,7 @@ public class JClientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonClientesCadastrados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonClientesExcluidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCadastrarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonExcluirClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonEditarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonCadastrarClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(101, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(145, 145, 145)
@@ -102,17 +107,31 @@ public class JClientes extends javax.swing.JFrame {
                 .addComponent(jButtonClientesExcluidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jButtonCadastrarClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jButtonEditarClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jButtonExcluirClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCadastrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarClientesActionPerformed
+        // Botao de cadastrar clientes
+        JCadastroCliente cliente = new JCadastroCliente(adm);
+        cliente.setVisible(true);
+    }//GEN-LAST:event_jButtonCadastrarClientesActionPerformed
+
+    private void jButtonClientesCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesCadastradosActionPerformed
+        // Botao lista clientes cadastrados
+        jListaClientes listaCliente = new jListaClientes();
+        listaCliente.setVisible(true);
+    }//GEN-LAST:event_jButtonClientesCadastradosActionPerformed
+
+    private void jButtonClientesExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesExcluidosActionPerformed
+        // Botao lista excluidos
+        JClientesExcluidos excluidos = new JClientesExcluidos();
+        excluidos.setVisible(true);
+    }//GEN-LAST:event_jButtonClientesExcluidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,8 +173,6 @@ public class JClientes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCadastrarClientes;
     private javax.swing.JButton jButtonClientesCadastrados;
     private javax.swing.JButton jButtonClientesExcluidos;
-    private javax.swing.JButton jButtonEditarClientes;
-    private javax.swing.JButton jButtonExcluirClientes;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

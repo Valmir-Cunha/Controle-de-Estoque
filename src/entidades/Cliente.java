@@ -3,7 +3,7 @@ package entidades;
 import java.util.List;
 
 public class Cliente extends Pessoa{
-	private double codigoCliente;
+	private int codigoCliente;
 	private List<Produto> carrinho;
 	private List<Vendas> comprasFeitas;
 	
@@ -11,12 +11,12 @@ public class Cliente extends Pessoa{
 		super();
 	}
 
-	public Cliente(String nome, String endereco, long numeroTelefone, double codigoCliente) {
+	public Cliente(String nome, String endereco, String numeroTelefone, int codigoCliente) {
 		super(nome, endereco, numeroTelefone);
 		this.codigoCliente = codigoCliente;
 	}
 
-	public double getCodigoCliente() {
+	public int getCodigoCliente() {
 		return codigoCliente;
 	}
 	

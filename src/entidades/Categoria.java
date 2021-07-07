@@ -1,9 +1,12 @@
 package entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Categoria{
     private String nomeCategoria;
     private int codigoCategoria;
-
+    private List<Produto> produtos = new ArrayList<>();
     public Categoria(String nomeCategoria, int codigoCategoria) {
             super();
             this.nomeCategoria = nomeCategoria;
@@ -26,5 +29,11 @@ public class Categoria{
             this.codigoCategoria = codigoCategoria;
     }
 
-	
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
 }

@@ -3,12 +3,12 @@ package entidades;
 public abstract class Pessoa {
 	public String nome;
 	public String endereco;
-	private long numeroTelefone;
+	private String numeroTelefone;
 	
 	public Pessoa() {
 	}
 	
-	public Pessoa(String nome, String endereco, long numeroTelefone) {
+	public Pessoa(String nome, String endereco, String numeroTelefone) {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.numeroTelefone = numeroTelefone;
@@ -30,11 +30,11 @@ public abstract class Pessoa {
 		this.endereco = endereco;
 	}
 
-	public long getNumeroTelefone() {
+	public String getNumeroTelefone() {
 		return numeroTelefone;
 	}
 
-	public void setNumeroTelefone(long numeroTelefone) {
+	public void setNumeroTelefone(String numeroTelefone) {
 		this.numeroTelefone = numeroTelefone;
 	}
 	

@@ -39,8 +39,6 @@ public class JCategoria extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonCategoriasCadastradas = new javax.swing.JButton();
-        jButtonEditarCategoria = new javax.swing.JButton();
-        jButtonExcluirCategoria = new javax.swing.JButton();
         jButtonCadastrarCategoria = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
         jButtonVoltar = new javax.swing.JButton();
@@ -49,15 +47,19 @@ public class JCategoria extends javax.swing.JFrame {
 
         jButtonCategoriasCadastradas.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCategoriasCadastradas.setText("Categorias cadastradas");
-
-        jButtonEditarCategoria.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonEditarCategoria.setText("Editar categoria");
-
-        jButtonExcluirCategoria.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonExcluirCategoria.setText("Excluir categoria");
+        jButtonCategoriasCadastradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCategoriasCadastradasActionPerformed(evt);
+            }
+        });
 
         jButtonCadastrarCategoria.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCadastrarCategoria.setText("Cadastrar categoria");
+        jButtonCadastrarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarCategoriaActionPerformed(evt);
+            }
+        });
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelTitulo.setText("Categorias");
@@ -70,42 +72,48 @@ public class JCategoria extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonCategoriasCadastradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonEditarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonExcluirCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonCadastrarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelTitulo)
-                .addGap(147, 147, 147))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(150, Short.MAX_VALUE)
+                .addGap(110, 110, 110))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonVoltar)
-                .addGap(150, 150, 150))
+                .addGap(119, 119, 119))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButtonCategoriasCadastradas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jButtonEditarCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jButtonExcluirCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addComponent(jButtonCadastrarCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(jButtonVoltar)
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonCadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarCategoriaActionPerformed
+        // Botao cadastrar categoria
+        JCadastroCategoria cadastroCategoria = new JCadastroCategoria();
+        cadastroCategoria.setVisible(true);
+    }//GEN-LAST:event_jButtonCadastrarCategoriaActionPerformed
+
+    private void jButtonCategoriasCadastradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriasCadastradasActionPerformed
+        // Botao categoria cadastradas
+        JListaCategorias listaCategoria = new JListaCategorias();
+        listaCategoria.setVisible(true);
+    }//GEN-LAST:event_jButtonCategoriasCadastradasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,8 +153,6 @@ public class JCategoria extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrarCategoria;
     private javax.swing.JButton jButtonCategoriasCadastradas;
-    private javax.swing.JButton jButtonEditarCategoria;
-    private javax.swing.JButton jButtonExcluirCategoria;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabelTitulo;
     // End of variables declaration//GEN-END:variables
