@@ -11,6 +11,10 @@ import servicos.Administracao;
 import servicos.Estoque;
 import entidades.Funcionario;
 import entidades.Produto;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Arquivos {
     Estoque estoque;
@@ -41,7 +45,12 @@ public class Arquivos {
 
     }
 
-    public void registrarProdutos(){
+    public void registrarProdutos() throws FileNotFoundException, IOException{
+        try (FileOutputStream f = new FileOutputStream(new File("\\dados\\Produtos.txt"),true)) {
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            o.writeObject(estoque.getProdutosCadastrados().toString());
+            o.close();
+        }
 
     }
 
@@ -65,7 +74,15 @@ public class Arquivos {
 
     }
 
-    public void carregarProdutos() {
+    public void carregarProdutos() throws FileNotFoundException, IOException {
+        File arquivo = new File("\\dados\\Produtos.txt");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String estoquetotal;
+            while (in.ready()) {
+                estoquetotal = in.readLine();
+                //estoque.getProdutosCadastrados().add(estoquetotal); 
+            }
+        }
 
     }
 
