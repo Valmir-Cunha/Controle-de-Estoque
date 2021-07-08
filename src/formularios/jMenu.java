@@ -132,6 +132,8 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoActionPerformed
         // Botão produtos
+        JProdutos produtos = new JProdutos();
+        produtos.setVisible(true);
     }//GEN-LAST:event_jButtonProdutoActionPerformed
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
