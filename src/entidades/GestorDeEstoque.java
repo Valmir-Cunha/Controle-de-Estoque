@@ -27,7 +27,7 @@ public class GestorDeEstoque extends Funcionario {
             return estoque;
     }
 
-    public void cadastrarProdutos() {
+    public String cadastrarProdutos() {
         Scanner entrada = new Scanner(System.in);
         Produto produto = new Produto();
         String categoria;
