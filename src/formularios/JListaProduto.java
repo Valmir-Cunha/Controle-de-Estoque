@@ -13,36 +13,51 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author vinic
+ * @author aliss
  */
 public class JListaProduto extends javax.swing.JFrame {
 
     /**
-     * Creates new form JProduto
+     * Creates new form JListaProdutos
      */
-    private JListaProduto() {
+    public JListaProduto() {
         initComponents();
+        addRowToJTable();
     }
-            public ArrayList ArrayProdutos(){
+
+                    public ArrayList ArrayProdutos(){
         List<Produto> produtosCadastrados = new ArrayList<>();
         Categoria c = new Categoria("sfg",1);
+        Produto p1 = new Produto(01,"Biscoito","Vita",1.99,400,c);
+        Produto p2 = new Produto(02,"Nescau","Vita",3.99,100,c);
+        Produto p3 = new Produto(03,"Bolacha","Vita",2.99,200,c);
+        Produto p4 = new Produto(04,"Pipoca","Vita",0.99,300,c);
+        Produto p5 = new Produto(05,"Doce","Vita",1.99,200,c);
+        Produto p6 = new Produto(06,"teste","Vita",2.49,200,c);
+        
+        produtosCadastrados.add(p1);
+        produtosCadastrados.add(p2);
+        produtosCadastrados.add(p3);
+        produtosCadastrados.add(p4);
+        produtosCadastrados.add(p5);
+        produtosCadastrados.add(p6);
         return (ArrayList) produtosCadastrados;
     }
-    
     public void addRowToJTable(){
-        List<Produto> produtosCadastrados = new ArrayList<>();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        ArrayList<Produto> produtosCadastrados = ArrayProdutos();
         Object rowData[] = new Object[6];
         for(int i = 0 ; i < produtosCadastrados.size();i++){
             rowData[0] = produtosCadastrados.get(i).codigoProduto;
             rowData[1] = produtosCadastrados.get(i).nome;
             rowData[2] = produtosCadastrados.get(i).marca;
             rowData[3] = produtosCadastrados.get(i).categoria;
-            rowData[4] = produtosCadastrados.get(i).preco;
-            rowData[5] = produtosCadastrados.get(i).quantidadeEstoque;
+            rowData[4] = produtosCadastrados.get(i).quantidadeEstoque;
+            rowData[5] = produtosCadastrados.get(i).preco;
+            model.addRow(rowData);
             
         }
-
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +73,6 @@ public class JListaProduto extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Lista de produtos");
@@ -83,40 +97,20 @@ public class JListaProduto extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(60);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(60);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(60);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(3).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(65);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(65);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(65);
-            jTable1.getColumnModel().getColumn(5).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(5).setMaxWidth(80);
-        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(258, 258, 258)
+                .addComponent(jLabel3)
+                .addContainerGap(240, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 263, Short.MAX_VALUE)
+                .addGap(0, 235, Short.MAX_VALUE)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(262, 262, 262))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +119,7 @@ public class JListaProduto extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
