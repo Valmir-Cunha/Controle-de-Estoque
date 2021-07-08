@@ -5,11 +5,21 @@
  */
 package formularios;
 
+import entidades.GestorDeEstoque;
+import entidades.Produto;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import servicos.Estoque;
+
 /**
  *
  * @author vinic
  */
 public class JCadastroProduto extends javax.swing.JFrame {
+    Estoque estoqueMercado = new Estoque(); 
+    GestorDeEstoque gestor = new GestorDeEstoque("vinicius","rua123","9993242",1,"vinicius192","vinicius",900.0,estoqueMercado);
 
     /**
      * Creates new form JFuncionarios
@@ -31,7 +41,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jLabelCodFuncionario = new javax.swing.JLabel();
         jLabelNomeFuncionario = new javax.swing.JLabel();
         jTextFieldCodProduto = new javax.swing.JTextField();
-        jTextFieldNomeFuncionario = new javax.swing.JTextField();
+        jTextFieldNomeProd = new javax.swing.JTextField();
         jLabelMarca = new javax.swing.JLabel();
         jTextFieldMarca = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
@@ -49,7 +59,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jLabelTitulo.setText("Cadastro Produto");
 
         jLabelCodFuncionario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabelCodFuncionario.setText("CÃ³digo:");
+        jLabelCodFuncionario.setText("Código:");
 
         jLabelNomeFuncionario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeFuncionario.setText("Nome:");
@@ -71,7 +81,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel1.setText("PreÃ§o:");
+        jLabel1.setText("Preço:");
 
         jLabelEstoque.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelEstoque.setText("Estoque:");
@@ -113,7 +123,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelEstoque)
                                     .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jTextFieldNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
@@ -132,7 +142,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelMarca)
@@ -157,6 +167,27 @@ public class JCadastroProduto extends javax.swing.JFrame {
 
     private void jTextFieldEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEstoqueActionPerformed
         // TODO add your handling code here:
+                try {
+            // TODO add your handling code here:
+            gestor.CarregarArquivoEstoque();
+        } catch (IOException ex) {
+            Logger.getLogger(JCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Produto produto = new Produto();
+        produto.setCodigoProduto(jTextFieldCodProduto.getText()));
+        produto.setNome(jTextFieldNomeProd.getText());
+        produto.setMarca(jTextFieldMarca.getText());
+        produto.setPreco(jTextFieldPreco.getText());
+        produto.setQuantidadeEstoque(jTextFieldEstoque.getText());
+        
+        JOptionPane.showMessageDialog(null, gestor.cadastrarProdutos());
+        
+        jTextFieldCodProduto.setText("");
+        jTextFieldNomeProd.setText("");
+        jTextFieldMarca.setText("");
+        jTextFieldPreco.setText("");
+        jTextFieldEstoque.setText("");
+        
     }//GEN-LAST:event_jTextFieldEstoqueActionPerformed
 
     /**
@@ -211,7 +242,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCodProduto;
     private javax.swing.JTextField jTextFieldEstoque;
     private javax.swing.JTextField jTextFieldMarca;
-    private javax.swing.JTextField jTextFieldNomeFuncionario;
+    private javax.swing.JTextField jTextFieldNomeProd;
     private javax.swing.JTextField jTextFieldPreco;
     // End of variables declaration//GEN-END:variables
 }
