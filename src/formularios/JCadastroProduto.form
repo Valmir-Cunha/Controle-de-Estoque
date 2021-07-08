@@ -57,7 +57,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="jTextFieldNomeFuncionario" alignment="0" min="-2" pref="345" max="-2" attributes="0"/>
+                  <Component id="jTextFieldNomeProd" alignment="0" min="-2" pref="345" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="43" pref="39" max="32767" attributes="0"/>
           </Group>
@@ -81,7 +81,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldCodProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldNomeFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldNomeProd" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -137,7 +137,7 @@
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldNomeFuncionario">
+    <Component class="javax.swing.JTextField" name="jTextFieldNomeProd">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelMarca">
       <Properties>
