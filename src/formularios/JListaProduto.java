@@ -5,6 +5,12 @@
  */
 package formularios;
 
+import entidades.Categoria;
+import entidades.Produto;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author vinic
@@ -14,9 +20,28 @@ public class JListaProduto extends javax.swing.JFrame {
     /**
      * Creates new form JProduto
      */
-    public JListaProduto() {
+    private JListaProduto() {
         initComponents();
     }
+            public ArrayList ArrayProdutos(){
+        List<Produto> produtosCadastrados = new ArrayList<>();
+        Categoria c = new Categoria("sfg",1);
+        return (ArrayList) produtosCadastrados;
+    }
+    
+    public void addRowToJTable(){
+        List<Produto> produtosCadastrados = new ArrayList<>();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Object rowData[] = new Object[6];
+        for(int i = 0 ; i < produtosCadastrados.size();i++){
+            rowData[0] = produtosCadastrados.get(i).codigoProduto;
+            rowData[1] = produtosCadastrados.get(i).nome;
+            rowData[2] = produtosCadastrados.get(i).marca;
+            rowData[3] = produtosCadastrados.get(i).categoria;
+            rowData[4] = produtosCadastrados.get(i).preco;
+            rowData[5] = produtosCadastrados.get(i).quantidadeEstoque;
+            
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
