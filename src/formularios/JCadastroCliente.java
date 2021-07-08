@@ -29,6 +29,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
     public JCadastroCliente(Administracao adm) {
         initComponents();
         this.adm = adm;
+        carregarCodigo();
     }
 
     /**
@@ -181,9 +182,6 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
     private void jTextFieldCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteActionPerformed
         // Campo do código cliente
-        String texto = String.valueOf(adm.getIdClientes());
-        jTextFieldCodCliente.setText(texto);
-        //System.out.println("ola");
     }//GEN-LAST:event_jTextFieldCodClienteActionPerformed
 
     private void jTextFieldNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeClienteActionPerformed
@@ -207,7 +205,13 @@ public class JCadastroCliente extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // Botão cancelar
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-
+    
+    public void carregarCodigo(){
+        String texto = String.valueOf(adm.getIdClientes());
+        jTextFieldCodCliente.setText(texto);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
