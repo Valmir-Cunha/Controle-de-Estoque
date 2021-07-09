@@ -5,17 +5,30 @@
  */
 package formularios;
 
+import entidades.GestorDeEstoque;
+import servicos.Estoque;
+
 /**
  *
  * @author vinic
  */
 public class JProdutos extends javax.swing.JFrame {
-
+    Estoque est;
+    GestorDeEstoque gestor;
     /**
      * Creates new form JProdutos
      */
     public JProdutos() {
         initComponents();
+    }
+    
+    /**
+     * Creates new form JProdutos
+     */
+    public JProdutos(Estoque est, GestorDeEstoque gestor) {
+        initComponents();
+        this.est =est;
+        this.gestor = gestor;
     }
 
     /**

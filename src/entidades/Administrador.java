@@ -12,9 +12,8 @@ public class Administrador extends Funcionario {
             super();
     }
 
-    public Administrador(String nome, String endereco, String numeroTelefone, int id, String login, String senha,
-                double salario, Estoque estoque, Administracao gerencia) {
-        super(nome, endereco, numeroTelefone, id, login, senha, salario);
+    public Administrador(String nome, String endereco, String numeroTelefone, int id,double salario, Estoque estoque, Administracao gerencia) {
+        super(nome, endereco, numeroTelefone, id, salario);
         this.estoque = estoque;
         this.gerencia = gerencia;
     }

@@ -7,9 +7,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import servicos.Estoque;
@@ -18,8 +15,8 @@ public class GestorDeEstoque extends Funcionario {
     private Estoque estoque; 
     //private List<Produto> produtos = new ArrayList<>();
 
-    public GestorDeEstoque(String nome, String endereco, String numeroTelefone, int id, String login, String senha,double salario, Estoque estoque) {
-        super(nome, endereco, numeroTelefone, id, login, senha, salario);
+    public GestorDeEstoque(String nome, String endereco, String numeroTelefone, int id,double salario, Estoque estoque) {
+        super(nome, endereco, numeroTelefone, id, salario);
         this.estoque = estoque;
     }
 
@@ -47,7 +44,7 @@ public class GestorDeEstoque extends Funcionario {
         entrada.nextLine();
         System.out.println("Digite o nome da categoria: ");
         categoria = entrada.nextLine();
-        produto.setCategoria(buscarCategoria(categoria));
+        //produto.setCategoria(buscarCategoria(categoria));
         for (Produto produtoArray : estoque.getProdutosCadastrados()) {
             if(produtoArray.getCodigoProduto() == produto.getCodigoProduto()) {
                 System.out.println("Um produto de mesmo codigo ja esta cadastrado, "
@@ -56,13 +53,14 @@ public class GestorDeEstoque extends Funcionario {
         }
         estoque.getProdutosCadastrados().add(produto);
         entrada.close();
+        return null;
     }
 
     public void alterarProduto(Produto produto) {
         Scanner entrada = new Scanner(System.in);
         for (Produto produtoArray : estoque.getProdutosCadastrados()) {
             if(produtoArray.equals(produto)) {
-                    System.out.println("Por favor, digite os dados do produto a seguir!");
+            System.out.println("Por favor, digite os dados do produto a seguir!");
             System.out.println("Codigo: ");
             produto.setCodigoProduto(entrada.nextInt());
             System.out.println("Nome: ");
@@ -76,7 +74,7 @@ public class GestorDeEstoque extends Funcionario {
             System.out.println("Quantidade: ");
             produto.setQuantidadeEstoque(entrada.nextInt());
             System.out.println("Digite o nome da categoria: ");
-            produto.setCategoria(buscarCategoria(entrada.nextLine()));
+            //produto.setCategoria(buscarCategoria(entrada.nextLine()));
             }
         }
         entrada.close();
@@ -92,20 +90,25 @@ public class GestorDeEstoque extends Funcionario {
             }
         }
     }
-
-    public Categoria buscarCategoria(String nome) {
+    //Nao mexer
+    public boolean buscarCategoria(int id,String nome) {
         for (Categoria categoria: estoque.getCategorias()) {
-            if(categoria.getNomeCategoria().equals(nome)) {
-                    return categoria;
+            if(categoria.getCodigoCategoria()== id) {
+                    return true;
             }
         }
-        return cadastrarCategoria(nome);
+        return false;
     }
-
-    public Categoria cadastrarCategoria(String nome) {
-        Categoria categoria = new Categoria(nome,9999); //id temporario
-        estoque.getCategorias().add(categoria);
-        return categoria;
+    //Nao mexer
+    public boolean cadastrarCategoria(int id,String nome) {
+        if(!buscarCategoria(id, nome)){
+            Categoria categoria = new Categoria(nome,id);
+            estoque.getCategorias().add(categoria);
+            return true;
+        }else{
+            return false;
+        }
+        
     }
 
     public void excluirCategoria(Categoria categoria) {

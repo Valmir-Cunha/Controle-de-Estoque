@@ -25,7 +25,7 @@ public class JListaProduto extends javax.swing.JFrame {
         addRowToJTable();
     }
 
-                    public ArrayList ArrayProdutos(){
+    public ArrayList ArrayProdutos(){
         List<Produto> produtosCadastrados = new ArrayList<>();
         Categoria c = new Categoria("sfg",1);
         Produto p1 = new Produto(01,"Biscoito","Vita",1.99,400,c);

@@ -195,7 +195,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão de cadastrar
         a.cadastrarCliente(Integer.parseInt(jTextFieldCodCliente.getText()),
-                jTextFieldNomeCliente.getText() , jTextFieldCelular.getText(), jTextFieldEndereco.getText());
+        jTextFieldNomeCliente.getText() , jTextFieldCelular.getText(), jTextFieldEndereco.getText());
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jTextFieldCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCelularActionPerformed

@@ -5,17 +5,33 @@
  */
 package formularios;
 
+import entidades.GestorDeEstoque;
+import javax.swing.JOptionPane;
+import servicos.Estoque;
+
 /**
  *
  * @author vinic
  */
 public class JCadastroCategoria extends javax.swing.JFrame {
-
+    Estoque est = new Estoque();
+    GestorDeEstoque gestor;
     /**
      * Creates new form JCadastroCategoria
      */
     public JCadastroCategoria() {
         initComponents();
+    }
+    
+    /**
+     * Creates new form JCadastroCategoria
+     * @param est
+     */
+    public JCadastroCategoria(Estoque est, GestorDeEstoque gestor) {
+        initComponents();
+        this.est = est;
+        this.gestor = gestor;
+        carregarCodigo();
     }
 
     /**
@@ -44,17 +60,39 @@ public class JCadastroCategoria extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel2.setText("Código:");
 
+        jTextFieldCodCategoria.setEditable(false);
+        jTextFieldCodCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCodCategoriaActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel3.setText("Nome:");
 
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonCadastrar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarActionPerformed(evt);
+            }
+        });
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,6 +144,34 @@ public class JCadastroCategoria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextFieldCodCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodCategoriaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextFieldCodCategoriaActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // Botão cancelar
+        jTextFieldNomeCategoria.setText("");
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+        // Botão cadastro
+        if(jTextFieldNomeCategoria.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+        }else{
+            if(gestor.cadastrarCategoria(est.getIdCategoria() , jTextFieldNomeCategoria.getText())){
+                JOptionPane.showMessageDialog(null, "Categoria cadastrada com sucesso!");
+            }else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar categoria.");
+            }
+        }
+    }//GEN-LAST:event_jButtonCadastrarActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Botão voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -139,6 +205,11 @@ public class JCadastroCategoria extends javax.swing.JFrame {
                 new JCadastroCategoria().setVisible(true);
             }
         });
+    }
+    
+    public void carregarCodigo(){
+        String texto = String.valueOf(est.getIdCategoria());
+        jTextFieldCodCategoria.setText(texto);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import entidades.GestorDeEstoque;
 import servicos.Estoque;
 
 /**
@@ -12,7 +13,8 @@ import servicos.Estoque;
  * @author vinic
  */
 public class JCategoria extends javax.swing.JFrame {
-    Estoque est = new Estoque();
+    Estoque est;
+    GestorDeEstoque gestor;
 
     /**
      * Creates new form JCategoria
@@ -24,8 +26,9 @@ public class JCategoria extends javax.swing.JFrame {
      * Creates new form JCategoria
      * @param est
      */
-    public JCategoria(Estoque est) {
+    public JCategoria(Estoque est,GestorDeEstoque gestor) {
         this.est = est;
+        this.gestor = gestor;
         initComponents();
     }
 
@@ -66,6 +69,11 @@ public class JCategoria extends javax.swing.JFrame {
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,15 +113,20 @@ public class JCategoria extends javax.swing.JFrame {
 
     private void jButtonCadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarCategoriaActionPerformed
         // Botao cadastrar categoria
-        JCadastroCategoria cadastroCategoria = new JCadastroCategoria();
+        JCadastroCategoria cadastroCategoria = new JCadastroCategoria(est,gestor);
         cadastroCategoria.setVisible(true);
     }//GEN-LAST:event_jButtonCadastrarCategoriaActionPerformed
 
     private void jButtonCategoriasCadastradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriasCadastradasActionPerformed
         // Botao categoria cadastradas
-        JListaCategorias listaCategoria = new JListaCategorias();
+        JListaCategorias listaCategoria = new JListaCategorias(est, gestor);
         listaCategoria.setVisible(true);
     }//GEN-LAST:event_jButtonCategoriasCadastradasActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Boao voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     /**
      * @param args the command line arguments

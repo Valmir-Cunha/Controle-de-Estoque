@@ -5,17 +5,39 @@
  */
 package formularios;
 
+import entidades.Categoria;
+import entidades.GestorDeEstoque;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import servicos.Estoque;
+
 /**
  *
  * @author vinic
  */
 public class JListaCategorias extends javax.swing.JFrame {
-
+    Estoque est;
+    GestorDeEstoque gestor;
     /**
      * Creates new form JListaCategorias
      */
     public JListaCategorias() {
         initComponents();
+    }
+    
+    /**
+     * Creates new form JListaCategorias
+     * @param est
+     * @param gestor
+     */
+    public JListaCategorias(Estoque est, GestorDeEstoque gestor) {
+        initComponents();
+        this.est = est;
+        this.gestor = gestor;
+        jButtonEditarProdutos.setEnabled(false);
+        jButtonEditar.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
     }
 
     /**
@@ -38,6 +60,8 @@ public class JListaCategorias extends javax.swing.JFrame {
         jButtonExcluir = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonEditarProdutos = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButtonPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,20 +102,36 @@ public class JListaCategorias extends javax.swing.JFrame {
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jButtonExcluir.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonExcluir.setText("Excluir");
 
         jButtonEditar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonEditar.setText("Editar");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
-            }
-        });
 
         jButtonEditarProdutos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonEditarProdutos.setText("Exibir produtos");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton1.setText("Exibir todas as categorias");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButtonPesquisar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonPesquisar.setText("Pesquisar");
+        jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,32 +140,34 @@ public class JListaCategorias extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(242, 242, 242)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(60, 60, 60)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74)
-                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(76, 76, 76)
-                                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                                .addComponent(jButtonEditarProdutos)))))
+                                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(38, 38, 38)
+                                .addComponent(jButtonEditarProdutos))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(jButtonPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -140,24 +182,57 @@ public class JListaCategorias extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPesquisar))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonEditarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditarActionPerformed
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Botao voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Botao para listar todas as categorias
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
+        // Botao pesquisar
+        Categoria categoria;
+        if(jTextFieldCod.getText().isEmpty() && jTextFieldNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para pesquisa.");
+        }
+        else if(jTextFieldCod.getText().isEmpty()){
+            categoria = est.encontrarCategoriaNome(jTextFieldNome.getText());
+            if(categoria == null){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+                jTextFieldCod.requestFocus();
+            }
+        } else if(jTextFieldNome.getText().isEmpty()){
+            categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
+            if(categoria == null){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+                jTextFieldCod.requestFocus();
+            }
+        }else {
+            categoria = est.encontrarCategoriaNome(jTextFieldNome.getText());
+            if(categoria == null){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+            }        
+        }
+    }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,11 +268,20 @@ public class JListaCategorias extends javax.swing.JFrame {
             }
         });
     }
+    //Preenchimento da tabela
+    public void carregarCategorias(){
+        List<Categoria> categorias = new ArrayList<>();
+        categorias = est.getCategorias();
+        for (Categoria categoria: categorias) {
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonEditarProdutos;
     private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -18,14 +18,24 @@ import servicos.Estoque;
  * @author vinic
  */
 public class JCadastroProduto extends javax.swing.JFrame {
-    Estoque estoqueMercado = new Estoque(); 
-    GestorDeEstoque gestor = new GestorDeEstoque("vinicius","rua123","9993242",1,"vinicius192","vinicius",900.0,estoqueMercado);
+    Estoque est; 
+    GestorDeEstoque gestor;
 
     /**
      * Creates new form JFuncionarios
      */
     public JCadastroProduto() {
         initComponents();
+    }
+    /**
+     * Creates new form JFuncionarios
+     * @param est
+     * @param gestor
+     */
+    public JCadastroProduto(Estoque est ,GestorDeEstoque gestor) {
+        initComponents();
+        this.est = est;
+        this.gestor = gestor;
     }
 
     /**
@@ -59,12 +69,17 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jLabelTitulo.setText("Cadastro Produto");
 
         jLabelCodFuncionario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabelCodFuncionario.setText("Código:");
+        jLabelCodFuncionario.setText("CÃ³digo:");
 
         jLabelNomeFuncionario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeFuncionario.setText("Nome:");
 
         jTextFieldCodProduto.setEditable(false);
+        jTextFieldCodProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCodProdutoActionPerformed(evt);
+            }
+        });
 
         jLabelMarca.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelMarca.setText("Marca:");
@@ -81,7 +96,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel1.setText("Preço:");
+        jLabel1.setText("PreÃ§o:");
 
         jLabelEstoque.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelEstoque.setText("Estoque:");
@@ -167,18 +182,17 @@ public class JCadastroProduto extends javax.swing.JFrame {
 
     private void jTextFieldEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEstoqueActionPerformed
         // TODO add your handling code here:
-                try {
-            // TODO add your handling code here:
+        try {
             gestor.CarregarArquivoEstoque();
         } catch (IOException ex) {
             Logger.getLogger(JCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
         Produto produto = new Produto();
-        produto.setCodigoProduto(jTextFieldCodProduto.getText()));
+        produto.setCodigoProduto((jTextFieldCodProduto.getText()));
         produto.setNome(jTextFieldNomeProd.getText());
         produto.setMarca(jTextFieldMarca.getText());
-        produto.setPreco(jTextFieldPreco.getText());
-        produto.setQuantidadeEstoque(jTextFieldEstoque.getText());
+        produto.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
+        produto.setQuantidadeEstoque(Integer.parseInt(jTextFieldEstoque.getText()));
         
         JOptionPane.showMessageDialog(null, gestor.cadastrarProdutos());
         
@@ -189,6 +203,10 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jTextFieldEstoque.setText("");
         
     }//GEN-LAST:event_jTextFieldEstoqueActionPerformed
+
+    private void jTextFieldCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCodProdutoActionPerformed
 
     /**
      * @param args the command line arguments

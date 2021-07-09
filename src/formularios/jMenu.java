@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import entidades.GestorDeEstoque;
 import servicos.Administracao;
 import servicos.Estoque;
 
@@ -13,8 +14,9 @@ import servicos.Estoque;
  * @author vinic
  */
 public class jMenu extends javax.swing.JFrame {
-    Administracao adm = new Administracao();
-    Estoque est = new Estoque();
+    Administracao adm;
+    Estoque est;
+    GestorDeEstoque gestor;
     /**
      * Creates new form jMenu
      */
@@ -25,10 +27,12 @@ public class jMenu extends javax.swing.JFrame {
      * Creates new form jMenu
      * @param adm
      * @param estoque
+     * @param gestor
      */
-    public jMenu(Administracao adm,Estoque estoque) {
+    public jMenu(Administracao adm,Estoque estoque,GestorDeEstoque gestor) {
         this.est = estoque;
         this.adm = adm;
+        this.gestor = gestor;
         initComponents();
     }
 
@@ -114,7 +118,7 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriasActionPerformed
         // Botão categoria
-        JCategoria categoria = new JCategoria(est);
+        JCategoria categoria = new JCategoria(est, gestor);
         categoria.setVisible(true);
     }//GEN-LAST:event_jButtonCategoriasActionPerformed
 
@@ -132,7 +136,7 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoActionPerformed
         // Botão produtos
-        JProdutos produtos = new JProdutos();
+        JProdutos produtos = new JProdutos(est,gestor);
         produtos.setVisible(true);
     }//GEN-LAST:event_jButtonProdutoActionPerformed
 

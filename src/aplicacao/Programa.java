@@ -15,7 +15,8 @@ public class Programa {
         Estoque estoqueMercado = new Estoque(); 
         Administracao admMercado = new Administracao();
         Arquivos arq = new Arquivos(estoqueMercado, admMercado);
-        jMenu menu = new jMenu(admMercado,estoqueMercado);
+        GestorDeEstoque gestor = new GestorDeEstoque("Valmir", "Avenida 1", "99321312", admMercado.getIdFuncionario(), 0, estoqueMercado);
+        jMenu menu = new jMenu(admMercado,estoqueMercado,gestor);
         menu.setVisible(true);
         /*GestorDeEstoque gestor = new GestorDeEstoque("vinicius","rua123",9993242,1,"vinicius192","vinicius",900.0,estoqueMercado);
         //Categoria c = new Categoria("sfg",1);
