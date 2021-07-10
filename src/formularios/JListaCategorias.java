@@ -10,6 +10,7 @@ import entidades.GestorDeEstoque;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import servicos.Estoque;
 
 /**
@@ -110,9 +111,19 @@ public class JListaCategorias extends javax.swing.JFrame {
 
         jButtonExcluir.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jButtonEditar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
 
         jButtonEditarProdutos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonEditarProdutos.setText("Exibir produtos");
@@ -206,6 +217,7 @@ public class JListaCategorias extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Botao para listar todas as categorias
+        carregarCategorias();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
@@ -233,6 +245,26 @@ public class JListaCategorias extends javax.swing.JFrame {
             }        
         }
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // Botão excluir categotia
+        if(jTableCategorias.getSelectedRow() != -1){
+            DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
+            if(gestor.excluirCategoria((int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0))){
+                JOptionPane.showMessageDialog(null, "Categoria excluida.");
+                model.removeRow(jTableCategorias.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao excluir categoria");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja excluir.");
+        }
+        
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // Botão editar categotia
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,9 +302,13 @@ public class JListaCategorias extends javax.swing.JFrame {
     }
     //Preenchimento da tabela
     public void carregarCategorias(){
-        List<Categoria> categorias = new ArrayList<>();
-        categorias = est.getCategorias();
-        for (Categoria categoria: categorias) {
+        DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
+        for(Categoria categoria: est.getCategorias()){
+            if(categoria.getProdutos() != null){
+                model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});
+            }else{
+                model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});
+            }
         }
     }
 

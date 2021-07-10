@@ -110,12 +110,24 @@ public class GestorDeEstoque extends Funcionario {
         }
         
     }
+    
+    public Categoria buscarCategoria(int id) {
+        for (Categoria categoria: estoque.getCategorias()) {
+            if(categoria.getCodigoCategoria()== id) {
+                    return categoria;
+            }
+        }
+        return null;
+    }
 
-    public void excluirCategoria(Categoria categoria) {
-        if(estoque.getCategorias().remove(categoria)) {
-                System.out.println("Categoria excluida");
+    public boolean excluirCategoria(int i) {
+        Categoria categoria = buscarCategoria(i);
+        
+        if(categoria != null) {
+            estoque.getCategorias().remove(categoria);
+            return true;
         }else {
-                System.out.println("Categoria nao existe/ nao encontrada");
+            return false;
         }
     }
     public void salvar() throws FileNotFoundException, IOException{
