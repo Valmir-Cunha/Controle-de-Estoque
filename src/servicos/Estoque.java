@@ -18,9 +18,17 @@ public class  Estoque implements FuncoesEstoque {
     public int getIdProdutos() {
         return idProdutos;
     }
+    
+    public int setIdProdutos() {
+        return idProdutos++;
+    }
 
     public int getIdCategoria() {
         return idCategoria;
+    }
+    
+    public void setIdCategoria() {
+        idCategoria++;
     }
 
     public List<Produto> getProdutosCadastrados() {
@@ -104,6 +112,7 @@ public class  Estoque implements FuncoesEstoque {
             }
         return null;
     }
+    
     public Categoria encontrarCategoriaNome(String nome){
         for (Categoria categoria : categorias) {
                 if(categoria.getNomeCategoria().equals(nome)){

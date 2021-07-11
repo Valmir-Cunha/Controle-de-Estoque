@@ -114,6 +114,7 @@ public class jMenu extends javax.swing.JFrame {
         getContentPane().add(imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, 10, 750, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriasActionPerformed

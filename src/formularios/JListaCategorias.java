@@ -7,8 +7,6 @@ package formularios;
 
 import entidades.Categoria;
 import entidades.GestorDeEstoque;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servicos.Estoque;
@@ -36,7 +34,7 @@ public class JListaCategorias extends javax.swing.JFrame {
         initComponents();
         this.est = est;
         this.gestor = gestor;
-        jButtonEditarProdutos.setEnabled(false);
+        jButtonExibirProdutos.setEnabled(false);
         jButtonEditar.setEnabled(false);
         jButtonExcluir.setEnabled(false);
     }
@@ -50,6 +48,14 @@ public class JListaCategorias extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrameEditar = new javax.swing.JFrame();
+        jButtonSalvarEdicao = new javax.swing.JButton();
+        jLabelTitulo2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFieldCodCategoria2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextFieldNomeCategoriaEditado = new javax.swing.JTextField();
+        jButtonVoltar2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCategorias = new javax.swing.JTable();
@@ -60,11 +66,83 @@ public class JListaCategorias extends javax.swing.JFrame {
         jButtonVoltar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
-        jButtonEditarProdutos = new javax.swing.JButton();
+        jButtonExibirProdutos = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButtonPesquisar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jButtonSalvarEdicao.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonSalvarEdicao.setText("Salvar");
+        jButtonSalvarEdicao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarEdicaoActionPerformed(evt);
+            }
+        });
+
+        jLabelTitulo2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabelTitulo2.setText("Editar categoria");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel8.setText("Código:");
+
+        jTextFieldCodCategoria2.setEditable(false);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel9.setText("Nome:");
+
+        jButtonVoltar2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonVoltar2.setText("Voltar");
+        jButtonVoltar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltar2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFrameEditarLayout = new javax.swing.GroupLayout(jFrameEditar.getContentPane());
+        jFrameEditar.getContentPane().setLayout(jFrameEditarLayout);
+        jFrameEditarLayout.setHorizontalGroup(
+            jFrameEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrameEditarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jFrameEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextFieldCodCategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVoltar2))
+                .addGap(18, 18, 18)
+                .addGroup(jFrameEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jFrameEditarLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jFrameEditarLayout.createSequentialGroup()
+                        .addGap(0, 209, Short.MAX_VALUE)
+                        .addComponent(jButtonSalvarEdicao))
+                    .addComponent(jTextFieldNomeCategoriaEditado))
+                .addContainerGap())
+            .addGroup(jFrameEditarLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabelTitulo2)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jFrameEditarLayout.setVerticalGroup(
+            jFrameEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrameEditarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelTitulo2)
+                .addGap(26, 26, 26)
+                .addGroup(jFrameEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jFrameEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCodCategoria2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNomeCategoriaEditado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(jFrameEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonVoltar2)
+                    .addComponent(jButtonSalvarEdicao))
+                .addContainerGap())
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Lista de categorias");
@@ -125,8 +203,13 @@ public class JListaCategorias extends javax.swing.JFrame {
             }
         });
 
-        jButtonEditarProdutos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonEditarProdutos.setText("Exibir produtos");
+        jButtonExibirProdutos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonExibirProdutos.setText("Exibir produtos");
+        jButtonExibirProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExibirProdutosActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton1.setText("Exibir todas as categorias");
@@ -163,7 +246,7 @@ public class JListaCategorias extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                 .addComponent(jButton1)
                                 .addGap(38, 38, 38)
-                                .addComponent(jButtonEditarProdutos))))
+                                .addComponent(jButtonExibirProdutos))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(242, 242, 242)
                         .addComponent(jLabel1))
@@ -202,12 +285,13 @@ public class JListaCategorias extends javax.swing.JFrame {
                     .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonExibirProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
@@ -218,53 +302,53 @@ public class JListaCategorias extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Botao para listar todas as categorias
         carregarCategorias();
+        jButtonExibirProdutos.setEnabled(true);
+        jButtonEditar.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // Botao pesquisar
-        Categoria categoria;
-        if(jTextFieldCod.getText().isEmpty() && jTextFieldNome.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para pesquisa.");
-        }
-        else if(jTextFieldCod.getText().isEmpty()){
-            categoria = est.encontrarCategoriaNome(jTextFieldNome.getText());
-            if(categoria == null){
-                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
-                jTextFieldCod.requestFocus();
-            }
-        } else if(jTextFieldNome.getText().isEmpty()){
-            categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
-            if(categoria == null){
-                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
-                jTextFieldCod.requestFocus();
-            }
-        }else {
-            categoria = est.encontrarCategoriaNome(jTextFieldNome.getText());
-            if(categoria == null){
-                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
-            }        
-        }
+        pesquisarCategoria();
+        jButtonExibirProdutos.setEnabled(true);
+        jButtonEditar.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // Botão excluir categotia
-        if(jTableCategorias.getSelectedRow() != -1){
-            DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
-            if(gestor.excluirCategoria((int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0))){
-                JOptionPane.showMessageDialog(null, "Categoria excluida.");
-                model.removeRow(jTableCategorias.getSelectedRow());
-            }else{
-                JOptionPane.showMessageDialog(null, "Erro ao excluir categoria");
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja excluir.");
-        }
-        
+        excluirCategoria();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // Botão editar categotia
+        if(jTableCategorias.getSelectedRow() != -1){
+            jFrameEditar.setVisible(true);
+            jFrameEditar.setSize(400,250);
+            jFrameEditar.setLocationRelativeTo(null);
+            String texto = String.valueOf(est.getIdCategoria());
+            jTextFieldCodCategoria2.setText(texto);
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja editar.");
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExibirProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirProdutosActionPerformed
+        // Botão de exibir lista de produtos da categoria selecionada.
+        exibirListaProdutos();
+    }//GEN-LAST:event_jButtonExibirProdutosActionPerformed
+
+    private void jButtonSalvarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarEdicaoActionPerformed
+        // Botao salvar tela de editar
+        editarCategoria();
+    }//GEN-LAST:event_jButtonSalvarEdicaoActionPerformed
+
+    private void jButtonVoltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltar2ActionPerformed
+        // Botao voltar tela de editar
+        jFrameEditar.setVisible(false);
+        this.setVisible(true);
+    }//GEN-LAST:event_jButtonVoltar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,20 +395,105 @@ public class JListaCategorias extends javax.swing.JFrame {
             }
         }
     }
+    
+    public void pesquisarCategoria(){
+        Categoria categoria;
+        DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
+        model.setRowCount(0);
+        if(jTextFieldCod.getText().isEmpty() && jTextFieldNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para pesquisa.");
+        }
+        else if(jTextFieldCod.getText().isEmpty()){
+            categoria = est.encontrarCategoriaNome(jTextFieldNome.getText());
+            if(categoria == null){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+                jTextFieldCod.requestFocus();
+            }else{
+             model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+            }
+        } else if(jTextFieldNome.getText().isEmpty()){
+            categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
+            if(categoria == null){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+                jTextFieldCod.requestFocus();
+            }else{
+             model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+            }
+        }else {
+            categoria = est.encontrarCategoriaNome(jTextFieldNome.getText());
+            if(categoria == null){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+            }else{
+             model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+            }
+        }
+    }
+    
+    
+    public void exibirListaProdutos(){
+        if(jTableCategorias.getSelectedRow() != -1){
+            jButtonExibirProdutos.setEnabled(true);
+            est.encontrarCategoriaCodigo((int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0));
+            JOptionPane.showMessageDialog(null, "Categoria editada.");
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja editar.");
+        }
+    }
+    
+    public void editarCategoria(){
+        int id;
+        Categoria categoria;
+        DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
+        id = (int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0);
+        if(jTextFieldNomeCategoriaEditado.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo \"nome\" está vazio.");
+        } else{
+            if(gestor.editarCategoria(id, jTextFieldNomeCategoriaEditado.getText())){
+                JOptionPane.showMessageDialog(null, "Categoria editada.");
+                model.removeRow(jTableCategorias.getSelectedRow());
+                categoria = est.encontrarCategoriaCodigo(id);
+                model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao editar categoria");
+            }
+        }
+    }
+    
+    public void excluirCategoria(){
+        if(jTableCategorias.getSelectedRow() != -1){
+            DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
+            if(gestor.excluirCategoria((int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0))){
+                JOptionPane.showMessageDialog(null, "Categoria excluida.");
+                model.removeRow(jTableCategorias.getSelectedRow());
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao excluir categoria");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja excluir.");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonEditarProdutos;
     private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonExibirProdutos;
     private javax.swing.JButton jButtonPesquisar;
+    private javax.swing.JButton jButtonSalvarEdicao;
     private javax.swing.JButton jButtonVoltar;
+    private javax.swing.JButton jButtonVoltar2;
+    private javax.swing.JFrame jFrameEditar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTitulo2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableCategorias;
     private javax.swing.JTextField jTextFieldCod;
+    private javax.swing.JTextField jTextFieldCodCategoria2;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldNomeCategoriaEditado;
     // End of variables declaration//GEN-END:variables
 }

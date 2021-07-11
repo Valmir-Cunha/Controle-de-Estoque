@@ -110,7 +110,7 @@ public class GestorDeEstoque extends Funcionario {
         }
         
     }
-    
+    //Nao mexer
     public Categoria buscarCategoria(int id) {
         for (Categoria categoria: estoque.getCategorias()) {
             if(categoria.getCodigoCategoria()== id) {
@@ -119,7 +119,7 @@ public class GestorDeEstoque extends Funcionario {
         }
         return null;
     }
-
+    //Nao mexer
     public boolean excluirCategoria(int i) {
         Categoria categoria = buscarCategoria(i);
         
@@ -130,6 +130,18 @@ public class GestorDeEstoque extends Funcionario {
             return false;
         }
     }
+    
+    public boolean editarCategoria(int id, String nome){
+        Categoria categoria;
+        categoria = buscarCategoria(id);
+        if(categoria != null){
+            categoria.setNomeCategoria(nome);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public void salvar() throws FileNotFoundException, IOException{
         try (FileOutputStream f = new FileOutputStream(new File("\\dados\\Produtos.txt"),true)) {
             ObjectOutputStream o = new ObjectOutputStream(f);

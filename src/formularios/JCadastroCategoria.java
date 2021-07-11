@@ -52,7 +52,7 @@ public class JCadastroCategoria extends javax.swing.JFrame {
         jButtonCadastrar = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabelTitulo.setText("Cadastro categoria");
@@ -142,6 +142,7 @@ public class JCadastroCategoria extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldCodCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodCategoriaActionPerformed
@@ -161,6 +162,9 @@ public class JCadastroCategoria extends javax.swing.JFrame {
         }else{
             if(gestor.cadastrarCategoria(est.getIdCategoria() , jTextFieldNomeCategoria.getText())){
                 JOptionPane.showMessageDialog(null, "Categoria cadastrada com sucesso!");
+                est.setIdCategoria();
+                jTextFieldNomeCategoria.setText("");
+                carregarCodigo();
             }else {
                 JOptionPane.showMessageDialog(null, "Erro ao cadastrar categoria.");
             }

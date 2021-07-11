@@ -46,7 +46,7 @@ public class JCategoria extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jButtonVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButtonCategoriasCadastradas.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCategoriasCadastradas.setText("Categorias cadastradas");
@@ -109,6 +109,7 @@ public class JCategoria extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarCategoriaActionPerformed
