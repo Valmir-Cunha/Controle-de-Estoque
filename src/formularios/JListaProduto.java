@@ -5,45 +5,48 @@
  */
 package formularios;
 
+import banco.Arquivos;
 import entidades.Categoria;
+import entidades.GestorDeEstoque;
 import entidades.Produto;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import servicos.Estoque;
 
 /**
  *
  * @author aliss
  */
 public class JListaProduto extends javax.swing.JFrame {
-
+    Estoque est = new Estoque();
+    GestorDeEstoque gestor;
+    Arquivos arq;
     /**
      * Creates new form JListaProdutos
      */
-    public JListaProduto() {
+    public JListaProduto() throws IOException {
         initComponents();
         addRowToJTable();
+        
+    }
+    public JListaProduto(Arquivos arq, Estoque est, GestorDeEstoque gestor) throws IOException{
+        initComponents();
+        addRowToJTable();
+        this.arq = arq;
+        this.est = est;
+        this.gestor = gestor;
     }
 
-    public ArrayList ArrayProdutos(){
-        List<Produto> produtosCadastrados = new ArrayList<>();
-        Categoria c = new Categoria("sfg",1);
-        Produto p1 = new Produto(01,"Biscoito","Vita",1.99,400,c);
-        Produto p2 = new Produto(02,"Nescau","Vita",3.99,100,c);
-        Produto p3 = new Produto(03,"Bolacha","Vita",2.99,200,c);
-        Produto p4 = new Produto(04,"Pipoca","Vita",0.99,300,c);
-        Produto p5 = new Produto(05,"Doce","Vita",1.99,200,c);
-        Produto p6 = new Produto(06,"teste","Vita",2.49,200,c);
-        
-        produtosCadastrados.add(p1);
-        produtosCadastrados.add(p2);
-        produtosCadastrados.add(p3);
-        produtosCadastrados.add(p4);
-        produtosCadastrados.add(p5);
-        produtosCadastrados.add(p6);
+    public ArrayList ArrayProdutos() throws IOException{
+        arq.carregarProdutos();
+        List<String> produtosCadastrados = new ArrayList<>();
         return (ArrayList) produtosCadastrados;
     }
-    public void addRowToJTable(){
+    public void addRowToJTable() throws IOException{
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Produto> produtosCadastrados = ArrayProdutos();
         Object rowData[] = new Object[6];
@@ -158,7 +161,11 @@ public class JListaProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JListaProduto().setVisible(true);
+                try {
+                    new JListaProduto().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(JListaProduto.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
