@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Arquivos {
     Estoque estoque;
@@ -75,15 +76,19 @@ public class Arquivos {
     }
 
     public void carregarProdutos() throws FileNotFoundException, IOException {
-        File arquivo = new File("\\dados\\Produtos.txt");
+        List<Produto> produtosCadastrados = new ArrayList<>();
+        File arquivo = new File("Produtos.txt");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {
                 estoquetotal = in.readLine();
-                //estoque.getProdutosCadastrados().add(estoquetotal); 
+                String separartexto [] = estoquetotal.split(";");
+                for (int posicao = 0; posicao < 6; posicao++){
+                    estoque.getProdutosCadastrados().add(separartexto[posicao]);
+                }
+                
             }
         }
-
     }
 
     public void carregarProdutosIndisponiveis() {
