@@ -87,12 +87,29 @@ public class Administracao implements FuncoesAdministracao{
     }
 
     public String buscarClienteCodigo(int i) {
-            for (Cliente cliente : Clientes) {
-                if(cliente.getCodigoCliente() == i){
-                    return cliente.getNome();
-                }
+        for (Cliente cliente : Clientes) {
+            if(cliente.getCodigoCliente() == i){
+                return cliente.getNome();
             }
+        }
         return "teste";
     }
-	
+    
+    public Cliente buscarClienteCod(int i) {
+        for (Cliente cliente : Clientes) {
+            if(cliente.getCodigoCliente() == i){
+                return cliente;
+            }
+        }
+        return null;
+    }
+    
+    public Cliente buscarClienteNome(String nome) {
+        for (Cliente cliente : Clientes) {
+            if(cliente.getNome().equals(nome)){
+                return cliente;
+            }
+        }
+        return null;
+    }
 }

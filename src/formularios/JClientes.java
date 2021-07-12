@@ -5,6 +5,8 @@
  */
 package formularios;
 
+import entidades.Administrador;
+import javax.swing.JOptionPane;
 import servicos.Administracao;
 
 /**
@@ -12,8 +14,8 @@ import servicos.Administracao;
  * @author vinic
  */
 public class JClientes extends javax.swing.JFrame {
-    Administracao adm = new Administracao();
-
+    Administracao adm;
+    Administrador administrador;
     /**
      * Creates new form JClientes
      */
@@ -24,9 +26,10 @@ public class JClientes extends javax.swing.JFrame {
      * Creates new form JClientes
      * @param adm
      */
-    public JClientes(Administracao adm) {
+    public JClientes(Administracao adm,Administrador administrador) {
         initComponents();
         this.adm = adm;
+        this.administrador = administrador;
     }
 
     /**
@@ -44,7 +47,7 @@ public class JClientes extends javax.swing.JFrame {
         jButtonCadastrarClientes = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Clientes");
@@ -75,6 +78,11 @@ public class JClientes extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,25 +121,30 @@ public class JClientes extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCadastrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarClientesActionPerformed
         // Botao de cadastrar clientes
-        JCadastroCliente cliente = new JCadastroCliente(adm);
+        JCadastroCliente cliente = new JCadastroCliente(adm, administrador);
         cliente.setVisible(true);
     }//GEN-LAST:event_jButtonCadastrarClientesActionPerformed
 
     private void jButtonClientesCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesCadastradosActionPerformed
         // Botao lista clientes cadastrados
-        jListaClientes listaCliente = new jListaClientes();
+        jListaClientes listaCliente = new jListaClientes(adm, administrador);
         listaCliente.setVisible(true);
     }//GEN-LAST:event_jButtonClientesCadastradosActionPerformed
 
     private void jButtonClientesExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesExcluidosActionPerformed
         // Botao lista excluidos
-        JClientesExcluidos excluidos = new JClientesExcluidos();
-        excluidos.setVisible(true);
+        inicializarListaExcluidos();
     }//GEN-LAST:event_jButtonClientesExcluidosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Botão voltar
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +179,15 @@ public class JClientes extends javax.swing.JFrame {
                 new JClientes().setVisible(true);
             }
         });
+    }
+    
+    public void inicializarListaExcluidos(){
+        if(adm.getClientesExcluidos().isEmpty()){
+            JOptionPane.showMessageDialog(null, "A lista de clientes excluídos está vazia.");
+        }else{
+            JClientesExcluidos excluidos = new JClientesExcluidos(adm);
+            excluidos.setVisible(true);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

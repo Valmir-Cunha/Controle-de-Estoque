@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import entidades.Administrador;
 import entidades.GestorDeEstoque;
 import servicos.Administracao;
 import servicos.Estoque;
@@ -15,6 +16,7 @@ import servicos.Estoque;
  */
 public class jMenu extends javax.swing.JFrame {
     Administracao adm;
+    Administrador administrador;
     Estoque est;
     GestorDeEstoque gestor;
     /**
@@ -29,11 +31,12 @@ public class jMenu extends javax.swing.JFrame {
      * @param estoque
      * @param gestor
      */
-    public jMenu(Administracao adm,Estoque estoque,GestorDeEstoque gestor) {
+    public jMenu(Administracao adm,Estoque estoque,GestorDeEstoque gestor,Administrador administrador) {
+        initComponents();
         this.est = estoque;
         this.adm = adm;
         this.gestor = gestor;
-        initComponents();
+        this.administrador = administrador;     
     }
 
     /**
@@ -69,7 +72,7 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
+        getContentPane().add(jButtonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 195, -1, 30));
 
         jButtonProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonProduto.setText("Produtos");
@@ -131,7 +134,7 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed
         // Botão cliente
-        JClientes clientes = new JClientes(adm);
+        JClientes clientes = new JClientes(adm,administrador);
         clientes.setVisible(true);
     }//GEN-LAST:event_jButtonClientesActionPerformed
 

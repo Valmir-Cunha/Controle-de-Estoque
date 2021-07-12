@@ -6,10 +6,8 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 import entidades.Cliente;
-import entidades.Vendas;
 import servicos.Administracao;
 import servicos.Estoque;
-import entidades.Funcionario;
 import entidades.Produto;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -52,7 +50,6 @@ public class Arquivos {
             o.writeObject(estoque.getProdutosCadastrados().toString());
             o.close();
         }
-
     }
 
     public void registrarProdutosIndisponiveis() {
@@ -97,5 +94,13 @@ public class Arquivos {
 
     public void carregarProdutosExcluidos() {
 
+    }
+    
+    public void carregarArquivos(){
+        
+    }
+    
+    public void preencherEstruturas(){
+        
     }
 }

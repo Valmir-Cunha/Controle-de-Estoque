@@ -322,11 +322,13 @@ public class JListaCategorias extends javax.swing.JFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // Botão editar categotia
+        
         if(jTableCategorias.getSelectedRow() != -1){
             jFrameEditar.setVisible(true);
             jFrameEditar.setSize(400,250);
             jFrameEditar.setLocationRelativeTo(null);
-            String texto = String.valueOf(est.getIdCategoria());
+            Object ob = jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0);
+            String texto = ob.toString();
             jTextFieldCodCategoria2.setText(texto);
             this.setVisible(false);
         }else{
@@ -347,6 +349,7 @@ public class JListaCategorias extends javax.swing.JFrame {
     private void jButtonVoltar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltar2ActionPerformed
         // Botao voltar tela de editar
         jFrameEditar.setVisible(false);
+        dispose();
         this.setVisible(true);
     }//GEN-LAST:event_jButtonVoltar2ActionPerformed
 
@@ -416,13 +419,6 @@ public class JListaCategorias extends javax.swing.JFrame {
             if(categoria == null){
                 JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
                 jTextFieldCod.requestFocus();
-            }else{
-             model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
-            }
-        }else {
-            categoria = est.encontrarCategoriaNome(jTextFieldNome.getText());
-            if(categoria == null){
-                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
             }else{
              model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
             }

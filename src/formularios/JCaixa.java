@@ -63,7 +63,7 @@ public class JCaixa extends javax.swing.JFrame {
         jButtonFinalizarVendas = new javax.swing.JButton();
         jButtonCancelarVenda = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelCodCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelCodCliente.setText("Código cliente:");
@@ -237,6 +237,7 @@ public class JCaixa extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNomeProdutoActionPerformed

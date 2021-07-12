@@ -5,17 +5,32 @@
  */
 package formularios;
 
+import entidades.Cliente;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import servicos.Administracao;
+
 /**
  *
  * @author vinic
  */
 public class JClientesExcluidos extends javax.swing.JFrame {
-
+        Administracao adm;
     /**
      * Creates new form JClientesExcluidos
      */
     public JClientesExcluidos() {
         initComponents();
+    }
+    
+    /**
+     * Creates new form JClientesExcluidos
+     * @param adm
+     */
+    public JClientesExcluidos( Administracao adm) {
+        initComponents();
+        this.adm = adm;
+        carregarTabela();
     }
 
     /**
@@ -29,15 +44,15 @@ public class JClientesExcluidos extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableClientesExcluidos = new javax.swing.JTable();
         jButtonVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Lista clientes excluidos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableClientesExcluidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -53,18 +68,23 @@ public class JClientesExcluidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(90);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(90);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(90);
+        jScrollPane1.setViewportView(jTableClientesExcluidos);
+        if (jTableClientesExcluidos.getColumnModel().getColumnCount() > 0) {
+            jTableClientesExcluidos.getColumnModel().getColumn(0).setMinWidth(80);
+            jTableClientesExcluidos.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jTableClientesExcluidos.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTableClientesExcluidos.getColumnModel().getColumn(2).setMinWidth(90);
+            jTableClientesExcluidos.getColumnModel().getColumn(2).setPreferredWidth(90);
+            jTableClientesExcluidos.getColumnModel().getColumn(2).setMaxWidth(90);
         }
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +118,13 @@ public class JClientesExcluidos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Botão voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,11 +160,21 @@ public class JClientesExcluidos extends javax.swing.JFrame {
             }
         });
     }
-
+    /*
+    *Ler a List de cliente e preenche a tabela;
+    */
+    public void carregarTabela(){
+        DefaultTableModel model = (DefaultTableModel) jTableClientesExcluidos.getModel();
+        for(Cliente cliente: adm.getClientesExcluidos() ){
+            model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableClientesExcluidos;
     // End of variables declaration//GEN-END:variables
 }

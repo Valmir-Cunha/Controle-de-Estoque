@@ -13,8 +13,9 @@ import servicos.Administracao;
  * @author vinic
  */
 public class JCadastroCliente extends javax.swing.JFrame {
-    Administracao adm = new Administracao();
-    Administrador a = new Administrador();
+    Administracao adm ;
+    Administrador administrador;
+    
     /**
      * Creates new form JCliente
      *
@@ -22,13 +23,16 @@ public class JCadastroCliente extends javax.swing.JFrame {
     public JCadastroCliente() {
         initComponents();
     }
+    
     /**
      * Creates new form JCliente
      * @param adm
+     * @param administrador
      */
-    public JCadastroCliente(Administracao adm) {
+    public JCadastroCliente(Administracao adm,Administrador administrador) {
         initComponents();
         this.adm = adm;
+        this.administrador = administrador;
         carregarCodigo();
     }
 
@@ -53,7 +57,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
         jButtonCancelar = new javax.swing.JButton();
         jButtonCadastrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelCodCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelCodCliente.setText("Cód. cliente:");
@@ -63,32 +67,9 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
         jTextFieldCodCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextFieldCodCliente.setEnabled(false);
-        jTextFieldCodCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodClienteActionPerformed(evt);
-            }
-        });
-
-        jTextFieldNomeCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldNomeClienteActionPerformed(evt);
-            }
-        });
-
-        jTextFieldCelular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCelularActionPerformed(evt);
-            }
-        });
 
         jLabelCelular.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelCelular.setText("Celular:");
-
-        jTextFieldEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEnderecoActionPerformed(evt);
-            }
-        });
 
         jLabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabelTitulo.setText("Cadastro Clientes");
@@ -178,40 +159,29 @@ public class JCadastroCliente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteActionPerformed
-        // Campo do código cliente
-    }//GEN-LAST:event_jTextFieldCodClienteActionPerformed
-
-    private void jTextFieldNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeClienteActionPerformed
-        // Campo nome do cliente
-    }//GEN-LAST:event_jTextFieldNomeClienteActionPerformed
-
-    private void jTextFieldEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEnderecoActionPerformed
-        // Campo endereço do cliente
-    }//GEN-LAST:event_jTextFieldEnderecoActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão de cadastrar
-        a.cadastrarCliente(Integer.parseInt(jTextFieldCodCliente.getText()),
-        jTextFieldNomeCliente.getText() , jTextFieldCelular.getText(), jTextFieldEndereco.getText());
+        cadastrarCliente();
+        jTextFieldNomeCliente.setText("");
+        jTextFieldCelular.setText("");
+        jTextFieldEndereco.setText("");
+        carregarCodigo();
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
-
-    private void jTextFieldCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCelularActionPerformed
-        // Campo de texto celular
-    }//GEN-LAST:event_jTextFieldCelularActionPerformed
-
+    
+    /*
+    *Limpa os campos e fecha tela;
+    */
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // Botão cancelar
+        jTextFieldNomeCliente.setText("");
+        jTextFieldCelular.setText("");
+        jTextFieldEndereco.setText("");
+        dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-    
-    public void carregarCodigo(){
-        String texto = String.valueOf(adm.getIdClientes());
-        jTextFieldCodCliente.setText(texto);
-    }
-    
-    
+ 
     /**
      * @param args the command line arguments
      */
@@ -247,6 +217,22 @@ public class JCadastroCliente extends javax.swing.JFrame {
                 new JCadastroCliente().setVisible(true);
             }
         });
+    }
+    
+    /*
+    *Busca na classe administração o id livre para cadastro e carrega para o campo de texto;
+    */
+    public void carregarCodigo(){
+        String texto = String.valueOf(adm.getIdClientes());
+        jTextFieldCodCliente.setText(texto);
+    }
+    
+    /*
+    *Realiza a leitura dos campos e chama a função de cadastro do cliente na classe administrador
+    */
+    public void cadastrarCliente(){
+        administrador.cadastrarCliente(Integer.parseInt(jTextFieldCodCliente.getText()),
+        jTextFieldNomeCliente.getText() , jTextFieldCelular.getText(), jTextFieldEndereco.getText());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

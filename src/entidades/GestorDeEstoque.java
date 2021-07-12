@@ -130,7 +130,7 @@ public class GestorDeEstoque extends Funcionario {
             return false;
         }
     }
-    
+    //Nao mexer
     public boolean editarCategoria(int id, String nome){
         Categoria categoria;
         categoria = buscarCategoria(id);
