@@ -79,17 +79,18 @@ public class Arquivos {
                 Cliente cliente = new Cliente();
                 todoscientes = in.readLine();
                 String separartexto [] = todoscientes.split(";");
-                for (int posicao = 0; posicao < 6; posicao++){
+                cliente.setEndereco(separartexto[0]);
+                cliente.setNome(separartexto[1]);
+                cliente.setNumeroTelefone(separartexto[2]);
                     administracao.getClientes().add(cliente);
                     
-                }
+                
                 
             }
             }
     }
 
     public void carregarFuncionarios() throws FileNotFoundException, IOException {
-        List<Funcionario> Funcionarios = new ArrayList<>();
         File arquivo = new File("dados\\Funcionarios.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String todosfuncionarios;
@@ -97,10 +98,12 @@ public class Arquivos {
                 Funcionario funcionarios = new Funcionario();
                 todosfuncionarios = in.readLine();
                 String separartexto [] = todosfuncionarios.split(";");
-                for (int posicao = 0; posicao < 6; posicao++){
-                    administracao.getFuncionarios().add(funcionarios);
+                funcionarios.setEndereco(separartexto[0]);
+                funcionarios.setNome(separartexto[1]);
+                funcionarios.setNumeroTelefone(separartexto[2]);
+                administracao.getFuncionarios().add(funcionarios);
                     
-                }
+                
                 
             }
             }
@@ -112,21 +115,24 @@ public class Arquivos {
     }
 
     public void carregarProdutos() throws FileNotFoundException, IOException {
-        List<Produto> produtosCadastrados = new ArrayList<>();
         File arquivo = new File("Produtos.txt");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {
                 Produto produto = new Produto();
                 estoquetotal = in.readLine();
-                //estoque.getProdutosCadastrados().add(produto);
                 String separartexto [] = estoquetotal.split(";");
-                for (int posicao = 0; posicao < 6; posicao++){
+                    produto.setNome(separartexto[0]);
+                    produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
+                    produto.setMarca(separartexto[2]);
+                    produto.setPreco(Double.parseDouble(separartexto[3]));
+                    produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
                     estoque.getProdutosCadastrados().add(produto);
+                    System.out.println(estoque.getProdutosCadastrados());
                     
                 }
                 
-            }
+            
         }
     }
 
