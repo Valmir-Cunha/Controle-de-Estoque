@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servicos.Estoque;
 
@@ -41,12 +42,9 @@ public class JListaProduto extends javax.swing.JFrame {
         this.gestor = gestor;
     }
 
-    public ArrayList ArrayProdutos() throws IOException{
+   /* public void addRowToJTable() throws IOException{ //carrega os clientes
         carregarProdutos();
-        return (ArrayList) est.getProdutosCadastrados();
-    }
-    public void addRowToJTable() throws IOException{ //carrega os clientes
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
         Object rowData[] = new Object[6];
         for(int i = 0 ; i < est.getProdutosCadastrados().size();i++){
             rowData[0] = est.getProdutosCadastrados().get(i).getCodigoProduto();
@@ -58,7 +56,19 @@ public class JListaProduto extends javax.swing.JFrame {
             model.addRow(rowData);
             
         }
-    }
+    }*/
+        public void carregarClientes() throws IOException{
+            //carregarProdutos();
+            DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
+            if(est.getProdutosCadastrados().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Sem produtos Cadastrados.");
+        }else{
+            for(Produto produto: est.getProdutosCadastrados()){
+                model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            }
+        }
+        
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,7 +81,7 @@ public class JListaProduto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButtonVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jListaProduto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,12 +91,12 @@ public class JListaProduto extends javax.swing.JFrame {
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jListaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CÃ³d.", "Nome", "Marca", "Categoria", "Quant.", "PreÃ§o"
+                "Cód.", "Nome", "Marca", "Categoria", "Quant.", "Preço"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -97,7 +107,7 @@ public class JListaProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jListaProduto);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,8 +184,8 @@ public class JListaProduto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JTable jListaProduto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
 
