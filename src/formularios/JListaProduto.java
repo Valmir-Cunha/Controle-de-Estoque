@@ -31,12 +31,9 @@ public class JListaProduto extends javax.swing.JFrame {
      */
     public JListaProduto() throws IOException {
         initComponents();
-        addRowToJTable();
-        
     }
     public JListaProduto(Arquivos arq, Estoque est, GestorDeEstoque gestor) throws IOException{
         initComponents();
-        addRowToJTable();
         this.arq = arq;
         this.est = est;
         this.gestor = gestor;
@@ -66,6 +63,7 @@ public class JListaProduto extends javax.swing.JFrame {
             for(Produto produto: est.getProdutosCadastrados()){
                 model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
             }
+        }
         }
         
     
