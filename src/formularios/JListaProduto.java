@@ -46,17 +46,17 @@ public class JListaProduto extends javax.swing.JFrame {
         List<String> produtosCadastrados = new ArrayList<>();
         return (ArrayList) produtosCadastrados;
     }
-    public void addRowToJTable() throws IOException{
+    public void addRowToJTable() throws IOException{ //carrega os clientes
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Produto> produtosCadastrados = ArrayProdutos();
         Object rowData[] = new Object[6];
         for(int i = 0 ; i < produtosCadastrados.size();i++){
-            rowData[0] = produtosCadastrados.get(i).codigoProduto;
-            rowData[1] = produtosCadastrados.get(i).nome;
-            rowData[2] = produtosCadastrados.get(i).marca;
-            rowData[3] = produtosCadastrados.get(i).categoria;
-            rowData[4] = produtosCadastrados.get(i).quantidadeEstoque;
-            rowData[5] = produtosCadastrados.get(i).preco;
+            rowData[0] = produtosCadastrados.get(i).getCodigoProduto();
+            rowData[1] = produtosCadastrados.get(i).getNome();
+            rowData[2] = produtosCadastrados.get(i).getMarca();
+            rowData[3] = produtosCadastrados.get(i).getCategoria();
+            rowData[4] = produtosCadastrados.get(i).getQuantidadeEstoque();
+            rowData[5] = produtosCadastrados.get(i).getPreco();
             model.addRow(rowData);
             
         }
