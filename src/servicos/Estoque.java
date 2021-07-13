@@ -88,12 +88,21 @@ public class  Estoque implements FuncoesEstoque {
     public String encontrarProdutoCodigo(int i){
         for (Produto produto : produtosCadastrados) {
                 if(produto.getCodigoProduto() == i){
-                    //return produto.getNome();
-                    return "caralho";
+                    return produto.getNome();
                 }
             }
-        return "teste";
+        return null;
     }
+    
+    public Produto encontrarProdutoCod(int i){
+        for (Produto produto : produtosCadastrados) {
+                if(produto.getCodigoProduto() == i){
+                    return produto;
+                }
+            }
+        return null;
+    }
+    
     public int encontrarProdutoNome(String nome){
         for (Produto produto : produtosCadastrados) {
                 if(produto.getNome().equals(nome)){

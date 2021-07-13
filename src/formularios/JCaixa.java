@@ -5,6 +5,11 @@
  */
 package formularios;
 
+import entidades.Cliente;
+import entidades.Produto;
+import entidades.Vendas;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import servicos.Administracao;
 import servicos.Estoque;
 
@@ -13,8 +18,9 @@ import servicos.Estoque;
  * @author vinic
  */
 public class JCaixa extends javax.swing.JFrame {
-    Administracao adm = new Administracao();
-    Estoque est = new Estoque();
+    Administracao adm;
+    Estoque est;
+    Vendas venda;
     /**
      * Creates new form JVendas
      */
@@ -33,7 +39,8 @@ public class JCaixa extends javax.swing.JFrame {
         this.est = est;
         listarClientes();
         listarProdutos();
-        
+        carregarCodigo();
+        jTextFieldPrecoTotalCompra.setText("0");
     }
 
     /**
@@ -57,11 +64,16 @@ public class JCaixa extends javax.swing.JFrame {
         jTextFieldCodProduto = new javax.swing.JTextField();
         jButtonAdicionarProduto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableListaProdutos = new javax.swing.JTable();
         jLabelPrecoTotalCompra = new javax.swing.JLabel();
         jTextFieldPrecoTotalCompra = new javax.swing.JTextField();
         jButtonFinalizarVendas = new javax.swing.JButton();
         jButtonCancelarVenda = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldCodVenda = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,12 +83,14 @@ public class JCaixa extends javax.swing.JFrame {
         jLabelNomeCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeCliente.setText("Nome cliente:");
 
+        jTextFieldCodCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jTextFieldCodCliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextFieldCodClienteFocusLost(evt);
             }
         });
 
+        jComboBoxNomeCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jComboBoxNomeCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxNomeCliente.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
@@ -87,11 +101,6 @@ public class JCaixa extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
-        jComboBoxNomeCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxNomeClienteActionPerformed(evt);
-            }
-        });
 
         jLabelCodProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelCodProduto.setText("Código produto:");
@@ -99,25 +108,28 @@ public class JCaixa extends javax.swing.JFrame {
         jLabelNomeProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeProduto.setText("Nome produto:");
 
+        jComboBoxNomeProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jComboBoxNomeProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxNomeProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxNomeProdutoActionPerformed(evt);
-            }
-        });
 
         jLabelQuantidadeProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelQuantidadeProduto.setText("Quantidade:");
 
-        jTextFieldCodProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodProdutoActionPerformed(evt);
+        jTextFieldCodProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jTextFieldCodProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldCodProdutoFocusLost(evt);
             }
         });
 
+        jButtonAdicionarProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonAdicionarProduto.setText("Adicionar");
+        jButtonAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAdicionarProdutoActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableListaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -133,28 +145,64 @@ public class JCaixa extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(60);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(60);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(60);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(60);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(60);
-            jTable1.getColumnModel().getColumn(3).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(80);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(80);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(4).setMaxWidth(80);
+        jScrollPane1.setViewportView(jTableListaProdutos);
+        if (jTableListaProdutos.getColumnModel().getColumnCount() > 0) {
+            jTableListaProdutos.getColumnModel().getColumn(0).setMinWidth(60);
+            jTableListaProdutos.getColumnModel().getColumn(0).setPreferredWidth(60);
+            jTableListaProdutos.getColumnModel().getColumn(0).setMaxWidth(60);
+            jTableListaProdutos.getColumnModel().getColumn(2).setMinWidth(60);
+            jTableListaProdutos.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jTableListaProdutos.getColumnModel().getColumn(2).setMaxWidth(60);
+            jTableListaProdutos.getColumnModel().getColumn(3).setMinWidth(80);
+            jTableListaProdutos.getColumnModel().getColumn(3).setPreferredWidth(80);
+            jTableListaProdutos.getColumnModel().getColumn(3).setMaxWidth(80);
+            jTableListaProdutos.getColumnModel().getColumn(4).setMinWidth(80);
+            jTableListaProdutos.getColumnModel().getColumn(4).setPreferredWidth(80);
+            jTableListaProdutos.getColumnModel().getColumn(4).setMaxWidth(80);
         }
 
         jLabelPrecoTotalCompra.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabelPrecoTotalCompra.setText("Preço Total:");
 
+        jButtonFinalizarVendas.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonFinalizarVendas.setText("Finalizar");
+        jButtonFinalizarVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFinalizarVendasActionPerformed(evt);
+            }
+        });
 
+        jButtonCancelarVenda.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCancelarVenda.setText("Cancelar");
+        jButtonCancelarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarVendaActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton1.setText("Selecionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Caixa");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel2.setText("Id:");
+
+        jTextFieldCodVenda.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,9 +214,11 @@ public class JCaixa extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
                                 .addComponent(jButtonCancelarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(618, 618, 618)
-                                .addComponent(jButtonFinalizarVendas, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+                                .addGap(479, 479, 479)
+                                .addComponent(jButtonFinalizarVendas, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -180,7 +230,9 @@ public class JCaixa extends javax.swing.JFrame {
                             .addComponent(jTextFieldCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNomeCliente)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNomeCliente)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabelNomeProduto, javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,12 +240,20 @@ public class JCaixa extends javax.swing.JFrame {
                                     .addComponent(jComboBoxNomeProduto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelQuantidadeProduto)
+                                    .addComponent(jButton1)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTextFieldQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jButtonAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabelQuantidadeProduto))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButtonAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(239, 239, 239)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(13, 13, 13))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabelPrecoTotalCompra)
@@ -206,70 +266,124 @@ public class JCaixa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNomeCliente))
-                .addGap(12, 12, 12)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNomeCliente)
+                    .addComponent(jLabelCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(jComboBoxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelQuantidadeProduto)
                     .addComponent(jLabelCodProduto)
-                    .addComponent(jLabelNomeProduto)
-                    .addComponent(jLabelQuantidadeProduto))
-                .addGap(8, 8, 8)
+                    .addComponent(jLabelNomeProduto))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAdicionarProduto))
-                .addGap(21, 21, 21)
+                    .addComponent(jButtonAdicionarProduto)
+                    .addComponent(jTextFieldCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPrecoTotalCompra)
                     .addComponent(jTextFieldPrecoTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonFinalizarVendas)
-                    .addComponent(jButtonCancelarVenda))
-                .addContainerGap(13, Short.MAX_VALUE))
+                    .addComponent(jButtonCancelarVenda)
+                    .addComponent(jButtonVoltar)
+                    .addComponent(jButtonFinalizarVendas))
+                .addGap(23, 23, 23))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNomeProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxNomeProdutoActionPerformed
-
-    private void jTextFieldCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodProdutoActionPerformed
-
-    private void jComboBoxNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNomeClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxNomeClienteActionPerformed
-
+    /*
+    *
+    */
     private void jTextFieldCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteFocusLost
         // Evento que carrega um cliente no box pelo codigo
-        String nome;
-        nome = adm.buscarClienteCodigo(Integer.parseInt(jTextFieldCodCliente.getText()));
-        jComboBoxNomeCliente.setSelectedItem(nome);
+        if(!jTextFieldCodCliente.getText().trim().equals("")){ //Se o textField estiver vazio, não realiza o evento
+            String nome;
+            nome = adm.buscarClienteCodigo(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
+            if(nome == null){
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+            }else{
+                jComboBoxNomeCliente.setSelectedItem(nome);
+            }
+        }
+        
     }//GEN-LAST:event_jTextFieldCodClienteFocusLost
-
+    
+    /*
+    *
+    */
     private void jComboBoxNomeClientePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
         // Evento que carrega um cliente no codigo pelo box
         int i;
         String txt;
         if(jComboBoxNomeCliente.isPopupVisible()){
-            //jComboBoxNomeCliente.getSelectedItem().toString(); //Pegando string do combo box
-            //i = est.encontrarProdutoNome(jComboBoxNomeCliente.getSelectedItem().toString());
-            //txt = Integer.toString(i);
-            //jTextFieldCodCliente.setText(txt);
+            jComboBoxNomeCliente.getSelectedItem().toString(); //Pegando string do combo box
+            i = est.encontrarProdutoNome(jComboBoxNomeCliente.getSelectedItem().toString());
+            txt = Integer.toString(i);
+            jTextFieldCodCliente.setText(txt);
         }
     }//GEN-LAST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
+
+    /*
+    *
+    */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Botao selecionar cliente
+        selecionarClienteCompra();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /*
+    *
+    */
+    private void jTextFieldCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodProdutoFocusLost
+        // Carrega o nome do produto na jbox pelo código digitado após a perca de focu na caixa de texto
+        if(!jTextFieldCodProduto.getText().trim().equals("")){ //Se o textField estiver vazio, não realiza o evento
+            String nome;
+            nome = est.encontrarProdutoCodigo(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
+            if(nome == null){
+                JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+            }else{
+                jComboBoxNomeProduto.setSelectedItem(nome);
+            }
+        }
+    }//GEN-LAST:event_jTextFieldCodProdutoFocusLost
+
+    /*
+    *
+    */
+    private void jButtonAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarProdutoActionPerformed
+        // Botão adicionar protudo
+        adicionarProdutoCompra();
+    }//GEN-LAST:event_jButtonAdicionarProdutoActionPerformed
+
+    private void jButtonCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarVendaActionPerformed
+        // Botão cancelar
+        resetarTela();
+    }//GEN-LAST:event_jButtonCancelarVendaActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Botão voltar
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jButtonFinalizarVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarVendasActionPerformed
+        // Botão de finalizar a venda
+        finalizarVenda();
+    }//GEN-LAST:event_jButtonFinalizarVendasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +423,9 @@ public class JCaixa extends javax.swing.JFrame {
         });
     }
     
+    /*
+    *
+    */
     private void listarClientes(){
         jComboBoxNomeCliente.removeAllItems();
         for (int i =0 ; i < adm.getClientes().size(); i++){
@@ -316,19 +433,113 @@ public class JCaixa extends javax.swing.JFrame {
         }
     }
     
+    /*
+    *
+    */
     private void listarProdutos(){
         jComboBoxNomeProduto.removeAllItems();
         for (int i =0 ; i < est.getProdutosCadastrados().size(); i++){
             jComboBoxNomeProduto.addItem(est.getProdutosCadastrados().get(i).getNome());
         }
     }
+    
+    /*
+    *
+    */
+    public void selecionarClienteCompra(){
+        if(jTextFieldCodCliente.getText().trim().equals("") || jComboBoxNomeCliente.getSelectedItem().equals("")){
+            JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para seleção do cliente.");
+        }else{
+            venda = new Vendas(Integer.parseInt(jTextFieldCodVenda.getText().trim()));
+            Cliente cliente;
+            cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
+            this.venda.setCliente(cliente);
+            jTextFieldCodCliente.setEditable(false);
+            jComboBoxNomeCliente.setEditable(false);
+        }
+    }
+    
+    /*
+    *
+    */
+    public void adicionarProdutoCompra(){
+        if(venda == null){
+            JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
+        }else{
+            if(!jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
+            }else{
+                Produto produtoLista;
+                int i = Integer.parseInt(jTextFieldCodProduto.getText().trim());
+                produtoLista = est.encontrarProdutoCod(i);
+                if(produtoLista == null){
+                    JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+                    jTextFieldCodProduto.setText("");
+                    jComboBoxNomeProduto.setSelectedItem("");
+                    jTextFieldQuantidadeProduto.setText("");
+                }else if(Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()) > produtoLista.getQuantidadeEstoque()){
+                    JOptionPane.showMessageDialog(null, "Quantidade é maior que a disponível no estoque.");
+                    jTextFieldQuantidadeProduto.setText("");
+                }else{
+                    Produto produto = new Produto(produtoLista.getCodigoProduto(),produtoLista.getNome(),produtoLista.getMarca(),produtoLista.getPreco(),Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()), produtoLista.getCategoria());
+                    produtoLista.setQuantidadeEstoque(produtoLista.getQuantidadeEstoque()- Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()));
+                    venda.getProdutos().add(produto);
+                    DefaultTableModel model = (DefaultTableModel) jTableListaProdutos.getModel();
+                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getPreco(),produto.getQuantidadeEstoque(), produto.getCategoria()});
+                    double precoTxtField = Double.parseDouble(jTextFieldPrecoTotalCompra.getText().trim());
+                    double soma = precoTxtField + produto.getPreco()*produto.getQuantidadeEstoque();
+                    jTextFieldPrecoTotalCompra.setText(Double.toString(soma));
+                    venda.setPrecoTotal(soma);
+                }
+            }
+        }
+    }
+    
+    /*
+    *
+    */
+    public void resetarTela(){
+        DefaultTableModel model = (DefaultTableModel) jTableListaProdutos.getModel();
+        model.setRowCount(0);
+        jTextFieldCodCliente.setEditable(true);
+        jComboBoxNomeCliente.setEditable(true);
+        jTextFieldCodCliente.setText("");
+        jComboBoxNomeCliente.setSelectedItem("");
+        jTextFieldCodProduto.setText("");
+        jComboBoxNomeProduto.setSelectedItem("");
+        jTextFieldQuantidadeProduto.setText("");
+        jTextFieldPrecoTotalCompra.setText("0");
+        venda = null;
+    }
+    
+    /*
+    *
+    */
+    public void finalizarVenda(){
+        Cliente cliente;
+        cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
+        cliente.getCompras().add(venda);
+        resetarTela();
+    }
+    
+    /*
+    *
+    */
+    public void carregarCodigo(){
+        String texto = String.valueOf(adm.getIdVendas());
+        jTextFieldCodVenda.setText(texto);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdicionarProduto;
     private javax.swing.JButton jButtonCancelarVenda;
     private javax.swing.JButton jButtonFinalizarVendas;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxNomeCliente;
     private javax.swing.JComboBox<String> jComboBoxNomeProduto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCodCliente;
     private javax.swing.JLabel jLabelCodProduto;
     private javax.swing.JLabel jLabelNomeCliente;
@@ -336,9 +547,10 @@ public class JCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPrecoTotalCompra;
     private javax.swing.JLabel jLabelQuantidadeProduto;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableListaProdutos;
     private javax.swing.JTextField jTextFieldCodCliente;
     private javax.swing.JTextField jTextFieldCodProduto;
+    private javax.swing.JTextField jTextFieldCodVenda;
     private javax.swing.JTextField jTextFieldPrecoTotalCompra;
     private javax.swing.JTextField jTextFieldQuantidadeProduto;
     // End of variables declaration//GEN-END:variables

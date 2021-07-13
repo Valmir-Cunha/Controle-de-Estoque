@@ -163,6 +163,11 @@ public class JListaCategorias extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCategoriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableCategorias);
         if (jTableCategorias.getColumnModel().getColumnCount() > 0) {
             jTableCategorias.getColumnModel().getColumn(0).setMinWidth(80);
@@ -353,6 +358,16 @@ public class JListaCategorias extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_jButtonVoltar2ActionPerformed
 
+    private void jTableCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCategoriasMouseClicked
+        // TODO add your handling code here:
+        Object ob = jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0);
+        String texto = ob.toString();
+        jTextFieldCod.setText(texto);
+        ob =jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 1);
+        texto = ob.toString();
+        jTextFieldNome.setText(texto);
+    }//GEN-LAST:event_jTableCategoriasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -415,6 +430,14 @@ public class JListaCategorias extends javax.swing.JFrame {
              model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
             }
         } else if(jTextFieldNome.getText().isEmpty()){
+            categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
+            if(categoria == null){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+                jTextFieldCod.requestFocus();
+            }else{
+             model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+            }
+        } else {
             categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
             if(categoria == null){
                 JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
