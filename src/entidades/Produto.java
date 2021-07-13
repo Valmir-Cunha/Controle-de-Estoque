@@ -71,12 +71,12 @@ public class Produto {
 
     @Override
     public String toString() {
-            return "Nome: " + nome 
-                            +"\nCodigo do Produto: " + codigoProduto 
-                            +"\nMarca: " + marca
-                            +"\nPreco do protudo: " + preco
-                            + "\nQuantidade no estoque: " + quantidadeEstoque 
-                            +"\nCategoria: " + categoria.getNomeCategoria()
-                            +"\n--------------------------------------------------------";
+            return "" + nome 
+                            +";" + codigoProduto 
+                            +";" + marca
+                            +";" + preco
+                            +";" + quantidadeEstoque 
+                            +";" + categoria.getNomeCategoria()
+                            +"\n";
     }
 }
