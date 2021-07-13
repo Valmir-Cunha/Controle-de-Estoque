@@ -18,14 +18,14 @@ import servicos.Administracao;
  *
  * @author aliss
  */
-public class jListaClientes extends javax.swing.JFrame {
+public class JListaClientes extends javax.swing.JFrame {
     Administracao adm;
     Administrador administrador;
     
     /**
      * Creates new form jListaClientess
      */
-    public jListaClientes() {
+    public JListaClientes() {
         initComponents();
     }
 
@@ -34,7 +34,7 @@ public class jListaClientes extends javax.swing.JFrame {
      * @param adm
      * @param administrador
      */
-    public jListaClientes(Administracao adm, Administrador administrador) {
+    public JListaClientes(Administracao adm, Administrador administrador) {
         initComponents();
         this.adm = adm;
         this.administrador = administrador;
@@ -698,21 +698,23 @@ public class jListaClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jListaClientes().setVisible(true);
+                new JListaClientes().setVisible(true);
             }
         });
     }
@@ -732,7 +734,6 @@ public class jListaClientes extends javax.swing.JFrame {
                 jButtonExibirCompras.setEnabled(true);
             }
         }
-        
     }
     
     /*

@@ -46,7 +46,7 @@ public class JProdutos extends javax.swing.JFrame {
         jButtonVoltar = new javax.swing.JButton();
         jButtonProdutosExcluidos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setText("Produtos");
@@ -69,6 +69,11 @@ public class JProdutos extends javax.swing.JFrame {
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jButtonProdutosExcluidos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonProdutosExcluidos.setText("Produtos excluídos");
@@ -115,11 +120,12 @@ public class JProdutos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonProdutosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutosCadastradosActionPerformed
         // Botao lista de produtos:
-        JListaProduto listaProduto = new JListaProduto();
+        JListaProduto listaProduto = new JListaProduto(est,gestor);
         listaProduto.setVisible(true);
     }//GEN-LAST:event_jButtonProdutosCadastradosActionPerformed
 
@@ -134,6 +140,11 @@ public class JProdutos extends javax.swing.JFrame {
         JCadastroProduto cadastroProduto = new JCadastroProduto();
         cadastroProduto.setVisible(true);
     }//GEN-LAST:event_jButtonCadastroProdutosActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Botão voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     /**
      * @param args the command line arguments

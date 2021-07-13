@@ -132,7 +132,7 @@ public class JClientes extends javax.swing.JFrame {
 
     private void jButtonClientesCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesCadastradosActionPerformed
         // Botao lista clientes cadastrados
-        jListaClientes listaCliente = new jListaClientes(adm, administrador);
+        JListaClientes listaCliente = new JListaClientes(adm, administrador);
         listaCliente.setVisible(true);
     }//GEN-LAST:event_jButtonClientesCadastradosActionPerformed
 
@@ -143,7 +143,7 @@ public class JClientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Botão voltar
-        
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

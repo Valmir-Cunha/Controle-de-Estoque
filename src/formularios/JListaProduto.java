@@ -29,14 +29,15 @@ public class JListaProduto extends javax.swing.JFrame {
     /**
      * Creates new form JListaProdutos
      */
-    public JListaProduto() throws IOException {
+    public JListaProduto() {
         initComponents();
     }
-    public JListaProduto(Arquivos arq, Estoque est, GestorDeEstoque gestor) throws IOException{
+    public JListaProduto(Estoque est, GestorDeEstoque gestor){
         initComponents();
-        this.arq = arq;
+        //this.arq = arq;
         this.est = est;
         this.gestor = gestor;
+        carregarClientes();
     }
 
    /* public void addRowToJTable() throws IOException{ //carrega os clientes
@@ -54,17 +55,17 @@ public class JListaProduto extends javax.swing.JFrame {
             
         }
     }*/
-        public void carregarClientes() throws IOException{
-            //carregarProdutos();
-            DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
-            if(est.getProdutosCadastrados().isEmpty()){
+    public void carregarClientes(){
+        //carregarProdutos();
+        DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
+        if(est.getProdutosCadastrados().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem produtos Cadastrados.");
         }else{
             for(Produto produto: est.getProdutosCadastrados()){
-                model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
             }
         }
-        }
+    }
         
     
     /**
@@ -81,20 +82,25 @@ public class JListaProduto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jListaProduto = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Lista de produtos");
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jListaProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CÛd.", "Nome", "Marca", "Categoria", "Quant.", "PreÁo"
+                "C√≥d.", "Nome", "Marca", "Categoria", "Quant.", "Pre√ßo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -134,7 +140,13 @@ public class JListaProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Bo√£o voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,18 +179,17 @@ public class JListaProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new JListaProduto().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(JListaProduto.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new JListaProduto().setVisible(true);
+                
             }
         });
     }
-    private void carregarProdutos() throws IOException {
-        arq.carregarProdutos();
+    
+    /*
+    public void carregarProdutos() throws IOException {
+        //arq.carregarProdutos();
         est.getProdutosCadastrados();
-    }
+    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel3;

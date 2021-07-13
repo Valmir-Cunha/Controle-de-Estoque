@@ -9,6 +9,7 @@ import entidades.Funcionario;
 
 public class Administracao implements FuncoesAdministracao{
     private int idClientes = 1;
+    private int idFuncionarios = 1;
     private int idVendas = 1;
     private List<Cliente> Clientes = new ArrayList<>();
     private List<Cliente> ClientesExcluidos = new ArrayList<>();
@@ -28,6 +29,14 @@ public class Administracao implements FuncoesAdministracao{
     
     public void setIdClientes() {
             idClientes++;
+    }
+
+    public int getIdFuncionarios() {
+        return idFuncionarios;
+    }
+
+    public void setIdFuncionarios(int idFuncionarios) {
+        this.idFuncionarios = idFuncionarios;
     }
 
     public int getIdVendas() {

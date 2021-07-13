@@ -5,17 +5,30 @@
  */
 package formularios;
 
+import entidades.GestorDeEstoque;
+import servicos.Estoque;
+
 /**
  *
  * @author vinic
  */
 public class JProdutosExcluidos extends javax.swing.JFrame {
-
+        Estoque est;
+        GestorDeEstoque gestor;
     /**
      * Creates new form JProdutosExcluidos
      */
     public JProdutosExcluidos() {
         initComponents();
+    }
+
+    /**
+     * Creates new form JProdutosExcluidos
+     */
+    public JProdutosExcluidos(Estoque est, GestorDeEstoque gestor) {
+        initComponents();
+        this.est = est;
+        this.gestor = gestor;
     }
 
     /**
@@ -33,7 +46,7 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         jButtonVoltar = new javax.swing.JButton();
         jButtonRestaurar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Lista de produtos excluídos");
@@ -58,6 +71,11 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jButtonRestaurar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonRestaurar.setText("Restaurar");
@@ -91,9 +109,9 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(137, 137, 137)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -103,7 +121,13 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Botão voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     /**
      * @param args the command line arguments
