@@ -42,21 +42,19 @@ public class JListaProduto extends javax.swing.JFrame {
     }
 
     public ArrayList ArrayProdutos() throws IOException{
-        arq.carregarProdutos();
-        List<String> produtosCadastrados = new ArrayList<>();
-        return (ArrayList) produtosCadastrados;
+        carregarProdutos();
+        return (ArrayList) est.getProdutosCadastrados();
     }
     public void addRowToJTable() throws IOException{ //carrega os clientes
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        ArrayList<Produto> produtosCadastrados = ArrayProdutos();
         Object rowData[] = new Object[6];
-        for(int i = 0 ; i < produtosCadastrados.size();i++){
-            rowData[0] = produtosCadastrados.get(i).getCodigoProduto();
-            rowData[1] = produtosCadastrados.get(i).getNome();
-            rowData[2] = produtosCadastrados.get(i).getMarca();
-            rowData[3] = produtosCadastrados.get(i).getCategoria();
-            rowData[4] = produtosCadastrados.get(i).getQuantidadeEstoque();
-            rowData[5] = produtosCadastrados.get(i).getPreco();
+        for(int i = 0 ; i < est.getProdutosCadastrados().size();i++){
+            rowData[0] = est.getProdutosCadastrados().get(i).getCodigoProduto();
+            rowData[1] = est.getProdutosCadastrados().get(i).getNome();
+            rowData[2] = est.getProdutosCadastrados().get(i).getMarca();
+            rowData[3] = est.getProdutosCadastrados().get(i).getCategoria();
+            rowData[4] = est.getProdutosCadastrados().get(i).getQuantidadeEstoque();
+            rowData[5] = est.getProdutosCadastrados().get(i).getPreco();
             model.addRow(rowData);
             
         }
@@ -169,7 +167,10 @@ public class JListaProduto extends javax.swing.JFrame {
             }
         });
     }
-
+    private void carregarProdutos() throws IOException {
+        arq.carregarProdutos();
+        est.getProdutosCadastrados();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel3;
@@ -177,3 +178,4 @@ public class JListaProduto extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
+
