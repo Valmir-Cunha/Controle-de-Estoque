@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 import entidades.Cliente;
+import entidades.Funcionario;
 import servicos.Administracao;
 import servicos.Estoque;
 import entidades.Produto;
@@ -37,6 +38,15 @@ public class Arquivos {
     }
 
     public void registrarFuncionarios() {
+        try {
+            File file = new File("dados\\Funcionarios.dat");
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+            for (Funcionario funcionario : administracao.getFuncionarios()) {
+                output.writeObject(funcionario);
+            } 
+        } catch(Exception e){
+            System.out.println(e.toString());
+        }
 
     }
 
@@ -60,11 +70,40 @@ public class Arquivos {
 
     }
 
-    public void carregarClientes() {
-
+    public void carregarClientes() throws FileNotFoundException, IOException {
+        List<Cliente> Clientes = new ArrayList<>();
+        File arquivo = new File("dados\\Clientes.dat");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String todoscientes;
+            while (in.ready()) {
+                Cliente cliente = new Cliente();
+                todoscientes = in.readLine();
+                String separartexto [] = todoscientes.split(";");
+                for (int posicao = 0; posicao < 6; posicao++){
+                    administracao.getClientes().add(cliente);
+                    
+                }
+                
+            }
+            }
     }
 
-    public void carregarFuncionarios() {
+    public void carregarFuncionarios() throws FileNotFoundException, IOException {
+        List<Funcionario> Funcionarios = new ArrayList<>();
+        File arquivo = new File("dados\\Funcionarios.dat");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String todosfuncionarios;
+            while (in.ready()) {
+                Funcionario funcionarios = new Funcionario();
+                todosfuncionarios = in.readLine();
+                String separartexto [] = todosfuncionarios.split(";");
+                for (int posicao = 0; posicao < 6; posicao++){
+                    administracao.getFuncionarios().add(funcionarios);
+                    
+                }
+                
+            }
+            }
 
     }
 
@@ -78,10 +117,13 @@ public class Arquivos {
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {
+                Produto produto = new Produto();
                 estoquetotal = in.readLine();
+                //estoque.getProdutosCadastrados().add(produto);
                 String separartexto [] = estoquetotal.split(";");
                 for (int posicao = 0; posicao < 6; posicao++){
-                    estoque.getProdutosCadastrados().add(separartexto[posicao]);
+                    estoque.getProdutosCadastrados().add(produto);
+                    
                 }
                 
             }
