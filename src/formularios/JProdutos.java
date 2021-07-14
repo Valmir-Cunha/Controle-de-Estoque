@@ -6,6 +6,7 @@
 package formularios;
 
 import entidades.GestorDeEstoque;
+import javax.swing.JOptionPane;
 import servicos.Estoque;
 
 /**
@@ -130,14 +131,13 @@ public class JProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonProdutosCadastradosActionPerformed
 
     private void jButtonProdutosExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutosExcluidosActionPerformed
-        // TODO add your handling code here:
-        JProdutosExcluidos listaProdutoEx = new JProdutosExcluidos();
-        listaProdutoEx.setVisible(true);
+        // Botão proddutos excluídos
+        inicializarListaExcluidos();
     }//GEN-LAST:event_jButtonProdutosExcluidosActionPerformed
 
     private void jButtonCadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroProdutosActionPerformed
         // Botao cadastro de produtos
-        JCadastroProduto cadastroProduto = new JCadastroProduto();
+        JCadastroProduto cadastroProduto = new JCadastroProduto(est,gestor);
         cadastroProduto.setVisible(true);
     }//GEN-LAST:event_jButtonCadastroProdutosActionPerformed
 
@@ -181,6 +181,16 @@ public class JProdutos extends javax.swing.JFrame {
         });
     }
 
+    
+    public void inicializarListaExcluidos(){
+        if(est.getProdutosExcluidos().isEmpty()){
+            JOptionPane.showMessageDialog(null, "A lista de produtos excluídos está vazia.");
+        }else{
+            JProdutosExcluidos excluidos = new JProdutosExcluidos(est, gestor);
+            excluidos.setVisible(true);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastroProdutos;
     private javax.swing.JButton jButtonProdutosCadastrados;

@@ -5,19 +5,10 @@
  */
 package formularios;
 
-import banco.Arquivos;
-import entidades.Administrador;
-import entidades.Categoria;
 import entidades.GestorDeEstoque;
 import entidades.Produto;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import servicos.Administracao;
 import servicos.Estoque;
 
 /**
@@ -27,52 +18,26 @@ import servicos.Estoque;
 public class JListaProduto extends javax.swing.JFrame {
     Estoque est = new Estoque();
     GestorDeEstoque gestor;
-    Arquivos arq;
-    Administracao adm;
-    Administrador administrador;
     /**
      * Creates new form JListaProdutos
      */
     public JListaProduto() {
         initComponents();
     }
-    public JListaProduto(Estoque est, GestorDeEstoque gestor, Administracao adm, Administrador administrador){
+    
+    /**
+     * Creates new form JListaProdutos
+     * @param est
+     * @param gestor
+     */
+    public JListaProduto(Estoque est, GestorDeEstoque gestor){
         initComponents();
-        //this.arq = arq;
         this.est = est;
         this.gestor = gestor;
-        this.adm = adm;
-        this.administrador = administrador;
         carregarProdutos();
     }
-
-   /* public void addRowToJTable() throws IOException{ //carrega os clientes
-        carregarProdutos();
-        DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
-        Object rowData[] = new Object[6];
-        for(int i = 0 ; i < est.getProdutosCadastrados().size();i++){
-            rowData[0] = est.getProdutosCadastrados().get(i).getCodigoProduto();
-            rowData[1] = est.getProdutosCadastrados().get(i).getNome();
-            rowData[2] = est.getProdutosCadastrados().get(i).getMarca();
-            rowData[3] = est.getProdutosCadastrados().get(i).getCategoria();
-            rowData[4] = est.getProdutosCadastrados().get(i).getQuantidadeEstoque();
-            rowData[5] = est.getProdutosCadastrados().get(i).getPreco();
-            model.addRow(rowData);
-            
-        }
-    }*/
-    public void carregarProdutos(){
-        //carregarProdutos();
-        DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
-        if(est.getProdutosCadastrados().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Sem produtos Cadastrados.");
-        }else{
-            for(Produto produto: est.getProdutosCadastrados()){
-            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
-            }
-        }
-    }
-        
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,6 +66,7 @@ public class JListaProduto extends javax.swing.JFrame {
         jTextFieldMarca = new javax.swing.JTextField();
         jToggleButtonExcluir = new javax.swing.JToggleButton();
         jToggleButtonEditar = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,7 +86,7 @@ public class JListaProduto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cód.", "Nome", "Marca", "Categoria", "Quant.", "Preço"
+                "CÃ³d.", "Nome", "Marca", "Categoria", "Quant.", "PreÃ§o"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -142,10 +108,10 @@ public class JListaProduto extends javax.swing.JFrame {
         jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel1.setText("Preço:");
+        jLabel1.setText("PreÃ§o:");
 
         jLabelCodFuncionario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabelCodFuncionario.setText("Código:");
+        jLabelCodFuncionario.setText("CÃ³digo:");
 
         jLabelNomeFuncionario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeFuncionario.setText("Nome:");
@@ -153,7 +119,6 @@ public class JListaProduto extends javax.swing.JFrame {
         jLabelEstoque.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelEstoque.setText("Quant. Estoque:");
 
-        jTextFieldCodProduto.setEditable(false);
         jTextFieldCodProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCodProdutoActionPerformed(evt);
@@ -182,47 +147,56 @@ public class JListaProduto extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButton1.setText("Pesquisar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelCodFuncionario)
-                    .addComponent(jLabelMarca)
-                    .addComponent(jTextFieldMarca)
-                    .addComponent(jTextFieldCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelNomeFuncionario)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFuncaoFuncionario))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(110, 110, 110))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(258, 258, 258)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jToggleButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addComponent(jToggleButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldCodProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                            .addComponent(jLabelMarca)
+                            .addComponent(jTextFieldMarca)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelCodFuncionario)
+                        .addGap(77, 77, 77)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNomeFuncionario)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelFuncaoFuncionario)
+                                    .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(56, 56, 56)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelEstoque))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +210,8 @@ public class JListaProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelMarca)
@@ -249,15 +224,14 @@ public class JListaProduto extends javax.swing.JFrame {
                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jToggleButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jToggleButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25))
+                    .addComponent(jToggleButtonEditar)
+                    .addComponent(jToggleButtonExcluir)
+                    .addComponent(jButtonVoltar))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -275,7 +249,7 @@ public class JListaProduto extends javax.swing.JFrame {
 
     private void jTextFieldEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEstoqueActionPerformed
         // TODO add your handling code here:
-        try {
+        /*try {
             gestor.CarregarArquivoEstoque();
         } catch (IOException ex) {
             Logger.getLogger(JCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
@@ -294,15 +268,16 @@ public class JListaProduto extends javax.swing.JFrame {
         jTextFieldMarca.setText("");
         jTextFieldPreco.setText("");
         jTextFieldEstoque.setText("");
+        */
     }//GEN-LAST:event_jTextFieldEstoqueActionPerformed
 
     private void jToggleButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonExcluirActionPerformed
-        //Botão Excluir
+        //Botï¿½o Excluir
         excluirProduto();
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 
     private void jToggleButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonEditarActionPerformed
-        // Botão editar
+        // Botï¿½o editar
     }//GEN-LAST:event_jToggleButtonEditarActionPerformed
 
     /**
@@ -321,15 +296,12 @@ public class JListaProduto extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JListaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
 
@@ -344,24 +316,31 @@ public class JListaProduto extends javax.swing.JFrame {
       private void excluirProduto(){
         if(jListaProduto.getSelectedRow() != -1){
             DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
-            if(administrador.excluirProduto((int) jListaProduto.getValueAt(jListaProduto.getSelectedRow(), 0))){
+            if(gestor.excluirProduto((int) jListaProduto.getValueAt(jListaProduto.getSelectedRow(), 0))){
                 JOptionPane.showMessageDialog(null, "Produto excluido com sucesso.");
                 model.removeRow(jListaProduto.getSelectedRow());
             }else{
                 JOptionPane.showMessageDialog(null, "Erro ao excluir o Produto.");
             }
         }else{
-            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, o produto que deseja excluir.");
+            JOptionPane.showMessageDialog(null, "Ã‰ necessÃ¡rio selecionar, na tabela, o produto que deseja excluir.");
         }
     }
     
-    
-    /*
-    public void carregarProdutos() throws IOException {
-        //arq.carregarProdutos();
-        est.getProdutosCadastrados();
-    }*/
+    public void carregarProdutos(){
+        //carregarProdutos();
+        DefaultTableModel model = (DefaultTableModel) jListaProduto.getModel();
+        if(est.getProdutosCadastrados().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Sem produtos cadastrados.");
+        }else{
+            for(Produto produto: est.getProdutosCadastrados()){
+            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JLabel jLabel1;

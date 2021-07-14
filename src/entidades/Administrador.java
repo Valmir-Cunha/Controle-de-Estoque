@@ -50,12 +50,4 @@ public class Administrador extends Funcionario {
             return false;
         }
     }
-    public boolean excluirProduto(int id) {
-        Produto produto;
-        produto = estoque.encontrarProdutoCod(id);
-        estoque.getProdutosCadastrados().remove(produto);
-        estoque.getProdutosExcluidos().add(produto);
-        return true;
-    }
-    
 }

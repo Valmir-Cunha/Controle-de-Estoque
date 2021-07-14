@@ -593,8 +593,6 @@ public class JListaClientes extends javax.swing.JFrame {
         ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 3);
         texto = ob.toString();
         jTextFieldEndereco.setText(texto);
-        
-        
     }//GEN-LAST:event_jTableListaClientesMouseClicked
 
     private void jToggleButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonExcluirActionPerformed

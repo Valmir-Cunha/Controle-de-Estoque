@@ -13,7 +13,6 @@ import servicos.Estoque;
 
 public class GestorDeEstoque extends Funcionario {
     private Estoque estoque; 
-    //private List<Produto> produtos = new ArrayList<>();
 
     public GestorDeEstoque(String nome, String endereco, String numeroTelefone, int id,double salario, Estoque estoque) {
         super(nome, endereco, numeroTelefone, id, salario);
@@ -24,39 +23,17 @@ public class GestorDeEstoque extends Funcionario {
             return estoque;
     }
 
-    public String cadastrarProdutos() {
-        Scanner entrada = new Scanner(System.in);
-        Produto produto = new Produto();
-        String categoria;
-        System.out.println("Por favor, digite os dados do produto a seguir!");
-        System.out.println("Codigo: ");
-        produto.setCodigoProduto(entrada.nextInt());
-        entrada.nextLine();
-        System.out.println("Nome: ");
-        produto.setNome(entrada.nextLine());
-        System.out.println("Marca: ");
-        produto.setMarca(entrada.nextLine());
-        System.out.println("Preco: ");
-        produto.setPreco(entrada.nextDouble());
-        entrada.nextLine();
-        System.out.println("Quantidade: ");
-        produto.setQuantidadeEstoque(entrada.nextInt());
-        entrada.nextLine();
-        System.out.println("Digite o nome da categoria: ");
-        categoria = entrada.nextLine();
-        //produto.setCategoria(buscarCategoria(categoria));
-        for (Produto produtoArray : estoque.getProdutosCadastrados()) {
-            if(produtoArray.getCodigoProduto() == produto.getCodigoProduto()) {
-                System.out.println("Um produto de mesmo codigo ja esta cadastrado, "
-                                + "nao eh possivel ter dois produto de mesmo codigo");
-            }
+    public boolean cadastrarProdutos(Produto produto) {
+        if(produto != null){
+            estoque.getProdutosCadastrados().add(produto);
+            return true;
         }
-        estoque.getProdutosCadastrados().add(produto);
-        entrada.close();
-        return null;
+        else{
+            return false;
+        }
     }
 
-    public void alterarProduto(Produto produto) {
+    public void editarProduto(Produto produto) {
         Scanner entrada = new Scanner(System.in);
         for (Produto produtoArray : estoque.getProdutosCadastrados()) {
             if(produtoArray.equals(produto)) {
@@ -86,10 +63,19 @@ public class GestorDeEstoque extends Funcionario {
             if(produtoArray.equals(produto)) {
                 estoque.getProdutosCadastrados().remove(produto);
                 estoque.getProdutosExcluidos().add(produto);
-                System.out.println("Produto excluido");
             }
         }
     }
+    
+    public boolean excluirProduto(int id) {
+        Produto produto;
+        produto = estoque.encontrarProdutoCod(id);
+        estoque.getProdutosCadastrados().remove(produto);
+        estoque.getProdutosExcluidos().add(produto);
+        return true;
+    }
+    
+    
     //Nao mexer
     public boolean buscarCategoria(int id,String nome) {
         for (Categoria categoria: estoque.getCategorias()) {
@@ -140,6 +126,10 @@ public class GestorDeEstoque extends Funcionario {
         }else{
             return false;
         }
+    }
+      
+    public void adicionarProdutoCategoria(Categoria categoria, Produto produto){
+        categoria.getProdutos().add(produto);
     }
     
     public void salvar() throws FileNotFoundException, IOException{

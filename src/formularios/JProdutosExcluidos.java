@@ -6,6 +6,9 @@
 package formularios;
 
 import entidades.GestorDeEstoque;
+import entidades.Produto;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import servicos.Estoque;
 
 /**
@@ -17,18 +20,19 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         GestorDeEstoque gestor;
     /**
      * Creates new form JProdutosExcluidos
-     */
-    public JProdutosExcluidos() {
-        initComponents();
-    }
-
-    /**
-     * Creates new form JProdutosExcluidos
+     * @param est
+     * @param gestor
      */
     public JProdutosExcluidos(Estoque est, GestorDeEstoque gestor) {
         initComponents();
         this.est = est;
         this.gestor = gestor;
+        carregarProdutos();
+        desabilitarCampos();
+    }
+
+    private JProdutosExcluidos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -42,16 +46,27 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableProdutosExcluidos = new javax.swing.JTable();
         jButtonVoltar = new javax.swing.JButton();
-        jButtonRestaurar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldCod = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
+        jTextFieldMarca = new javax.swing.JTextField();
+        jTextFieldQuant = new javax.swing.JTextField();
+        jTextFieldPrice = new javax.swing.JTextField();
+        jTextFieldCategoria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Lista de produtos excluídos");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableProdutosExcluidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -67,7 +82,29 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jTableProdutosExcluidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProdutosExcluidosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableProdutosExcluidos);
+        if (jTableProdutosExcluidos.getColumnModel().getColumnCount() > 0) {
+            jTableProdutosExcluidos.getColumnModel().getColumn(0).setMinWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(2).setMinWidth(120);
+            jTableProdutosExcluidos.getColumnModel().getColumn(2).setPreferredWidth(120);
+            jTableProdutosExcluidos.getColumnModel().getColumn(2).setMaxWidth(120);
+            jTableProdutosExcluidos.getColumnModel().getColumn(3).setMinWidth(120);
+            jTableProdutosExcluidos.getColumnModel().getColumn(3).setPreferredWidth(120);
+            jTableProdutosExcluidos.getColumnModel().getColumn(3).setMaxWidth(120);
+            jTableProdutosExcluidos.getColumnModel().getColumn(4).setMinWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(4).setPreferredWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(4).setMaxWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(5).setMinWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTableProdutosExcluidos.getColumnModel().getColumn(5).setMaxWidth(80);
+        }
 
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
@@ -77,8 +114,23 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
             }
         });
 
-        jButtonRestaurar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonRestaurar.setText("Restaurar");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel1.setText("Cód.");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel2.setText("Nome");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel4.setText("Marca");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel5.setText("Quant.");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel6.setText("Preço");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel7.setText("Categoria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,36 +139,75 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(244, 244, 244)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(244, 244, 244)
+                        .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButtonRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldCod)
+                    .addComponent(jTextFieldQuant, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(186, 186, 186))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(120, 120, 120))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextFieldCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(137, 137, 137)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jButtonRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -128,6 +219,28 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         // Botão voltar
         dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jTableProdutosExcluidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutosExcluidosMouseClicked
+        // Carregar campos ao clicar em um na jtable
+        Object ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 0);
+        String texto = ob.toString();
+        jTextFieldCod.setText(texto);
+        ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 1);
+        texto = ob.toString();
+        jTextFieldNome.setText(texto);
+        ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 2);
+        texto = ob.toString();
+        jTextFieldMarca.setText(texto);
+        ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 3);
+        texto = ob.toString();
+        jTextFieldCategoria.setText(texto);
+        ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 4);
+        texto = ob.toString();
+        jTextFieldQuant.setText(texto);
+        ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 5);
+        texto = ob.toString();
+        jTextFieldPrice.setText(texto);
+    }//GEN-LAST:event_jTableProdutosExcluidosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -163,12 +276,45 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void carregarProdutos(){
+        //carregarProdutos();
+        DefaultTableModel model = (DefaultTableModel) jTableProdutosExcluidos.getModel();
+        if(est.getProdutosExcluidos().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Lista de produtos excluídos está vazia.");
+        }else{
+            for(Produto produto: est.getProdutosExcluidos()){
+            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            }
+        }
+    }
+    
+    public void desabilitarCampos(){
+        jTextFieldCod.setEditable(false);
+        jTextFieldNome.setEditable(false);
+        jTextFieldMarca.setEditable(false);
+        jTextFieldCategoria.setEditable(false);
+        jTextFieldQuant.setEditable(false);
+        jTextFieldPrice.setEditable(false);
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonRestaurar;
     private javax.swing.JButton jButtonVoltar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableProdutosExcluidos;
+    private javax.swing.JTextField jTextFieldCategoria;
+    private javax.swing.JTextField jTextFieldCod;
+    private javax.swing.JTextField jTextFieldMarca;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldPrice;
+    private javax.swing.JTextField jTextFieldQuant;
     // End of variables declaration//GEN-END:variables
 }

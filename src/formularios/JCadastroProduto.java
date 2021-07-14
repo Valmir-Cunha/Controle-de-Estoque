@@ -5,11 +5,9 @@
  */
 package formularios;
 
+import entidades.Categoria;
 import entidades.GestorDeEstoque;
 import entidades.Produto;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import servicos.Estoque;
 
@@ -36,6 +34,8 @@ public class JCadastroProduto extends javax.swing.JFrame {
         initComponents();
         this.est = est;
         this.gestor = gestor;
+        carregarCodigo();
+        listarCategorias();
     }
 
     /**
@@ -62,6 +62,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jTextFieldPreco = new javax.swing.JTextField();
         jLabelEstoque = new javax.swing.JLabel();
         jTextFieldEstoque = new javax.swing.JTextField();
+        jButtonVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,20 +76,25 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jLabelNomeFuncionario.setText("Nome:");
 
         jTextFieldCodProduto.setEditable(false);
-        jTextFieldCodProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodProdutoActionPerformed(evt);
-            }
-        });
 
         jLabelMarca.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelMarca.setText("Marca:");
 
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonCadastrar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastrarActionPerformed(evt);
+            }
+        });
 
         jLabelFuncaoFuncionario.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelFuncaoFuncionario.setText("Categoria:");
@@ -107,18 +113,27 @@ public class JCadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelCodFuncionario)
-                    .addComponent(jLabelMarca)
-                    .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldMarca)
-                    .addComponent(jTextFieldCodProduto))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelCodFuncionario)
+                        .addComponent(jLabelMarca)
+                        .addComponent(jTextFieldMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                        .addComponent(jTextFieldCodProduto))
+                    .addComponent(jButtonVoltar))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelNomeFuncionario)
@@ -126,20 +141,19 @@ public class JCadastroProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelFuncaoFuncionario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(jButtonCadastrar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldEstoque)))))
-                    .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldEstoque)))
+                    .addComponent(jTextFieldNomeProd, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonCancelar)
+                        .addGap(159, 159, 159)
+                        .addComponent(jButtonCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(39, 39, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
@@ -171,10 +185,11 @@ public class JCadastroProduto extends javax.swing.JFrame {
                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCadastrar)
-                    .addComponent(jButtonCancelar))
+                    .addComponent(jButtonCancelar)
+                    .addComponent(jButtonVoltar))
                 .addGap(20, 20, 20))
         );
 
@@ -184,7 +199,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
 
     private void jTextFieldEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEstoqueActionPerformed
         // TODO add your handling code here:
-        try {
+        /*try {
             gestor.CarregarArquivoEstoque();
         } catch (IOException ex) {
             Logger.getLogger(JCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
@@ -203,12 +218,23 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jTextFieldMarca.setText("");
         jTextFieldPreco.setText("");
         jTextFieldEstoque.setText("");
-        
+        */
     }//GEN-LAST:event_jTextFieldEstoqueActionPerformed
 
-    private void jTextFieldCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodProdutoActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // Botão cancelar
+        resetarCampos();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        // Botão voltar
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
+        // Botão cadastrar produto
+        cadastraProduto();
+    }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,9 +274,58 @@ public class JCadastroProduto extends javax.swing.JFrame {
         });
     }
 
+    public void carregarCodigo(){
+        String texto = String.valueOf(est.getIdProdutos());
+        jTextFieldCodProduto.setText(texto);
+    }
+    
+    public void listarCategorias(){
+        jComboBoxCategoria.removeAllItems();
+        if(est.getCategorias().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada.");
+        }else{
+            for (int i =0 ; i < est.getCategorias().size(); i++){
+                jComboBoxCategoria.addItem(est.getCategorias().get(i).getNomeCategoria());
+            }
+        }
+        
+    }
+    
+    public void resetarCampos() {
+        jTextFieldNomeProd.setText("");
+        jTextFieldMarca.setText("");
+        jTextFieldPreco.setText("");
+        jTextFieldEstoque.setText("");
+        jComboBoxCategoria.setSelectedItem("");
+        carregarCodigo();
+    }    
+    
+    public void cadastraProduto(){
+        int id = Integer.parseInt(jTextFieldCodProduto.getText().trim());
+        Categoria categoria;
+        Produto produto = new Produto();
+        produto.setCodigoProduto(id);
+        produto.setNome(jTextFieldNomeProd.getText());
+        produto.setMarca(jTextFieldMarca.getText());
+        produto.setPreco(Double.parseDouble(jTextFieldPreco.getText().trim()));
+        produto.setQuantidadeEstoque(Integer.parseInt(jTextFieldEstoque.getText().trim()));
+        categoria = est.encontrarCategoriaNome(String.valueOf(jComboBoxCategoria.getSelectedItem()) );
+        produto.setCategoria(categoria);
+        if(gestor.cadastrarProdutos(produto)){
+            gestor.adicionarProdutoCategoria(categoria, produto);
+            JOptionPane.showMessageDialog(null, "Produto cadastrado.");
+            est.setIdProdutos();
+            resetarCampos();
+        }else{
+            produto = null;
+            JOptionPane.showMessageDialog(null, "Erro ao cadastra produto.");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelCodFuncionario;
