@@ -107,12 +107,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
         jLabelEstoque.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelEstoque.setText("Quant. Estoque:");
 
-        jTextFieldEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEstoqueActionPerformed(evt);
-            }
-        });
-
         jButtonVoltar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -197,30 +191,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEstoqueActionPerformed
-        // TODO add your handling code here:
-        /*try {
-            gestor.CarregarArquivoEstoque();
-        } catch (IOException ex) {
-            Logger.getLogger(JCadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Produto produto = new Produto();
-        produto.setCodigoProduto((jTextFieldCodProduto.getText()));
-        produto.setNome(jTextFieldNomeProd.getText());
-        produto.setMarca(jTextFieldMarca.getText());
-        produto.setPreco(Double.parseDouble(jTextFieldPreco.getText()));
-        produto.setQuantidadeEstoque(Integer.parseInt(jTextFieldEstoque.getText()));
-        
-        JOptionPane.showMessageDialog(null, gestor.cadastrarProdutos());
-        
-        jTextFieldCodProduto.setText("");
-        jTextFieldNomeProd.setText("");
-        jTextFieldMarca.setText("");
-        jTextFieldPreco.setText("");
-        jTextFieldEstoque.setText("");
-        */
-    }//GEN-LAST:event_jTextFieldEstoqueActionPerformed
-
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // Botão cancelar
         resetarCampos();
@@ -288,7 +258,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
                 jComboBoxCategoria.addItem(est.getCategorias().get(i).getNomeCategoria());
             }
         }
-        
     }
     
     public void resetarCampos() {

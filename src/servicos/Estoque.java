@@ -112,6 +112,15 @@ public class  Estoque implements FuncoesEstoque {
         return -1;
     }
     
+    public Produto encontrarProdNome(String nome){
+        for (Produto produto : produtosCadastrados) {
+                if(produto.getNome().equals(nome)){
+                    return produto;
+                }
+            }
+        return null;
+    }
+    
     public Categoria encontrarCategoriaCodigo(int i){
         for (Categoria categoria : categorias) {
                 if(categoria.getCodigoCategoria() == i){

@@ -378,6 +378,7 @@ public class JCaixa extends javax.swing.JFrame {
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // Botão voltar
+        dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonFinalizarVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarVendasActionPerformed

@@ -7,6 +7,7 @@ package formularios;
 
 import entidades.Categoria;
 import entidades.GestorDeEstoque;
+import entidades.Produto;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import servicos.Estoque;
@@ -56,6 +57,11 @@ public class JListaCategorias extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextFieldNomeCategoriaEditado = new javax.swing.JTextField();
         jButtonVoltar2 = new javax.swing.JButton();
+        jDialogListaProdutosCategoria = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableProdutosCategoria = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jButtonFechar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCategorias = new javax.swing.JTable();
@@ -140,6 +146,83 @@ public class JListaCategorias extends javax.swing.JFrame {
                     .addComponent(jButtonVoltar2)
                     .addComponent(jButtonSalvarEdicao))
                 .addContainerGap())
+        );
+
+        jTableProdutosCategoria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cód.", "Nome", "Marca", "Categoria", "Quant.", "Preço"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableProdutosCategoria);
+        if (jTableProdutosCategoria.getColumnModel().getColumnCount() > 0) {
+            jTableProdutosCategoria.getColumnModel().getColumn(0).setMinWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(0).setPreferredWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(0).setMaxWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(2).setMinWidth(100);
+            jTableProdutosCategoria.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTableProdutosCategoria.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTableProdutosCategoria.getColumnModel().getColumn(3).setMinWidth(100);
+            jTableProdutosCategoria.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTableProdutosCategoria.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTableProdutosCategoria.getColumnModel().getColumn(4).setMinWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(4).setPreferredWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(4).setMaxWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(5).setMinWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTableProdutosCategoria.getColumnModel().getColumn(5).setMaxWidth(80);
+        }
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel4.setText("Produtos da categoria");
+
+        jButtonFechar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogListaProdutosCategoriaLayout = new javax.swing.GroupLayout(jDialogListaProdutosCategoria.getContentPane());
+        jDialogListaProdutosCategoria.getContentPane().setLayout(jDialogListaProdutosCategoriaLayout);
+        jDialogListaProdutosCategoriaLayout.setHorizontalGroup(
+            jDialogListaProdutosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogListaProdutosCategoriaLayout.createSequentialGroup()
+                .addGroup(jDialogListaProdutosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogListaProdutosCategoriaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE))
+                    .addGroup(jDialogListaProdutosCategoriaLayout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogListaProdutosCategoriaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonFechar)
+                .addGap(308, 308, 308))
+        );
+        jDialogListaProdutosCategoriaLayout.setVerticalGroup(
+            jDialogListaProdutosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogListaProdutosCategoriaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonFechar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -343,7 +426,14 @@ public class JListaCategorias extends javax.swing.JFrame {
 
     private void jButtonExibirProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirProdutosActionPerformed
         // Botão de exibir lista de produtos da categoria selecionada.
-        exibirListaProdutos();
+        if(jTableCategorias.getSelectedRow() != -1){
+            jDialogListaProdutosCategoria.setVisible(true);
+            jDialogListaProdutosCategoria.setSize(700, 350);
+            jDialogListaProdutosCategoria.setLocationRelativeTo(null);
+            exibirListaProdutos();
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja editar.");
+        }
     }//GEN-LAST:event_jButtonExibirProdutosActionPerformed
 
     private void jButtonSalvarEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarEdicaoActionPerformed
@@ -367,6 +457,11 @@ public class JListaCategorias extends javax.swing.JFrame {
         texto = ob.toString();
         jTextFieldNome.setText(texto);
     }//GEN-LAST:event_jTableCategoriasMouseClicked
+
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+        //Botão fechar da Jdialog produtos
+        dispose();
+    }//GEN-LAST:event_jButtonFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -448,15 +543,19 @@ public class JListaCategorias extends javax.swing.JFrame {
         }
     }
     
-    
     public void exibirListaProdutos(){
-        if(jTableCategorias.getSelectedRow() != -1){
-            jButtonExibirProdutos.setEnabled(true);
-            est.encontrarCategoriaCodigo((int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0));
-            JOptionPane.showMessageDialog(null, "Categoria editada.");
+        DefaultTableModel model = (DefaultTableModel) jTableProdutosCategoria.getModel();
+        Categoria categoria;
+        categoria = est.encontrarCategoriaCodigo((int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0));
+        if(categoria.getProdutos().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Categoria sem produtos.");
+            
         }else{
-            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja editar.");
+            for(Produto produto: categoria.getProdutos()){
+                model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            }
         }
+        //jButtonExibirProdutos.setEnabled(true);
     }
     
     public void editarCategoria(){
@@ -497,19 +596,24 @@ public class JListaCategorias extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonExibirProdutos;
+    private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSalvarEdicao;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JButton jButtonVoltar2;
+    private javax.swing.JDialog jDialogListaProdutosCategoria;
     private javax.swing.JFrame jFrameEditar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelTitulo2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableCategorias;
+    private javax.swing.JTable jTableProdutosCategoria;
     private javax.swing.JTextField jTextFieldCod;
     private javax.swing.JTextField jTextFieldCodCategoria2;
     private javax.swing.JTextField jTextFieldNome;

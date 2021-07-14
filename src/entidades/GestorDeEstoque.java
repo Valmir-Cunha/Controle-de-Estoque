@@ -7,8 +7,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Scanner;
-
 import servicos.Estoque;
 
 public class GestorDeEstoque extends Funcionario {
@@ -33,28 +31,21 @@ public class GestorDeEstoque extends Funcionario {
         }
     }
 
-    public void editarProduto(Produto produto) {
-        Scanner entrada = new Scanner(System.in);
+    public boolean editarProduto(int id, String nome, String marca, double preco, int quantidadeEstoque, Categoria categoria) {
+        Produto produto = new Produto(id, nome, marca, preco, quantidadeEstoque, categoria);
         for (Produto produtoArray : estoque.getProdutosCadastrados()) {
-            if(produtoArray.equals(produto)) {
-            System.out.println("Por favor, digite os dados do produto a seguir!");
-            System.out.println("Codigo: ");
-            produto.setCodigoProduto(entrada.nextInt());
-            System.out.println("Nome: ");
-            produto.setNome(entrada.nextLine());
-            entrada.next();
-            System.out.println("Marca: ");
-            produto.setMarca(entrada.nextLine());
-            entrada.next();
-            System.out.println("Preco: ");
-            produto.setPreco(entrada.nextDouble());
-            System.out.println("Quantidade: ");
-            produto.setQuantidadeEstoque(entrada.nextInt());
-            System.out.println("Digite o nome da categoria: ");
-            //produto.setCategoria(buscarCategoria(entrada.nextLine()));
+            if(produtoArray.getCodigoProduto() == produto.getCodigoProduto()) {
+                produtoArray.setNome(produto.getNome());
+                produtoArray.setMarca(produto.getMarca());
+                produtoArray.setPreco(produto.getPreco());
+                produtoArray.setQuantidadeEstoque(produto.getQuantidadeEstoque());
+                if(!produto.getCategoria().equals(produtoArray.getCategoria())){
+                    trocarCategoriaProduto(produtoArray, produto.getCategoria().getNomeCategoria());
+                }
+                return true;
             }
         }
-        entrada.close();
+        return false;
     }
 
 
@@ -94,7 +85,7 @@ public class GestorDeEstoque extends Funcionario {
         }else{
             return false;
         }
-        
+
     }
     //Nao mexer
     public Categoria buscarCategoria(int id) {
@@ -129,6 +120,16 @@ public class GestorDeEstoque extends Funcionario {
     }
       
     public void adicionarProdutoCategoria(Categoria categoria, Produto produto){
+        categoria.getProdutos().add(produto);
+    }
+    
+    public void trocarCategoriaProduto(Produto produto, String categoriaNova){
+        //Removendo produto da lista de produtos da catttegoria 
+        Categoria categoria = produto.getCategoria();
+        categoria.getProdutos().remove(produto);
+        //Buscando nova categoria e cadastrando o produto nela
+        categoria = estoque.encontrarCategoriaNome(categoriaNova);
+        produto.setCategoria(categoria);
         categoria.getProdutos().add(produto);
     }
     

@@ -18,6 +18,14 @@ import servicos.Estoque;
 public class JProdutosExcluidos extends javax.swing.JFrame {
         Estoque est;
         GestorDeEstoque gestor;
+        
+    /**
+     * Creates new form JProdutosExcluidos
+     */
+    public JProdutosExcluidos() {
+        initComponents();
+    }
+    
     /**
      * Creates new form JProdutosExcluidos
      * @param est
@@ -29,10 +37,6 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         this.gestor = gestor;
         carregarProdutos();
         desabilitarCampos();
-    }
-
-    private JProdutosExcluidos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -223,23 +227,17 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
     private void jTableProdutosExcluidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutosExcluidosMouseClicked
         // Carregar campos ao clicar em um na jtable
         Object ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 0);
-        String texto = ob.toString();
-        jTextFieldCod.setText(texto);
+        jTextFieldCod.setText(ob.toString());
         ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 1);
-        texto = ob.toString();
-        jTextFieldNome.setText(texto);
+        jTextFieldNome.setText(ob.toString());
         ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 2);
-        texto = ob.toString();
-        jTextFieldMarca.setText(texto);
+        jTextFieldMarca.setText(ob.toString());
         ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 3);
-        texto = ob.toString();
-        jTextFieldCategoria.setText(texto);
+        jTextFieldCategoria.setText(ob.toString());
         ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 4);
-        texto = ob.toString();
-        jTextFieldQuant.setText(texto);
+        jTextFieldQuant.setText(ob.toString());
         ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 5);
-        texto = ob.toString();
-        jTextFieldPrice.setText(texto);
+        jTextFieldPrice.setText(ob.toString());
     }//GEN-LAST:event_jTableProdutosExcluidosMouseClicked
 
     /**
@@ -284,7 +282,7 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lista de produtos excluídos está vazia.");
         }else{
             for(Produto produto: est.getProdutosExcluidos()){
-            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
             }
         }
     }

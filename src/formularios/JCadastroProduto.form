@@ -215,9 +215,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldEstoque">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldEstoqueActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonVoltar">
       <Properties>
