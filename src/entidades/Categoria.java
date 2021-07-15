@@ -7,6 +7,10 @@ public class Categoria{
     private String nomeCategoria;
     private int codigoCategoria;
     private List<Produto> produtos = new ArrayList<>();
+    
+     public Categoria() {
+    }
+     
     public Categoria(String nomeCategoria, int codigoCategoria) {
             super();
             this.nomeCategoria = nomeCategoria;
@@ -35,5 +39,11 @@ public class Categoria{
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+        @Override
+    public String toString() {
+            return "" + nomeCategoria 
+                            +";" + codigoCategoria 
+                            +"\n";
     }
 }
