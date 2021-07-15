@@ -157,6 +157,7 @@ public class jMenu extends javax.swing.JFrame {
             arq.registrarProdutos();
             arq.registrarClientes();
             arq.registrarFuncionarios();
+            arq.registrarProdutosExcluidos();
             System.exit(0);
         } catch (IOException ex) {
             Logger.getLogger(jMenu.class.getName()).log(Level.SEVERE, null, ex);
