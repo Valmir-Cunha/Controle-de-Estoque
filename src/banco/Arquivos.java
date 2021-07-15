@@ -30,6 +30,7 @@ public class Arquivos {
             ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
             for (Cliente cliente : administracao.getClientes()) {
                 output.writeObject(cliente.toString());
+                output.flush();
             } 
     }
 
@@ -78,9 +79,10 @@ public class Arquivos {
                 Cliente cliente = new Cliente();
                 todoscientes = in.readLine();
                 String separartexto [] = todoscientes.split(";");
-                cliente.setEndereco(separartexto[0]);
-                cliente.setNome(separartexto[1]);
+                cliente.setNome(separartexto[0]);
+                cliente.setEndereco(separartexto[1]);
                 cliente.setNumeroTelefone(separartexto[2]);
+                cliente.setCodigoCliente(Integer.parseInt(separartexto[3]));
                     administracao.getClientes().add(cliente);
                     
                 
