@@ -32,4 +32,13 @@ public class Cliente extends Pessoa{
         }
         return null;
     }
+
+        @Override
+    public String toString() {
+          return " " + endereco 
+                           +" ; " + nome 
+                           +" ; " + numeroTelefone
+                           +" ; " + codigoCliente
+                           +"\n";
+    } 
 }
