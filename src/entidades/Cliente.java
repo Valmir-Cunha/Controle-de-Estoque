@@ -20,6 +20,10 @@ public class Cliente extends Pessoa{
             return codigoCliente;
     }
 
+    public void setCodigoCliente(int codigoCliente) {
+        this.codigoCliente = codigoCliente;
+    }
+
     public List<Vendas> getCompras() {
         return compras;
     }
@@ -35,10 +39,10 @@ public class Cliente extends Pessoa{
 
         @Override
     public String toString() {
-          return " " + endereco 
-                           +" ; " + nome 
-                           +" ; " + numeroTelefone
-                           +" ; " + codigoCliente
+          return ";" + nome
+                           +";" + numeroTelefone 
+                           +";" + endereco
+                           +";" + codigoCliente
                            +"\n";
     } 
 }
