@@ -1,6 +1,8 @@
 package banco;
 
 import entidades.Categoria;
+import entidades.Vendas;
+import servicos.Caixa;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -19,10 +21,12 @@ import java.io.IOException;
 public class Arquivos {
     Estoque estoque;
     Administracao administracao;
+    Caixa caixa;
 
-    public Arquivos(Estoque estoque,Administracao administracao) {
+    public Arquivos(Estoque estoque,Administracao administracao, Caixa caixa) {
         this.estoque = estoque;
         this.administracao = administracao;
+        this.caixa = caixa;
     }
 
     public void registrarClientes() throws FileNotFoundException, IOException {
@@ -43,7 +47,7 @@ public class Arquivos {
 
     }
 
-    public void registrarVendas() {
+    public void registrarVendas() throws IOException {
 
     }
 
@@ -67,7 +71,13 @@ public class Arquivos {
 
     }
 
-    public void registrarProdutosExcluidos() {
+    public void registrarProdutosExcluidos() throws FileNotFoundException, IOException {
+            File file = new File("dados\\ProdutosExcluidos.dat");
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+            for (Produto produto : estoque.getProdutosExcluidos()) {
+                output.writeObject(produto.toString());
+            } 
+        
 
     }
 
@@ -144,10 +154,12 @@ public class Arquivos {
             String estoquetotal;
             while (in.ready()) {
                 Categoria categoria = new Categoria();
+                Produto produto = new Produto();
                 estoquetotal = in.readLine();
                 String separartexto [] = estoquetotal.split(";");
                 categoria.setNomeCategoria(separartexto[0]);
                 categoria.setCodigoCategoria(Integer.parseInt(separartexto[1]));
+                produto.setCategoria(categoria);
                     estoque.getCategorias().add(categoria);
                     
                 }
@@ -156,11 +168,48 @@ public class Arquivos {
         }
     }
 
-    public void carregarProdutosIndisponiveis() {
-
+    public void carregarProdutosIndisponiveis() throws FileNotFoundException, IOException {
+                File arquivo = new File("dados\\ProdutosIndisponiveis.dat");
+                try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+                    String estoquetotal;
+                    while (in.ready()) {
+                Produto produto = new Produto();
+                Categoria categoria = new Categoria();
+                estoquetotal = in.readLine();
+                String separartexto [] = estoquetotal.split(";");
+                    produto.setNome(separartexto[0]);
+                    produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
+                    produto.setMarca(separartexto[2]);
+                    produto.setPreco(Double.parseDouble(separartexto[3]));
+                    produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
+                    categoria.setNomeCategoria(separartexto[5]);
+                    produto.setCategoria(categoria);
+                    estoque.getProdutosIndisponiveis().add(produto);
+                    
+                }
+                }
     }
 
-    public void carregarProdutosExcluidos() {
+    public void carregarProdutosExcluidos() throws FileNotFoundException, IOException {
+        File arquivo = new File("dados\\ProdutosExcluidos.dat");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String estoquetotal;
+            while (in.ready()) {
+                Produto produto = new Produto();
+                Categoria categoria = new Categoria();
+                estoquetotal = in.readLine();
+                String separartexto [] = estoquetotal.split(";");
+                    produto.setNome(separartexto[0]);
+                    produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
+                    produto.setMarca(separartexto[2]);
+                    produto.setPreco(Double.parseDouble(separartexto[3]));
+                    produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
+                    categoria.setNomeCategoria(separartexto[5]);
+                    produto.setCategoria(categoria);
+                    estoque.getProdutosExcluidos().add(produto);
+                    
+                }
+                }
 
     }
     
