@@ -9,7 +9,10 @@ import entidades.Administrador;
 import entidades.GestorDeEstoque;
 import servicos.Administracao;
 import servicos.Estoque;
-
+import banco.Arquivos;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author vinic
@@ -19,6 +22,7 @@ public class jMenu extends javax.swing.JFrame {
     Administrador administrador;
     Estoque est;
     GestorDeEstoque gestor;
+    Arquivos arq;
     /**
      * Creates new form jMenu
      */
@@ -31,12 +35,13 @@ public class jMenu extends javax.swing.JFrame {
      * @param estoque
      * @param gestor
      */
-    public jMenu(Administracao adm,Estoque estoque,GestorDeEstoque gestor,Administrador administrador) {
+    public jMenu(Administracao adm,Estoque estoque,GestorDeEstoque gestor,Administrador administrador, Arquivos arq) {
         initComponents();
         this.est = estoque;
         this.adm = adm;
         this.gestor = gestor;
-        this.administrador = administrador;     
+        this.administrador = administrador;   
+        this.arq = arq;
     }
 
     /**
@@ -146,7 +151,16 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         // Bot√£o fechar
-        System.exit(0);
+        try {
+            // Bot„o fechar
+            arq.registrarCategorias();
+            arq.registrarProdutos();
+            arq.registrarClientes();
+            arq.registrarFuncionarios();
+            System.exit(0);
+        } catch (IOException ex) {
+            Logger.getLogger(jMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
     /**
