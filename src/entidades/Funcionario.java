@@ -17,4 +17,11 @@ public class Funcionario extends Pessoa {
 	public int getId() {
 		return id;
 	}
+           @Override
+    public String toString() {
+            return "" + endereco 
+                            +";" + nome 
+                            +";" + numeroTelefone
+                            +"\n";
+    }
 }
