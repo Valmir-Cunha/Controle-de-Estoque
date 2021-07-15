@@ -76,7 +76,6 @@ public class Arquivos {
             String todoscientes;
             while (in.ready()) {
                 Cliente cliente = new Cliente();
-                Administracao adm = new Administracao();
                 todoscientes = in.readLine();
                 String separartexto [] = todoscientes.split(";");
                 cliente.setEndereco(separartexto[0]);
@@ -129,8 +128,8 @@ public class Arquivos {
                     produto.setPreco(Double.parseDouble(separartexto[3]));
                     produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
                     categoria.setNomeCategoria(separartexto[5]);
+                    produto.setCategoria(categoria);
                     estoque.getProdutosCadastrados().add(produto);
-                    System.out.println(estoque.getProdutosCadastrados());
                     
                 }
                 
@@ -145,10 +144,9 @@ public class Arquivos {
                 Categoria categoria = new Categoria();
                 estoquetotal = in.readLine();
                 String separartexto [] = estoquetotal.split(";");
-                categoria.setCodigoCategoria(Integer.parseInt(separartexto[0]));
-                categoria.setNomeCategoria(separartexto[1]);
+                categoria.setNomeCategoria(separartexto[0]);
+                categoria.setCodigoCategoria(Integer.parseInt(separartexto[1]));
                     estoque.getCategorias().add(categoria);
-                    System.out.println(estoque.getCategorias());
                     
                 }
                 
