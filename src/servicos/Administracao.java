@@ -60,6 +60,9 @@ public class Administracao implements FuncoesAdministracao{
     public List<Funcionario> getFuncionarios() {
             return funcionarios;
     }
+    public List<Vendas> getListaVendas() {
+            return listaVendas;
+    }
 
     @Override
     public void exibirListaClientes() {
