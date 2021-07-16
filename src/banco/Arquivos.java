@@ -64,22 +64,6 @@ public class Arquivos {
             } 
 
     }
-        public void registrarIdProduto() throws FileNotFoundException, IOException{
-            FileOutputStream arquivo = new FileOutputStream("dados\\IdProdutoCadastro.dat",true);
-            ObjectOutputStream Gravar = new ObjectOutputStream(arquivo);
-            for (Estoque est :estoque.getidprodutosCadastrados()) {
-                Gravar.writeObject(est.toString());
-                Gravar.flush();
-            } 
-    }
-        
-        public void registrarIdCadastroCategoria() throws FileNotFoundException, IOException{
-            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\IdCategoriaCadastro.dat"));
-            for (Estoque est : estoque.getidCategorias()) {
-                output.write(est.toString2());
-                output.flush();
-            } 
-        }
 
     public void registrarProdutosIndisponiveis() {
 
