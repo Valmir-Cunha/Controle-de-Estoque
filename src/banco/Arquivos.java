@@ -57,7 +57,7 @@ public class Arquivos {
             }
     }
     public void registrarCategorias() throws FileNotFoundException, IOException{
-            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("Categorias.dat"),"UTF-8");
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Categorias.dat"),"UTF-8");
             for (Categoria categoria :estoque.getCategorias()) {
                 output.write(categoria.toString());
                 output.flush();
@@ -166,7 +166,7 @@ public class Arquivos {
         }
     }
         public void carregarCategorias() throws FileNotFoundException, IOException {
-        File arquivo = new File("Categorias.dat");
+        File arquivo = new File("dados\\Categorias.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {
