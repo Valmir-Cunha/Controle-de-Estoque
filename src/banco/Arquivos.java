@@ -9,11 +9,13 @@ import entidades.Funcionario;
 import servicos.Administracao;
 import servicos.Estoque;
 import entidades.Produto;
+import entidades.Vendas;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import javax.swing.JOptionPane;
 
 
@@ -84,6 +86,15 @@ public class Arquivos {
         
 
     }
+    
+    public void RegistrarVendas() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\TodasVendas.dat"),"UTF-8");
+        for (Vendas venda : administracao.getListaVendas()) {
+            output.write(venda.toString());
+            output.flush();
+            } 
+        
+    }
 
     public void carregarClientes() throws FileNotFoundException, IOException {
         File arquivo = new File("dados\\Clientes.dat");
@@ -98,6 +109,28 @@ public class Arquivos {
                 cliente.setNumeroTelefone(separartexto[2]);
                 cliente.setCodigoCliente(Integer.parseInt(separartexto[3]));
                 administracao.getClientes().add(cliente);
+                    
+                
+         
+            }
+            }
+    }
+        public void carregarVendas() throws FileNotFoundException, IOException {
+        File arquivo = new File("dados\\TodasVendas.dat");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String todoscientes;
+            while (in.ready()) {
+                Cliente cliente = new Cliente();
+                Produto produto = new Produto();
+                Vendas vend = new Vendas();
+                todoscientes = in.readLine();
+                String separartexto [] = todoscientes.split(";");
+                cliente.setNome(separartexto[0]);
+                vend.setCliente(cliente);
+                produto.setNome(separartexto[1]);
+                vend.setProduto(produto);
+                vend.setPrecoTotal(Double.parseDouble(separartexto[2]));
+                administracao.getListaVendas().add(vend);
                     
                 
          
