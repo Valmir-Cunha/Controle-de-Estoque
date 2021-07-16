@@ -98,22 +98,23 @@ public class Arquivos {
             }
             }
     }
-        public void carregaridProduto() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\IdProdutoCadastro.dat");
-        
-        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+         public void carregaridProduto() throws FileNotFoundException, IOException {
             for (Produto produto :estoque.getProdutosCadastrados()) {
                 estoque.setIdProdutos(); 
             }
-            }
+            
     }
-        public void carregaridCategoria() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\IdCategoriaCadastro.dat");
-        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+      public void carregaridCliente() throws FileNotFoundException, IOException { 
+            for (Cliente cliente :administracao.getClientes()) {
+                administracao.setIdClientes();
+            }
+            
+    }
+      public void carregaridCategoria() throws FileNotFoundException, IOException {
             for (Categoria categoria :estoque.getCategorias()) {
                 estoque.setIdCategoria();
             }
-            }
+            
     }
         
 
