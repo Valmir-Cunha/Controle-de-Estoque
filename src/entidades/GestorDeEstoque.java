@@ -1,12 +1,5 @@
 package entidades;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import servicos.Estoque;
 
 public class GestorDeEstoque extends Funcionario {
@@ -52,6 +45,7 @@ public class GestorDeEstoque extends Funcionario {
     public boolean excluirProdutos(Produto produto) {
         for (Produto produtoArray : estoque.getProdutosCadastrados()) {
             if(produtoArray.equals(produto)) {
+                excluirProdutoCategoria(produto.getCategoria(), produto);
                 estoque.getProdutosCadastrados().remove(produto);
                 estoque.getProdutosExcluidos().add(produto);
                 return true;
@@ -59,15 +53,6 @@ public class GestorDeEstoque extends Funcionario {
         }
         return false;
     }
-    
-//    public boolean excluirProduto(int id) {
-//        Produto produto;
-//        produto = estoque.encontrarProdutoCod(id);
-//        estoque.getProdutosCadastrados().remove(produto);
-//        estoque.getProdutosExcluidos().add(produto);
-//        return true;
-//    }
-//    
     
     //Nao mexer
     public boolean buscarCategoria(int id,String nome) {
@@ -136,5 +121,42 @@ public class GestorDeEstoque extends Funcionario {
         categoria = estoque.encontrarCategoriaNome(categoriaNova);
         produto.setCategoria(categoria);
         categoria.getProdutos().add(produto);
+    }
+    
+    public void excluirProdutoCategoria(Categoria categoria,Produto produto){
+        if(categoria.getProdutos().contains(produto)){
+            categoria.getProdutos().remove(produto);
+        }
+    }
+    
+    public void cadatrasProdutoListDisponiveis(Produto produto){
+        if(estoque.getProdutosDisponiveis().contains(produto)){
+            return;
+        }else{
+            estoque.getProdutosDisponiveis().add(produto);
+        }
+        
+    }
+    
+    public void excluirProdutoListDisponíveis(Produto produto){
+        if(estoque.getProdutosDisponiveis().contains(produto)){
+            estoque.getProdutosDisponiveis().remove(produto);
+        }else{
+        }
+    }
+    
+    public void cadatrasProdutoListIndisponiveis(Produto produto){
+        if(estoque.getProdutosIndisponiveis().contains(produto)){
+            return;
+        }else{
+            estoque.getProdutosIndisponiveis().add(produto);
+        }
+    }
+    
+    public void excluirProdutoListIndisponíveis(Produto produto){
+         if(estoque.getProdutosIndisponiveis().contains(produto)){
+            estoque.getProdutosIndisponiveis().remove(produto);
+        }else{
+        }
     }
 }

@@ -111,6 +111,15 @@ public class JCaixa extends javax.swing.JFrame {
 
         jComboBoxNomeProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jComboBoxNomeProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxNomeProduto.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                jComboBoxNomeProdutoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         jLabelQuantidadeProduto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelQuantidadeProduto.setText("Quantidade:");
@@ -313,7 +322,7 @@ public class JCaixa extends javax.swing.JFrame {
     */
     private void jTextFieldCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteFocusLost
         // Evento que carrega um cliente no box pelo codigo
-        if(!jTextFieldCodCliente.getText().trim().equals("")){ //Se o textField estiver vazio, não realiza o evento
+        if(!jTextFieldCodCliente.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
             Cliente cliente;
             cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
             if(cliente == null){
@@ -350,13 +359,13 @@ public class JCaixa extends javax.swing.JFrame {
     */
     private void jTextFieldCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodProdutoFocusLost
         // Carrega o nome do produto na jbox pelo código digitado após a perca de focu na caixa de texto
-        if(!jTextFieldCodProduto.getText().trim().equals("")){ //Se o textField estiver vazio, não realiza o evento
-            String nome;
-            nome = est.encontrarProdutoCodigo(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
-            if(nome == null){
+        if(!jTextFieldCodProduto.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
+            Produto produto;
+            produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText().trim())); //trim elimina espaços
+            if(produto == null){
                 JOptionPane.showMessageDialog(null, "Produto não encontrado.");
             }else{
-                jComboBoxNomeProduto.setSelectedItem(nome);
+                jComboBoxNomeProduto.setSelectedItem(produto.getNome());
             }
         }
     }//GEN-LAST:event_jTextFieldCodProdutoFocusLost
@@ -383,6 +392,15 @@ public class JCaixa extends javax.swing.JFrame {
         // Botão de finalizar a venda
         finalizarVenda();
     }//GEN-LAST:event_jButtonFinalizarVendasActionPerformed
+
+    private void jComboBoxNomeProdutoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeProdutoPopupMenuWillBecomeInvisible
+        // Carrega o cod do produto na txtfield pelo jbox
+        Produto produto;
+        if(jComboBoxNomeProduto.isPopupVisible()){
+            produto = est.encontrarProdNome(jComboBoxNomeProduto.getSelectedItem().toString().trim());
+            jTextFieldCodCliente.setText(Integer.toString(produto.getCodigoProduto()));
+        }
+    }//GEN-LAST:event_jComboBoxNomeProdutoPopupMenuWillBecomeInvisible
 
     /**
      * @param args the command line arguments
@@ -466,8 +484,11 @@ public class JCaixa extends javax.swing.JFrame {
         if(venda == null){
             JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
         }else{
+            int quant =Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim());
             if(jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
+                JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
+            } else if(quant <= 0){
+                JOptionPane.showMessageDialog(null, "Quantidade inválida.");
             }else{
                 Produto produtoLista;
                 int i = Integer.parseInt(jTextFieldCodProduto.getText().trim());
@@ -510,6 +531,7 @@ public class JCaixa extends javax.swing.JFrame {
         jComboBoxNomeProduto.setSelectedItem("");
         jTextFieldQuantidadeProduto.setText("");
         jTextFieldPrecoTotalCompra.setText("0");
+        jTextFieldCodVenda.setText(String.valueOf(adm.getIdVendas()));
         venda = null;
     }
     
@@ -520,6 +542,7 @@ public class JCaixa extends javax.swing.JFrame {
         Cliente cliente;
         cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
         cliente.getCompras().add(venda);
+        adm.setIdVendas();
         resetarTela();
     }
     

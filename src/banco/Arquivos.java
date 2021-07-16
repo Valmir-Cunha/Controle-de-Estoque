@@ -45,10 +45,6 @@ public class Arquivos {
 
     }
 
-    public void registrarVendas() throws IOException {
-
-    }
-
     public void registrarProdutos() throws FileNotFoundException, IOException{
         OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Produtos.dat"),"UTF-8");
             for (Produto produto : estoque.getProdutosCadastrados()) {
@@ -126,6 +122,10 @@ public class Arquivos {
             }
             
     }
+      
+    public void carregarIdVendas(){
+        
+    }
         
 
     public void carregarFuncionarios() throws FileNotFoundException, IOException {
@@ -145,10 +145,6 @@ public class Arquivos {
                 
             }
             }
-
-    }
-
-    public void carregarVendas() {
 
     }
 
@@ -196,25 +192,24 @@ public class Arquivos {
     }
 
     public void carregarProdutosIndisponiveis() throws FileNotFoundException, IOException {
-                File arquivo = new File("dados\\ProdutosIndisponiveis.dat");
-                try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
-                    String estoquetotal;
-                    while (in.ready()) {
+        File arquivo = new File("dados\\ProdutosIndisponiveis.dat");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String estoquetotal;
+            while (in.ready()) {
                 Produto produto = new Produto();
                 Categoria categoria = new Categoria();
                 estoquetotal = in.readLine();
                 String separartexto [] = estoquetotal.split(";");
-                    produto.setNome(separartexto[0]);
-                    produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
-                    produto.setMarca(separartexto[2]);
-                    produto.setPreco(Double.parseDouble(separartexto[3]));
-                    produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
-                    categoria.setNomeCategoria(separartexto[5]);
-                    produto.setCategoria(categoria);
-                    estoque.getProdutosIndisponiveis().add(produto);
-                    
-                }
-                }
+                produto.setNome(separartexto[0]);
+                produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
+                produto.setMarca(separartexto[2]);
+                produto.setPreco(Double.parseDouble(separartexto[3]));
+                produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
+                categoria.setNomeCategoria(separartexto[5]);
+                produto.setCategoria(categoria);
+                estoque.getProdutosIndisponiveis().add(produto);
+            }
+        }
     }
 
     public void carregarProdutosExcluidos() throws FileNotFoundException, IOException {
@@ -266,7 +261,7 @@ public class Arquivos {
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
-            System.exit(0);
+            //System.exit(0);
         }catch (IOException ex) {
             ex.getMessage();
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
