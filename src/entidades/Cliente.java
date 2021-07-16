@@ -39,7 +39,7 @@ public class Cliente extends Pessoa{
 
         @Override
     public String toString() {
-          return ";" + nome
+          return "" + nome
                            +";" + numeroTelefone 
                            +";" + endereco
                            +";" + codigoCliente
