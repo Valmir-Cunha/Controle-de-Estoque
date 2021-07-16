@@ -61,7 +61,6 @@ public class JListaCategorias extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableProdutosCategoria = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jButtonFechar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCategorias = new javax.swing.JTable();
@@ -186,42 +185,26 @@ public class JListaCategorias extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel4.setText("Produtos da categoria");
 
-        jButtonFechar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonFechar.setText("Fechar");
-        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jDialogListaProdutosCategoriaLayout = new javax.swing.GroupLayout(jDialogListaProdutosCategoria.getContentPane());
         jDialogListaProdutosCategoria.getContentPane().setLayout(jDialogListaProdutosCategoriaLayout);
         jDialogListaProdutosCategoriaLayout.setHorizontalGroup(
             jDialogListaProdutosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogListaProdutosCategoriaLayout.createSequentialGroup()
-                .addGroup(jDialogListaProdutosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialogListaProdutosCategoriaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE))
-                    .addGroup(jDialogListaProdutosCategoriaLayout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogListaProdutosCategoriaLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonFechar)
-                .addGap(308, 308, 308))
+            .addGroup(jDialogListaProdutosCategoriaLayout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialogListaProdutosCategoriaLayout.setVerticalGroup(
             jDialogListaProdutosCategoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogListaProdutosCategoriaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonFechar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -408,6 +391,7 @@ public class JListaCategorias extends javax.swing.JFrame {
         excluirCategoria();
         jTextFieldCod.setText("");
         jTextFieldNome.setText("");
+        carregarCategorias();
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
@@ -463,11 +447,6 @@ public class JListaCategorias extends javax.swing.JFrame {
         texto = ob.toString();
         jTextFieldNome.setText(texto);
     }//GEN-LAST:event_jTableCategoriasMouseClicked
-
-    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
-        //Botão fechar da Jdialog produtos
-        dispose();
-    }//GEN-LAST:event_jButtonFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -606,7 +585,6 @@ public class JListaCategorias extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonExibirProdutos;
-    private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSalvarEdicao;
     private javax.swing.JButton jButtonVoltar;

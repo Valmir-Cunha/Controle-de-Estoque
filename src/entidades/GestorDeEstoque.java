@@ -49,23 +49,25 @@ public class GestorDeEstoque extends Funcionario {
     }
 
 
-    public void excluirProdutos(Produto produto) {
+    public boolean excluirProdutos(Produto produto) {
         for (Produto produtoArray : estoque.getProdutosCadastrados()) {
             if(produtoArray.equals(produto)) {
                 estoque.getProdutosCadastrados().remove(produto);
                 estoque.getProdutosExcluidos().add(produto);
+                return true;
             }
         }
+        return false;
     }
     
-    public boolean excluirProduto(int id) {
-        Produto produto;
-        produto = estoque.encontrarProdutoCod(id);
-        estoque.getProdutosCadastrados().remove(produto);
-        estoque.getProdutosExcluidos().add(produto);
-        return true;
-    }
-    
+//    public boolean excluirProduto(int id) {
+//        Produto produto;
+//        produto = estoque.encontrarProdutoCod(id);
+//        estoque.getProdutosCadastrados().remove(produto);
+//        estoque.getProdutosExcluidos().add(produto);
+//        return true;
+//    }
+//    
     
     //Nao mexer
     public boolean buscarCategoria(int id,String nome) {
@@ -99,7 +101,10 @@ public class GestorDeEstoque extends Funcionario {
     //Nao mexer
     public boolean excluirCategoria(int i) {
         Categoria categoria = buscarCategoria(i);
-        
+        for(Produto produto: categoria.getProdutos()){
+            produto.setCategoria(buscarCategoria(1));
+            adicionarProdutoCategoria(buscarCategoria(1),produto);
+        }
         if(categoria != null) {
             estoque.getCategorias().remove(categoria);
             return true;
@@ -132,23 +137,4 @@ public class GestorDeEstoque extends Funcionario {
         produto.setCategoria(categoria);
         categoria.getProdutos().add(produto);
     }
-    
-    public void salvar() throws FileNotFoundException, IOException{
-        try (FileOutputStream f = new FileOutputStream(new File("\\dados\\Produtos.txt"),true)) {
-            ObjectOutputStream o = new ObjectOutputStream(f);
-            o.writeObject(estoque.getProdutosCadastrados().toString());
-            o.close();
-        }
-    }
-    public void CarregarArquivoEstoque() throws IOException{
-        File arquivo = new File("Produtos.tx");
-        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
-            String estoquetotal;
-            while (in.ready()) {
-                estoquetotal = in.readLine();
-                //estoque.getProdutosCadastrados().add(estoquetotal); 
-            }
-        }
-    }
-
 }

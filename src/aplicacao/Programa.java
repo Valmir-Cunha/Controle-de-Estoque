@@ -21,17 +21,7 @@ public class Programa {
         GestorDeEstoque gestor = new GestorDeEstoque("Valmir", "Avenida 1", "99321312", admMercado.getIdFuncionarios(), 0, estoqueMercado);
         jMenu menu = new jMenu(admMercado,estoqueMercado,gestor,adm,arq);
         menu.setVisible(true);
-        try{
-            arq.carregarCategorias();
-            arq.carregarClientes();
-            arq.carregarProdutos();
-            arq.carregarFuncionarios();
-            arq.carregarProdutosExcluidos();
-            arq.carregaridProduto();
-            arq.carregaridCategoria();
-        }catch(FileNotFoundException e){
-            System.out.println(e.getMessage());
-        }
+        arq.preencherEstruturas();
         
     }
 }

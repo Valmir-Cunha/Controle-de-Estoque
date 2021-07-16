@@ -63,7 +63,7 @@ public class Administracao implements FuncoesAdministracao{
     public void exibirListaClientes() {
             System.out.println("Clientes cadastrados: ");
             for (Cliente cliente : Clientes) {
-                    System.out.println(cliente);
+                System.out.println(cliente);
             }
     }
 
@@ -71,7 +71,7 @@ public class Administracao implements FuncoesAdministracao{
     public void exibirListaClientesExcluidos() {
             System.out.println("Clientes excluidos: ");
             for (Cliente cliente : Clientes) {
-                    System.out.println(cliente);
+                System.out.println(cliente);
             }
     }
 
@@ -81,17 +81,8 @@ public class Administracao implements FuncoesAdministracao{
     public void exibirListaFuncionarios() {
             System.out.println("Funcionarios: ");
             for (Funcionario funcionario : Funcionarios) {
-                    System.out.println(funcionario);
+                System.out.println(funcionario);
             }
-    }
-
-    public String buscarClienteCodigo(int i) {
-        for (Cliente cliente : Clientes) {
-            if(cliente.getCodigoCliente() == i){
-                return cliente.getNome();
-            }
-        }
-        return "teste";
     }
     
     public Cliente buscarClienteCod(int i) {

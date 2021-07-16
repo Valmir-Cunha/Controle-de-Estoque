@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import entidades.Categoria;
 import entidades.Cliente;
 import entidades.Produto;
 import entidades.Vendas;
@@ -313,12 +314,12 @@ public class JCaixa extends javax.swing.JFrame {
     private void jTextFieldCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteFocusLost
         // Evento que carrega um cliente no box pelo codigo
         if(!jTextFieldCodCliente.getText().trim().equals("")){ //Se o textField estiver vazio, não realiza o evento
-            String nome;
-            nome = adm.buscarClienteCodigo(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
-            if(nome == null){
+            Cliente cliente;
+            cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
+            if(cliente == null){
                 JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
             }else{
-                jComboBoxNomeCliente.setSelectedItem(nome);
+                jComboBoxNomeCliente.setSelectedItem(cliente.getNome());
             }
         }
         

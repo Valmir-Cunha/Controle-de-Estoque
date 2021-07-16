@@ -13,8 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import javax.swing.JOptionPane;
 
 
 public class Arquivos {
@@ -62,11 +62,21 @@ public class Arquivos {
                 output.write(categoria.toString());
                 output.flush();
             } 
-
     }
 
     public void registrarProdutosIndisponiveis() {
-
+            for(Produto produto: estoque.getProdutosCadastrados()){
+                if(produto.getQuantidadeEstoque() == 0){
+                    estoque.getProdutosIndisponiveis().add(produto);                }
+            }
+    }
+    
+    public void registrarProdutosDisponiveis(){
+        for(Produto produto: estoque.getProdutosCadastrados()){
+                if(produto.getQuantidadeEstoque() > 0){
+                    estoque.getProdutosDisponiveis().add(produto);
+                }
+            }
     }
 
     public void registrarProdutosExcluidos() throws FileNotFoundException, IOException {
@@ -91,10 +101,10 @@ public class Arquivos {
                 cliente.setEndereco(separartexto[1]);
                 cliente.setNumeroTelefone(separartexto[2]);
                 cliente.setCodigoCliente(Integer.parseInt(separartexto[3]));
-                    administracao.getClientes().add(cliente);
+                administracao.getClientes().add(cliente);
                     
                 
-                
+         
             }
             }
     }
@@ -224,17 +234,42 @@ public class Arquivos {
                     categoria.setNomeCategoria(separartexto[5]);
                     produto.setCategoria(categoria);
                     estoque.getProdutosExcluidos().add(produto);
-                    
                 }
-                }
+        }
 
     }
     
     public void carregarArquivos(){
-        
+        try {
+            registrarCategorias();
+            registrarProdutos();
+            registrarClientes();
+            registrarFuncionarios();
+            registrarProdutosExcluidos();
+        } catch(FileNotFoundException  ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao salvar dados do sistema.");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Erro ao salvar dados do sistema.");
+        }
     }
     
-    public void preencherEstruturas(){
-        
+    public void preencherEstruturas() {
+        try{
+            carregarCategorias();
+            carregarClientes();
+            carregarProdutos();
+            carregarProdutosExcluidos();
+            carregaridProduto();
+            carregaridCategoria();
+        }catch(FileNotFoundException e){
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
+            System.exit(0);
+        }catch (IOException ex) {
+            ex.getMessage();
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
+        }
     }
 }

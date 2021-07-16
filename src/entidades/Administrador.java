@@ -3,9 +3,8 @@ package entidades;
 
 import servicos.Estoque;
 import servicos.Administracao;
-import entidades.Produto;
 
-public class Administrador extends Funcionario {
+public class Administrador extends Funcionario implements FuncoesAdministrador{
     private Estoque estoque; 
     private Administracao gerencia;
 
@@ -23,6 +22,7 @@ public class Administrador extends Funcionario {
     }
     
     //Não mexer
+    @Override
     public void cadastrarCliente(int id,String nome,String numero,String endereco){
         Cliente cliente = new Cliente(nome,numero,endereco,id);
         gerencia.getClientes().add(cliente);
@@ -30,6 +30,7 @@ public class Administrador extends Funcionario {
     }
     
     //Não mexer
+    @Override
     public boolean excluirCliente(int id) {
         Cliente cliente;
         cliente = gerencia.buscarClienteCod(id);
@@ -38,6 +39,7 @@ public class Administrador extends Funcionario {
         return true;
     }
     //Não mexer
+    @Override
     public boolean editarCliente(int id,String nome,String numero,String endereco){
         Cliente cliente;
         cliente = gerencia.buscarClienteCod(id);

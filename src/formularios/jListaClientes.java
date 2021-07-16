@@ -6,7 +6,6 @@
 package formularios;
 
 import entidades.Administrador;
-import entidades.Categoria;
 import entidades.Cliente;
 import entidades.Produto;
 import entidades.Vendas;

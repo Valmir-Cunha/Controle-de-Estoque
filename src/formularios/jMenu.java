@@ -10,10 +10,7 @@ import entidades.GestorDeEstoque;
 import servicos.Administracao;
 import servicos.Estoque;
 import banco.Arquivos;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author vinic
@@ -149,20 +146,8 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         // Botão fechar
-        try {
-            // Botão fechar
-            arq.registrarCategorias();
-            arq.registrarProdutos();
-            arq.registrarClientes();
-            arq.registrarFuncionarios();
-            arq.registrarProdutosExcluidos();
-            System.exit(0);
-        } catch(FileNotFoundException  ex){
-            System.out.println(ex.getMessage());
-        } catch (IOException ex) {
-            ex.getMessage();
-            //Logger.getLogger(jMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        arq.carregarArquivos();
+        System.exit(0);
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
     /**

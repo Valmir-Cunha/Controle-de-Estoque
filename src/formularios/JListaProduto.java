@@ -386,7 +386,9 @@ public class JListaProduto extends javax.swing.JFrame {
       private void excluirProduto(){
         if(jTableProdutos.getSelectedRow() != -1){
             DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
-            if(gestor.excluirProduto((int) jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 0))){
+            Produto produto;
+            produto = est.encontrarProdutoCod((int) jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 0));
+            if(gestor.excluirProdutos(produto)){
                 JOptionPane.showMessageDialog(null, "Produto excluido com sucesso.");
                 model.removeRow(jTableProdutos.getSelectedRow());
             }else{
