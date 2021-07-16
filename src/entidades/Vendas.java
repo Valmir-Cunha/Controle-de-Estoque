@@ -6,6 +6,7 @@ import java.util.List;
 public class Vendas {
     int id;
     private Cliente cliente;
+    private Produto produto;
     private List<Produto> produtos = new ArrayList<>();
     private double precoTotal = 0;
 
@@ -22,6 +23,14 @@ public class Vendas {
                     total = produto.getPreco() * produto.getQuantidadeEstoque() + total; ///modificar quantidade
             }
             return total;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public int getId() {
@@ -55,5 +64,12 @@ public class Vendas {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }   
+        @Override
+    public String toString() {
+            return "" + cliente
+                            +";" + produtos
+                            +";" + precoTotal
+                            +"\n";
+    }
     
 }
