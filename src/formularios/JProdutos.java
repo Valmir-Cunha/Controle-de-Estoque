@@ -137,8 +137,13 @@ public class JProdutos extends javax.swing.JFrame {
 
     private void jButtonCadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroProdutosActionPerformed
         // Botao cadastro de produtos
-        JCadastroProduto cadastroProduto = new JCadastroProduto(est,gestor);
-        cadastroProduto.setVisible(true);
+        if(est.getCategorias().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada.");
+        }else{
+            JCadastroProduto cadastroProduto = new JCadastroProduto(est,gestor);
+            cadastroProduto.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jButtonCadastroProdutosActionPerformed
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
@@ -190,6 +195,7 @@ public class JProdutos extends javax.swing.JFrame {
             excluidos.setVisible(true);
         }
     }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastroProdutos;

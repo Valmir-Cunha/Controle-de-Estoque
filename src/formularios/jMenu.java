@@ -60,7 +60,7 @@ public class jMenu extends javax.swing.JFrame {
         jButtonCategorias = new javax.swing.JButton();
         jButtonCaixa = new javax.swing.JButton();
         jButtonFechar = new javax.swing.JButton();
-        imagem = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -69,7 +69,7 @@ public class jMenu extends javax.swing.JFrame {
         jLabelMenu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelMenu.setForeground(new java.awt.Color(255, 255, 255));
         jLabelMenu.setText("Menu");
-        getContentPane().add(jLabelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, -1));
+        getContentPane().add(jLabelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
 
         jButtonClientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonClientes.setText("Clientes");
@@ -78,7 +78,7 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 195, -1, 30));
+        getContentPane().add(jButtonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, -1, 30));
 
         jButtonProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonProduto.setText("Produtos");
@@ -87,7 +87,7 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonProdutoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
+        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         jButtonCategorias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonCategorias.setText("Categorias");
@@ -96,7 +96,7 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonCategoriasActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+        getContentPane().add(jButtonCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
         jButtonCaixa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonCaixa.setText("Caixa");
@@ -105,7 +105,7 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonCaixaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 80, -1));
+        getContentPane().add(jButtonCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 80, -1));
 
         jButtonFechar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonFechar.setText("Fechar");
@@ -114,13 +114,10 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonFecharActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, -1, -1));
+        getContentPane().add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, -1, -1));
 
-        imagem.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        imagem.setForeground(new java.awt.Color(255, 255, 255));
-        imagem.setIcon(new javax.swing.ImageIcon("C:\\Users\\vinic\\Documents\\GitHub\\Controle-de-Estoque\\src\\imagem\\png-clipart-online-marketplace-marketing-e-commerce-shopping-marketplace-logo-supermarket.png")); // NOI18N
-        imagem.setText("Menu");
-        getContentPane().add(imagem, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, 10, 750, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/png-clipart-online-marketplace-marketing-e-commerce-shopping-marketplace-logo-supermarket.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 520));
 
         pack();
         setLocationRelativeTo(null);
@@ -204,12 +201,12 @@ public class jMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel imagem;
     private javax.swing.JButton jButtonCaixa;
     private javax.swing.JButton jButtonCategorias;
     private javax.swing.JButton jButtonClientes;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonProduto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelMenu;
     // End of variables declaration//GEN-END:variables
 }

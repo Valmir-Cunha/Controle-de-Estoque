@@ -300,6 +300,13 @@ public class JListaProduto extends javax.swing.JFrame {
     private void jToggleButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonExcluirActionPerformed
         //Botão Excluir
         excluirProduto();
+        jTextFieldCodProduto.setText("");
+        jTextFieldNomeProd.setText("");
+        jTextFieldMarca.setText("");
+        jComboBoxCategoria.setSelectedItem("");
+        jTextFieldPreco.setText("");
+        jTextFieldEstoque.setText("");
+                
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 
     private void jToggleButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonEditarActionPerformed

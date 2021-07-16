@@ -6,6 +6,7 @@
 package formularios;
 
 import entidades.Administrador;
+import javax.swing.JOptionPane;
 import servicos.Administracao;
 
 /**
@@ -231,8 +232,14 @@ public class JCadastroCliente extends javax.swing.JFrame {
     *Realiza a leitura dos campos e chama a função de cadastro do cliente na classe administrador
     */
     public void cadastrarCliente(){
-        administrador.cadastrarCliente(Integer.parseInt(jTextFieldCodCliente.getText()),
-        jTextFieldNomeCliente.getText() , jTextFieldCelular.getText(), jTextFieldEndereco.getText());
+        if(jTextFieldNomeCliente.getText().trim().isEmpty() | jTextFieldCelular.getText().trim().isEmpty() | jTextFieldEndereco.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Todos os campos devem está preenchidos");
+        }else{
+            administrador.cadastrarCliente(Integer.parseInt(jTextFieldCodCliente.getText()),
+            jTextFieldNomeCliente.getText() , jTextFieldCelular.getText(), jTextFieldEndereco.getText());
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso.");
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

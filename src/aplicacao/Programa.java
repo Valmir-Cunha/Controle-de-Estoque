@@ -22,10 +22,10 @@ public class Programa {
         jMenu menu = new jMenu(admMercado,estoqueMercado,gestor,adm,arq);
         menu.setVisible(true);
         try{
+            arq.carregarCategorias();
             arq.carregarClientes();
             arq.carregarProdutos();
             arq.carregarFuncionarios();
-            arq.carregarCategorias();
             arq.carregarProdutosExcluidos();
             arq.carregaridProduto();
             arq.carregaridCategoria();

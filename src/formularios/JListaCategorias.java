@@ -406,6 +406,8 @@ public class JListaCategorias extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // Botão excluir categotia
         excluirCategoria();
+        jTextFieldCod.setText("");
+        jTextFieldNome.setText("");
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
@@ -427,10 +429,14 @@ public class JListaCategorias extends javax.swing.JFrame {
     private void jButtonExibirProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirProdutosActionPerformed
         // Botão de exibir lista de produtos da categoria selecionada.
         if(jTableCategorias.getSelectedRow() != -1){
-            jDialogListaProdutosCategoria.setVisible(true);
-            jDialogListaProdutosCategoria.setSize(700, 350);
-            jDialogListaProdutosCategoria.setLocationRelativeTo(null);
-            exibirListaProdutos();
+            if((boolean )jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 2)){
+                jDialogListaProdutosCategoria.setVisible(true);
+                jDialogListaProdutosCategoria.setSize(700, 350);
+                jDialogListaProdutosCategoria.setLocationRelativeTo(null);
+                exibirListaProdutos();
+            }else{
+                JOptionPane.showMessageDialog(null, "A categoria selecionada não possui produtos.");
+            }
         }else{
             JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja editar.");
         }
@@ -501,8 +507,8 @@ public class JListaCategorias extends javax.swing.JFrame {
     public void carregarCategorias(){
         DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
         for(Categoria categoria: est.getCategorias()){
-            if(categoria.getProdutos() != null){
-                model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});
+            if(categoria.getProdutos().isEmpty()){
+                model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),false});
             }else{
                 model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});
             }
@@ -570,7 +576,11 @@ public class JListaCategorias extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Categoria editada.");
                 model.removeRow(jTableCategorias.getSelectedRow());
                 categoria = est.encontrarCategoriaCodigo(id);
+                if(categoria.getProdutos().isEmpty()){
+                model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),false});
+                }else{
                 model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "Erro ao editar categoria");
             }
