@@ -62,21 +62,6 @@ public class Arquivos {
             } 
     }
 
-    public void registrarProdutosIndisponiveis() {
-            for(Produto produto: estoque.getProdutosCadastrados()){
-                if(produto.getQuantidadeEstoque() == 0){
-                    estoque.getProdutosIndisponiveis().add(produto);                }
-            }
-    }
-    
-    public void registrarProdutosDisponiveis(){
-        for(Produto produto: estoque.getProdutosCadastrados()){
-                if(produto.getQuantidadeEstoque() > 0){
-                    estoque.getProdutosDisponiveis().add(produto);
-                }
-            }
-    }
-
     public void registrarProdutosExcluidos() throws FileNotFoundException, IOException {
             OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\ProdutosExcluidos.dat"),"UTF-8");
             for (Produto produto : estoque.getProdutosExcluidos()) {
@@ -224,26 +209,26 @@ public class Arquivos {
         }
     }
 
-    public void carregarProdutosIndisponiveis() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\ProdutosIndisponiveis.dat");
-        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
-            String estoquetotal;
-            while (in.ready()) {
-                Produto produto = new Produto();
-                Categoria categoria = new Categoria();
-                estoquetotal = in.readLine();
-                String separartexto [] = estoquetotal.split(";");
-                produto.setNome(separartexto[0]);
-                produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
-                produto.setMarca(separartexto[2]);
-                produto.setPreco(Double.parseDouble(separartexto[3]));
-                produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
-                categoria.setNomeCategoria(separartexto[5]);
-                produto.setCategoria(categoria);
-                estoque.getProdutosIndisponiveis().add(produto);
-            }
-        }
-    }
+//    public void carregarProdutosIndisponiveis() throws FileNotFoundException, IOException {
+//        File arquivo = new File("dados\\ProdutosIndisponiveis.dat");
+//        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+//            String estoquetotal;
+//            while (in.ready()) {
+//                Produto produto = new Produto();
+//                Categoria categoria = new Categoria();
+//                estoquetotal = in.readLine();
+//                String separartexto [] = estoquetotal.split(";");
+//                produto.setNome(separartexto[0]);
+//                produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
+//                produto.setMarca(separartexto[2]);
+//                produto.setPreco(Double.parseDouble(separartexto[3]));
+//                produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
+//                categoria.setNomeCategoria(separartexto[5]);
+//                produto.setCategoria(categoria);
+//                estoque.getProdutosIndisponiveis().add(produto);
+//            }
+//        }
+//    }
 
     public void carregarProdutosExcluidos() throws FileNotFoundException, IOException {
         File arquivo = new File("dados\\ProdutosExcluidos.dat");

@@ -8,7 +8,7 @@ import entidades.Vendas;
 
 
 
-public class Administracao implements FuncoesAdministracao{
+public class Administracao {
     private int idClientes = 1;
     private int idFuncionarios = 1;
     private int idVendas = 1;
@@ -60,34 +60,9 @@ public class Administracao implements FuncoesAdministracao{
     public List<Funcionario> getFuncionarios() {
             return funcionarios;
     }
+
     public List<Vendas> getListaVendas() {
             return listaVendas;
-    }
-
-    @Override
-    public void exibirListaClientes() {
-            System.out.println("Clientes cadastrados: ");
-            for (Cliente cliente : clientes) {
-                System.out.println(cliente);
-            }
-    }
-
-    @Override
-    public void exibirListaClientesExcluidos() {
-            System.out.println("Clientes excluidos: ");
-            for (Cliente cliente : clientesExcluidos) {
-                System.out.println(cliente);
-            }
-    }
-
-
-
-    @Override
-    public void exibirListaFuncionarios() {
-            System.out.println("Funcionarios: ");
-            for (Funcionario funcionario : funcionarios) {
-                System.out.println(funcionario);
-            }
     }
     
     public Cliente buscarClienteCod(int i) {
