@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 
 public class Arquivos {
@@ -30,19 +31,18 @@ public class Arquivos {
     }
 
     public void registrarClientes() throws FileNotFoundException, IOException {
-            File file = new File("dados\\Clientes.dat");
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Clientes.dat"),"UTF-8");
             for (Cliente cliente : administracao.getClientes()) {
-                output.writeObject(cliente.toString());
+                output.write(cliente.toString());
                 output.flush();
             } 
     }
 
     public void registrarFuncionarios() throws FileNotFoundException, IOException {
-            File file = new File("dados\\Funcionarios.dat");
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Funcionarios.dat"),"UTF-8");
             for (Funcionario funcionario : administracao.getFuncionarios()) {
-                output.writeObject(funcionario.toString());
+                output.write(funcionario.toString());
+                output.flush();
             } 
 
     }
@@ -52,17 +52,17 @@ public class Arquivos {
     }
 
     public void registrarProdutos() throws FileNotFoundException, IOException{
-            File file = new File("dados\\Produtos.dat");
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
-            for (Produto produto : estoque.getProdutosCadastrados()) {
-                output.writeObject(produto.toString());
-            } 
+        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Produtos.dat"),"UTF-8");
+            for (Funcionario funcionario : administracao.getFuncionarios()) {
+                output.write(funcionario.toString());
+                output.flush();
+            }
     }
     public void registrarCategorias() throws FileNotFoundException, IOException{
-            File file = new File("dados\\Categorias.dat");
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
-            for (Categoria categoria : estoque.getCategorias()) {
-                output.writeObject(categoria.toString());
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Categorias.dat"),"UTF-8");
+            for (Funcionario funcionario : administracao.getFuncionarios()) {
+                output.write(funcionario.toString());
+                output.flush();
             } 
 
     }
@@ -72,10 +72,10 @@ public class Arquivos {
     }
 
     public void registrarProdutosExcluidos() throws FileNotFoundException, IOException {
-            File file = new File("dados\\ProdutosExcluidos.dat");
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file));
-            for (Produto produto : estoque.getProdutosExcluidos()) {
-                output.writeObject(produto.toString());
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\ProdutosExcluidos.dat"),"UTF-8");
+            for (Funcionario funcionario : administracao.getFuncionarios()) {
+                output.write(funcionario.toString());
+                output.flush();
             } 
         
 
