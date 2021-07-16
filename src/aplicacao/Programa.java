@@ -27,6 +27,8 @@ public class Programa {
             arq.carregarFuncionarios();
             arq.carregarCategorias();
             arq.carregarProdutosExcluidos();
+            arq.carregaridProduto();
+            arq.carregaridCategoria();
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());
         }
