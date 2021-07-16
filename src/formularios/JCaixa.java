@@ -328,14 +328,11 @@ public class JCaixa extends javax.swing.JFrame {
     *
     */
     private void jComboBoxNomeClientePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
-        // Evento que carrega um cliente no codigo pelo box
-        int i;
-        String txt;
+        // Evento que carrega o codigo de um cliente pelo box
+        Cliente cliente;
         if(jComboBoxNomeCliente.isPopupVisible()){
-            jComboBoxNomeCliente.getSelectedItem().toString(); //Pegando string do combo box
-            i = est.encontrarProdutoNome(jComboBoxNomeCliente.getSelectedItem().toString());
-            txt = Integer.toString(i);
-            jTextFieldCodCliente.setText(txt);
+            cliente = adm.buscarClienteNome(jComboBoxNomeCliente.getSelectedItem().toString().trim());
+            jTextFieldCodCliente.setText(Integer.toString(cliente.getCodigoCliente()));
         }
     }//GEN-LAST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
 
@@ -457,6 +454,7 @@ public class JCaixa extends javax.swing.JFrame {
             this.venda.setCliente(cliente);
             jTextFieldCodCliente.setEditable(false);
             jComboBoxNomeCliente.setEditable(false);
+            jButton1.setEnabled(false);
         }
     }
     
@@ -467,7 +465,7 @@ public class JCaixa extends javax.swing.JFrame {
         if(venda == null){
             JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
         }else{
-            if(!jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
+            if(jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
             }else{
                 Produto produtoLista;
@@ -504,6 +502,7 @@ public class JCaixa extends javax.swing.JFrame {
         model.setRowCount(0);
         jTextFieldCodCliente.setEditable(true);
         jComboBoxNomeCliente.setEditable(true);
+        jButton1.setEnabled(true);
         jTextFieldCodCliente.setText("");
         jComboBoxNomeCliente.setSelectedItem("");
         jTextFieldCodProduto.setText("");

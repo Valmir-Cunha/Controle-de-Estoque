@@ -1,8 +1,8 @@
 package entidades;
 
 public abstract class Pessoa {
-	public String nome;
-	public String endereco;
+	private String nome;
+	private String endereco;
 	private String numeroTelefone;
 	
 	public Pessoa() {

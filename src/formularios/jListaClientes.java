@@ -77,11 +77,10 @@ public class JListaClientes extends javax.swing.JFrame {
         jButtonExibirListaProdutos = new javax.swing.JButton();
         jDialogListaProdutosCompra = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableListaProdCompras = new javax.swing.JTable();
         jLabelPrecoTotalCompra = new javax.swing.JLabel();
         jTextFieldPrecoTotalCompra = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabelEndereco = new javax.swing.JLabel();
         jLabelCodCliente = new javax.swing.JLabel();
         jLabelNomeCliente = new javax.swing.JLabel();
@@ -307,7 +306,7 @@ public class JListaClientes extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableListaProdCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -323,23 +322,23 @@ public class JListaClientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setMinWidth(60);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(60);
-            jTable2.getColumnModel().getColumn(0).setMaxWidth(60);
-            jTable2.getColumnModel().getColumn(2).setMinWidth(100);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTable2.getColumnModel().getColumn(3).setMinWidth(100);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(3).setMaxWidth(100);
-            jTable2.getColumnModel().getColumn(4).setMinWidth(60);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(60);
-            jTable2.getColumnModel().getColumn(4).setMaxWidth(60);
-            jTable2.getColumnModel().getColumn(5).setMinWidth(80);
-            jTable2.getColumnModel().getColumn(5).setPreferredWidth(80);
-            jTable2.getColumnModel().getColumn(5).setMaxWidth(80);
+        jScrollPane3.setViewportView(jTableListaProdCompras);
+        if (jTableListaProdCompras.getColumnModel().getColumnCount() > 0) {
+            jTableListaProdCompras.getColumnModel().getColumn(0).setMinWidth(60);
+            jTableListaProdCompras.getColumnModel().getColumn(0).setPreferredWidth(60);
+            jTableListaProdCompras.getColumnModel().getColumn(0).setMaxWidth(60);
+            jTableListaProdCompras.getColumnModel().getColumn(2).setMinWidth(100);
+            jTableListaProdCompras.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTableListaProdCompras.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTableListaProdCompras.getColumnModel().getColumn(3).setMinWidth(100);
+            jTableListaProdCompras.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTableListaProdCompras.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTableListaProdCompras.getColumnModel().getColumn(4).setMinWidth(60);
+            jTableListaProdCompras.getColumnModel().getColumn(4).setPreferredWidth(60);
+            jTableListaProdCompras.getColumnModel().getColumn(4).setMaxWidth(60);
+            jTableListaProdCompras.getColumnModel().getColumn(5).setMinWidth(80);
+            jTableListaProdCompras.getColumnModel().getColumn(5).setPreferredWidth(80);
+            jTableListaProdCompras.getColumnModel().getColumn(5).setMaxWidth(80);
         }
 
         jLabelPrecoTotalCompra.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -347,14 +346,6 @@ public class JListaClientes extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Produtos");
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButton1.setText("OK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jDialogListaProdutosCompraLayout = new javax.swing.GroupLayout(jDialogListaProdutosCompra.getContentPane());
         jDialogListaProdutosCompra.getContentPane().setLayout(jDialogListaProdutosCompraLayout);
@@ -371,14 +362,9 @@ public class JListaClientes extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jDialogListaProdutosCompraLayout.createSequentialGroup()
-                .addGroup(jDialogListaProdutosCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialogListaProdutosCompraLayout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDialogListaProdutosCompraLayout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(310, 310, 310)
+                .addComponent(jLabel5)
+                .addContainerGap(324, Short.MAX_VALUE))
         );
         jDialogListaProdutosCompraLayout.setVerticalGroup(
             jDialogListaProdutosCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,9 +377,7 @@ public class JListaClientes extends javax.swing.JFrame {
                 .addGroup(jDialogListaProdutosCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPrecoTotalCompra)
                     .addComponent(jTextFieldPrecoTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -422,9 +406,16 @@ public class JListaClientes extends javax.swing.JFrame {
                 "Cód. Cliente", "Nome", "Celular", "Endereço"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, true, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -635,6 +626,8 @@ public class JListaClientes extends javax.swing.JFrame {
     private void jButtonExibirComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirComprasActionPerformed
         // Exibir compras do cliente selecionado
         jFrameListaCompras.setVisible(true);
+        jFrameListaCompras.setSize(450, 410);
+        jFrameListaCompras.setLocationRelativeTo(null);
         Object ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0);
         String texto = ob.toString();
         jTextFieldCodClient.setText(texto);
@@ -663,11 +656,6 @@ public class JListaClientes extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonCancelarEdicaoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Botão OK da lista de produtos das compras
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButtonVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltar1ActionPerformed
         // Botão voltar da tela de lista de compras
         dispose();
@@ -675,8 +663,11 @@ public class JListaClientes extends javax.swing.JFrame {
 
     private void jButtonExibirListaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirListaProdutosActionPerformed
         // Botão de exibit lista de produtos das compras
-        int id = Integer.parseInt(jTextFieldCodClient.getText());
-        carregarListaCompras(id);
+        jDialogListaProdutosCompra.setVisible(true);
+        jDialogListaProdutosCompra.setSize(800, 400);
+        jDialogListaProdutosCompra.setLocationRelativeTo(null);
+        int id = (int) jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0);
+        carregarProdutosCompra(id);
     }//GEN-LAST:event_jButtonExibirListaProdutosActionPerformed
 
     /**
@@ -831,7 +822,7 @@ public class JListaClientes extends javax.swing.JFrame {
     *
     */
     public void carregarListaCompras(int id){
-        DefaultTableModel model = (DefaultTableModel) jTableListaClientes.getModel(); 
+        DefaultTableModel model = (DefaultTableModel) jTableListaCompras.getModel(); 
         Cliente cliente;
         cliente = adm.buscarClienteCod(id);  
         for(Vendas venda: cliente.getCompras() ){
@@ -843,7 +834,7 @@ public class JListaClientes extends javax.swing.JFrame {
     *
     */
     public void carregarProdutosCompra(int id){
-        DefaultTableModel model = (DefaultTableModel) jTableListaClientes.getModel(); 
+        DefaultTableModel model = (DefaultTableModel) jTableListaProdCompras.getModel(); 
         Cliente cliente;
         cliente = adm.buscarClienteCod(id);
         Vendas venda = cliente.encontrarVenda((int) jTableListaCompras.getValueAt(jTableListaCompras.getSelectedRow(), 0));
@@ -854,7 +845,6 @@ public class JListaClientes extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCancelarEdicao;
     private javax.swing.JButton jButtonCarregarClientes;
@@ -884,9 +874,9 @@ public class JListaClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableListaClientes;
     private javax.swing.JTable jTableListaCompras;
+    private javax.swing.JTable jTableListaProdCompras;
     private javax.swing.JTextField jTextFieldCelular;
     private javax.swing.JTextField jTextFieldCelular1;
     private javax.swing.JTextField jTextFieldCod;

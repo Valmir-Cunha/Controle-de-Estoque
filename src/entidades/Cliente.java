@@ -39,9 +39,9 @@ public class Cliente extends Pessoa{
 
         @Override
     public String toString() {
-          return "" + nome
-                           +";" + numeroTelefone 
-                           +";" + endereco
+          return "" + getNome()
+                           +";" + getNumeroTelefone() 
+                           +";" + getEndereco()
                            +";" + codigoCliente
                            +"\n";
     } 

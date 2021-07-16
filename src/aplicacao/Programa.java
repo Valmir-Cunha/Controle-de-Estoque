@@ -4,6 +4,7 @@ import banco.Arquivos;
 import entidades.Administrador;
 import entidades.GestorDeEstoque;
 import formularios.jMenu;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import servicos.Administracao;
 import servicos.Estoque;
@@ -20,10 +21,15 @@ public class Programa {
         GestorDeEstoque gestor = new GestorDeEstoque("Valmir", "Avenida 1", "99321312", admMercado.getIdFuncionarios(), 0, estoqueMercado);
         jMenu menu = new jMenu(admMercado,estoqueMercado,gestor,adm,arq);
         menu.setVisible(true);
-        arq.carregarClientes();
-        arq.carregarProdutos();
-        arq.carregarFuncionarios();
-        arq.carregarCategorias();
-        arq.carregarProdutosExcluidos();
+        try{
+            arq.carregarClientes();
+            arq.carregarProdutos();
+            arq.carregarFuncionarios();
+            arq.carregarCategorias();
+            arq.carregarProdutosExcluidos();
+        }catch(FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+        
     }
 }
