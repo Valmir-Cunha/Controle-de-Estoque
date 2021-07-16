@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import entidades.Cliente;
 import entidades.Funcionario;
+import entidades.Vendas;
 
 
 
@@ -11,10 +12,11 @@ public class Administracao implements FuncoesAdministracao{
     private int idClientes = 1;
     private int idFuncionarios = 1;
     private int idVendas = 1;
-    private List<Cliente> Clientes = new ArrayList<>();
-    private List<Cliente> ClientesExcluidos = new ArrayList<>();
-    private List<Funcionario> Funcionarios = new ArrayList<>();
-
+    private List<Cliente> clientes = new ArrayList<>();
+    private List<Cliente> clientesExcluidos = new ArrayList<>();
+    private List<Funcionario> funcionarios = new ArrayList<>();
+    private List<Vendas> listaVendas = new ArrayList<>();
+    
     public Administracao() {
     }
 
@@ -48,21 +50,21 @@ public class Administracao implements FuncoesAdministracao{
     }
     
     public List<Cliente> getClientes() {
-            return Clientes;
+            return clientes;
     }
 
     public List<Cliente> getClientesExcluidos() {
-            return ClientesExcluidos;
+            return clientesExcluidos;
     }
 
     public List<Funcionario> getFuncionarios() {
-            return Funcionarios;
+            return funcionarios;
     }
 
     @Override
     public void exibirListaClientes() {
             System.out.println("Clientes cadastrados: ");
-            for (Cliente cliente : Clientes) {
+            for (Cliente cliente : clientes) {
                 System.out.println(cliente);
             }
     }
@@ -70,7 +72,7 @@ public class Administracao implements FuncoesAdministracao{
     @Override
     public void exibirListaClientesExcluidos() {
             System.out.println("Clientes excluidos: ");
-            for (Cliente cliente : Clientes) {
+            for (Cliente cliente : clientesExcluidos) {
                 System.out.println(cliente);
             }
     }
@@ -80,13 +82,13 @@ public class Administracao implements FuncoesAdministracao{
     @Override
     public void exibirListaFuncionarios() {
             System.out.println("Funcionarios: ");
-            for (Funcionario funcionario : Funcionarios) {
+            for (Funcionario funcionario : funcionarios) {
                 System.out.println(funcionario);
             }
     }
     
     public Cliente buscarClienteCod(int i) {
-        for (Cliente cliente : Clientes) {
+        for (Cliente cliente : clientes) {
             if(cliente.getCodigoCliente() == i){
                 return cliente;
             }
@@ -95,7 +97,7 @@ public class Administracao implements FuncoesAdministracao{
     }
     
     public Cliente buscarClienteNome(String nome) {
-        for (Cliente cliente : Clientes) {
+        for (Cliente cliente : clientes) {
             if(cliente.getNome().equals(nome)){
                 return cliente;
             }
