@@ -6,10 +6,12 @@ import java.util.List;
 import entidades.Categoria;
 import entidades.Produto;
 
-public class  Estoque {
+public class  Estoque implements FuncoesEstoque {
     private int idProdutos = 1;
     private int idCategoria = 1;
     private List<Produto> produtosCadastrados = new ArrayList<>();
+    private List<Produto> produtosDisponiveis = new ArrayList<>();
+    private List<Produto> produtosIndisponiveis = new ArrayList<>();
     private List<Produto> produtosExcluidos = new ArrayList<>();
     private List<Categoria> categorias = new ArrayList<>();
 
@@ -33,6 +35,14 @@ public class  Estoque {
             return produtosCadastrados;
     }
 
+    public List<Produto> getProdutosDisponiveis() {
+            return produtosDisponiveis;
+    }
+
+    public List<Produto> getProdutosIndisponiveis() {
+            return produtosIndisponiveis;
+    }
+
     public List<Produto> getProdutosExcluidos() {
             return produtosExcluidos;
     }
@@ -40,6 +50,34 @@ public class  Estoque {
     public List<Categoria> getCategorias() {
             return categorias;
     }
+
+    @Override
+    public void exibirProdutosCadastrados() {
+        for (Produto produto : produtosCadastrados) {
+                System.out.println(produto.toString());
+        }
+    }
+
+    @Override
+    public void exibirProdutosDisponiveis() {
+        for (Produto produto : produtosCadastrados) {
+                System.out.println(produto);
+        }
+    }
+
+    @Override
+    public void exibirProdutosIndisponiveis() {
+        for (Produto produto : produtosCadastrados) {
+                System.out.println(produto);
+        }
+    }
+
+    @Override
+    public void exibirProdutosExcluidos() {
+        for (Produto produto : produtosCadastrados) {
+                System.out.println(produto);
+        }
+    }	
 
     public void exibirCategorias() {
         for (Categoria categoria: categorias) {
@@ -93,4 +131,7 @@ public class  Estoque {
             }
         return null;
     }
+    
+    
+    
 }

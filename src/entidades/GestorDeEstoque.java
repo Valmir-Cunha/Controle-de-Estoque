@@ -128,4 +128,35 @@ public class GestorDeEstoque extends Funcionario {
             categoria.getProdutos().remove(produto);
         }
     }
+    
+    public void cadatrasProdutoListDisponiveis(Produto produto){
+        if(estoque.getProdutosDisponiveis().contains(produto)){
+            return;
+        }else{
+            estoque.getProdutosDisponiveis().add(produto);
+        }
+        
+    }
+    
+    public void excluirProdutoListDisponíveis(Produto produto){
+        if(estoque.getProdutosDisponiveis().contains(produto)){
+            estoque.getProdutosDisponiveis().remove(produto);
+        }else{
+        }
+    }
+    
+    public void cadatrasProdutoListIndisponiveis(Produto produto){
+        if(estoque.getProdutosIndisponiveis().contains(produto)){
+            return;
+        }else{
+            estoque.getProdutosIndisponiveis().add(produto);
+        }
+    }
+    
+    public void excluirProdutoListIndisponíveis(Produto produto){
+         if(estoque.getProdutosIndisponiveis().contains(produto)){
+            estoque.getProdutosIndisponiveis().remove(produto);
+        }else{
+        }
+    }
 }
