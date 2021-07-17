@@ -128,7 +128,7 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCaixaActionPerformed
         //Botão do caixa
-        JCaixa caixa = new JCaixa(adm,est);
+        JCaixa caixa = new JCaixa(adm,est,administrador);
         caixa.setVisible(true);
     }//GEN-LAST:event_jButtonCaixaActionPerformed
 

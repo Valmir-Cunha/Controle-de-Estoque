@@ -72,7 +72,6 @@ public class JListaClientes extends javax.swing.JFrame {
         jTextFieldCodClient = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldNome1 = new javax.swing.JTextField();
-        jButtonVoltar1 = new javax.swing.JButton();
         jButtonExibirListaProdutos = new javax.swing.JButton();
         jDialogListaProdutosCompra = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -131,7 +130,7 @@ public class JListaClientes extends javax.swing.JFrame {
         jLabelNomeCliente1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeCliente1.setText("Nome:");
 
-        jTextFieldCodCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextFieldCodCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTextFieldCodCliente.setEnabled(false);
 
         jButtonCancelarEdicao.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
@@ -238,14 +237,6 @@ public class JListaClientes extends javax.swing.JFrame {
 
         jTextFieldNome1.setEditable(false);
 
-        jButtonVoltar1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButtonVoltar1.setText("Voltar");
-        jButtonVoltar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVoltar1ActionPerformed(evt);
-            }
-        });
-
         jButtonExibirListaProdutos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonExibirListaProdutos.setText("Exibir lista de produtos");
         jButtonExibirListaProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -261,25 +252,26 @@ public class JListaClientes extends javax.swing.JFrame {
             .addGroup(jFrameListaComprasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jFrameListaComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jFrameListaComprasLayout.createSequentialGroup()
-                        .addComponent(jButtonVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonExibirListaProdutos))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jFrameListaComprasLayout.createSequentialGroup()
                         .addGroup(jFrameListaComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextFieldCodClient, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jFrameListaComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jFrameListaComprasLayout.createSequentialGroup()
-                                .addGap(64, 64, 64)
-                                .addComponent(jLabel2))
+                                .addGroup(jFrameListaComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTextFieldCodClient, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jFrameListaComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jFrameListaComprasLayout.createSequentialGroup()
+                                        .addGap(64, 64, 64)
+                                        .addComponent(jLabel2))
+                                    .addGroup(jFrameListaComprasLayout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jLabel4))
+                                    .addGroup(jFrameListaComprasLayout.createSequentialGroup()
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jTextFieldNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jFrameListaComprasLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel4))
-                            .addGroup(jFrameListaComprasLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jTextFieldNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(131, 131, 131)
+                                .addComponent(jButtonExibirListaProdutos)))
                         .addGap(21, 21, 21)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -298,11 +290,9 @@ public class JListaClientes extends javax.swing.JFrame {
                     .addComponent(jTextFieldNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(jFrameListaComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonVoltar1)
-                    .addComponent(jButtonExibirListaProdutos))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonExibirListaProdutos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTableListaProdCompras.setModel(new javax.swing.table.DefaultTableModel(
@@ -655,11 +645,6 @@ public class JListaClientes extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonCancelarEdicaoActionPerformed
 
-    private void jButtonVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltar1ActionPerformed
-        // Botão voltar da tela de lista de compras
-        dispose();
-    }//GEN-LAST:event_jButtonVoltar1ActionPerformed
-
     private void jButtonExibirListaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirListaProdutosActionPerformed
         // Botão de exibit lista de produtos das compras
         jDialogListaProdutosCompra.setVisible(true);
@@ -694,6 +679,10 @@ public class JListaClientes extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JListaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -851,7 +840,6 @@ public class JListaClientes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonExibirListaProdutos;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JButton jButtonVoltar1;
     private javax.swing.JDialog jDialogListaProdutosCompra;
     private javax.swing.JFrame jFrameEditar;
     private javax.swing.JFrame jFrameListaCompras;

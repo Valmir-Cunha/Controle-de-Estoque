@@ -5,7 +5,7 @@
  */
 package formularios;
 
-import entidades.Categoria;
+import entidades.Administrador;
 import entidades.Cliente;
 import entidades.Produto;
 import entidades.Vendas;
@@ -19,6 +19,7 @@ import servicos.Estoque;
  * @author vinic
  */
 public class JCaixa extends javax.swing.JFrame {
+    Administrador administrador; 
     Administracao adm;
     Estoque est;
     Vendas venda;
@@ -34,10 +35,11 @@ public class JCaixa extends javax.swing.JFrame {
      * @param adm
      * @param est
      */
-    public JCaixa(Administracao adm, Estoque est) {
+    public JCaixa(Administracao adm, Estoque est,Administrador administrador) {
         initComponents();
         this.adm = adm;
         this.est = est;
+        this.administrador = administrador;
         listarClientes();
         listarProdutos();
         carregarCodigo();
@@ -53,6 +55,15 @@ public class JCaixa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogListaVendas = new javax.swing.JDialog();
+        jButtonExibirListaProdutos = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableListaVendas = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jDialogListaProdutosVenda = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableProdutosVenda = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
         jLabelCodCliente = new javax.swing.JLabel();
         jLabelNomeCliente = new javax.swing.JLabel();
         jTextFieldCodCliente = new javax.swing.JTextField();
@@ -75,6 +86,108 @@ public class JCaixa extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldCodVenda = new javax.swing.JTextField();
+        jButtonListaTodasVendas = new javax.swing.JButton();
+
+        jButtonExibirListaProdutos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonExibirListaProdutos.setText("Exibir lista de produtos");
+        jButtonExibirListaProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExibirListaProdutosActionPerformed(evt);
+            }
+        });
+
+        jTableListaVendas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id compra", "Cliente", "Preço"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableListaVendas);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Lista de vendas");
+
+        javax.swing.GroupLayout jDialogListaVendasLayout = new javax.swing.GroupLayout(jDialogListaVendas.getContentPane());
+        jDialogListaVendas.getContentPane().setLayout(jDialogListaVendasLayout);
+        jDialogListaVendasLayout.setHorizontalGroup(
+            jDialogListaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogListaVendasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+            .addGroup(jDialogListaVendasLayout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addComponent(jLabel5)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogListaVendasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonExibirListaProdutos)
+                .addGap(164, 164, 164))
+        );
+        jDialogListaVendasLayout.setVerticalGroup(
+            jDialogListaVendasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogListaVendasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jButtonExibirListaProdutos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTableProdutosVenda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cód.", "Nome", "Marca", "Categoria", "Quant.", "Preço"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTableProdutosVenda);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel4.setText("Produtos da categoria");
+
+        javax.swing.GroupLayout jDialogListaProdutosVendaLayout = new javax.swing.GroupLayout(jDialogListaProdutosVenda.getContentPane());
+        jDialogListaProdutosVenda.getContentPane().setLayout(jDialogListaProdutosVendaLayout);
+        jDialogListaProdutosVendaLayout.setHorizontalGroup(
+            jDialogListaProdutosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogListaProdutosVendaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jDialogListaProdutosVendaLayout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialogListaProdutosVendaLayout.setVerticalGroup(
+            jDialogListaProdutosVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogListaProdutosVendaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -157,18 +270,18 @@ public class JCaixa extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableListaProdutos);
         if (jTableListaProdutos.getColumnModel().getColumnCount() > 0) {
-            jTableListaProdutos.getColumnModel().getColumn(0).setMinWidth(60);
-            jTableListaProdutos.getColumnModel().getColumn(0).setPreferredWidth(60);
-            jTableListaProdutos.getColumnModel().getColumn(0).setMaxWidth(60);
-            jTableListaProdutos.getColumnModel().getColumn(2).setMinWidth(60);
-            jTableListaProdutos.getColumnModel().getColumn(2).setPreferredWidth(60);
-            jTableListaProdutos.getColumnModel().getColumn(2).setMaxWidth(60);
-            jTableListaProdutos.getColumnModel().getColumn(3).setMinWidth(80);
-            jTableListaProdutos.getColumnModel().getColumn(3).setPreferredWidth(80);
-            jTableListaProdutos.getColumnModel().getColumn(3).setMaxWidth(80);
-            jTableListaProdutos.getColumnModel().getColumn(4).setMinWidth(80);
-            jTableListaProdutos.getColumnModel().getColumn(4).setPreferredWidth(80);
-            jTableListaProdutos.getColumnModel().getColumn(4).setMaxWidth(80);
+            jTableListaProdutos.getColumnModel().getColumn(0).setMinWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(0).setMaxWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(2).setMinWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(3).setMinWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(4).setMinWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTableListaProdutos.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
         jLabelPrecoTotalCompra.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -214,6 +327,14 @@ public class JCaixa extends javax.swing.JFrame {
 
         jTextFieldCodVenda.setEditable(false);
 
+        jButtonListaTodasVendas.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonListaTodasVendas.setText("Lista todas as vendas");
+        jButtonListaTodasVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListaTodasVendasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,8 +348,10 @@ public class JCaixa extends javax.swing.JFrame {
                                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(48, 48, 48)
                                 .addComponent(jButtonCancelarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(479, 479, 479)
-                                .addComponent(jButtonFinalizarVendas, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+                                .addGap(42, 42, 42)
+                                .addComponent(jButtonListaTodasVendas)
+                                .addGap(270, 270, 270)
+                                .addComponent(jButtonFinalizarVendas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -259,7 +382,7 @@ public class JCaixa extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(239, 239, 239)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldCodVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -288,7 +411,7 @@ public class JCaixa extends javax.swing.JFrame {
                     .addComponent(jTextFieldCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelQuantidadeProduto)
                     .addComponent(jLabelCodProduto)
@@ -309,8 +432,9 @@ public class JCaixa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelarVenda)
                     .addComponent(jButtonVoltar)
-                    .addComponent(jButtonFinalizarVendas))
-                .addGap(23, 23, 23))
+                    .addComponent(jButtonFinalizarVendas)
+                    .addComponent(jButtonListaTodasVendas))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -390,7 +514,12 @@ public class JCaixa extends javax.swing.JFrame {
 
     private void jButtonFinalizarVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalizarVendasActionPerformed
         // Botão de finalizar a venda
-        finalizarVenda();
+        if(jTableListaProdutos.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Para finalizar uma venda é necessário haver produtos cadastrados.");
+        }else{
+            finalizarVenda();
+        }
+        
     }//GEN-LAST:event_jButtonFinalizarVendasActionPerformed
 
     private void jComboBoxNomeProdutoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeProdutoPopupMenuWillBecomeInvisible
@@ -401,6 +530,23 @@ public class JCaixa extends javax.swing.JFrame {
             jTextFieldCodCliente.setText(Integer.toString(produto.getCodigoProduto()));
         }
     }//GEN-LAST:event_jComboBoxNomeProdutoPopupMenuWillBecomeInvisible
+
+    private void jButtonListaTodasVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaTodasVendasActionPerformed
+        // Lista todas as vendas
+        jDialogListaVendas.setVisible(true);
+        jDialogListaVendas.setSize(450, 410);
+        jDialogListaVendas.setLocationRelativeTo(null);
+        listarVendas();
+    }//GEN-LAST:event_jButtonListaTodasVendasActionPerformed
+
+    private void jButtonExibirListaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirListaProdutosActionPerformed
+        // Botão de exibit lista de produtos das compras
+        jDialogListaProdutosVenda.setVisible(true);
+        jDialogListaProdutosVenda.setSize(800, 400);
+        jDialogListaProdutosVenda.setLocationRelativeTo(null);
+        int id = (int) jTableListaVendas.getValueAt(jTableListaVendas.getSelectedRow(), 0);
+        carregarListaProdutos(id);
+    }//GEN-LAST:event_jButtonExibirListaProdutosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -542,6 +688,7 @@ public class JCaixa extends javax.swing.JFrame {
         Cliente cliente;
         cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
         cliente.getCompras().add(venda);
+        adm.getListaVendas().add(venda);
         adm.setIdVendas();
         resetarTela();
     }
@@ -553,17 +700,44 @@ public class JCaixa extends javax.swing.JFrame {
         String texto = String.valueOf(adm.getIdVendas());
         jTextFieldCodVenda.setText(texto);
     }
+    
+    
+    public void listarVendas(){
+        DefaultTableModel model = (DefaultTableModel) jTableListaVendas.getModel();
+        if(adm.getListaVendas().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Nenhuma venda foi realizada.");
+        }else{
+            for(Vendas venda: adm.getListaVendas() ){
+                model.addRow(new Object[]{venda.getId(),venda.getCliente().getNome(),venda.getPrecoTotal()});
+            }
+        }
+    }
+    
+    public void carregarListaProdutos(int id){
+        DefaultTableModel model = (DefaultTableModel) jTableProdutosVenda.getModel(); 
+        Vendas venda;
+        venda = administrador.buscarVenda(id); 
+        for(Produto produto: venda.getProdutos() ){
+            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdicionarProduto;
     private javax.swing.JButton jButtonCancelarVenda;
+    private javax.swing.JButton jButtonExibirListaProdutos;
     private javax.swing.JButton jButtonFinalizarVendas;
+    private javax.swing.JButton jButtonListaTodasVendas;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxNomeCliente;
     private javax.swing.JComboBox<String> jComboBoxNomeProduto;
+    private javax.swing.JDialog jDialogListaProdutosVenda;
+    private javax.swing.JDialog jDialogListaVendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelCodCliente;
     private javax.swing.JLabel jLabelCodProduto;
     private javax.swing.JLabel jLabelNomeCliente;
@@ -571,7 +745,11 @@ public class JCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPrecoTotalCompra;
     private javax.swing.JLabel jLabelQuantidadeProduto;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableListaProdutos;
+    private javax.swing.JTable jTableListaVendas;
+    private javax.swing.JTable jTableProdutosVenda;
     private javax.swing.JTextField jTextFieldCodCliente;
     private javax.swing.JTextField jTextFieldCodProduto;
     private javax.swing.JTextField jTextFieldCodVenda;

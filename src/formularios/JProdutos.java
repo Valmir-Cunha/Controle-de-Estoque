@@ -126,8 +126,13 @@ public class JProdutos extends javax.swing.JFrame {
 
     private void jButtonProdutosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutosCadastradosActionPerformed
         // Botao lista de produtos:
-        JListaProduto listaProduto = new JListaProduto(est,gestor);
-        listaProduto.setVisible(true);
+        if(est.getCategorias().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada.");
+        }else{
+            JListaProduto listaProduto = new JListaProduto(est,gestor);
+            listaProduto.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jButtonProdutosCadastradosActionPerformed
 
     private void jButtonProdutosExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutosExcluidosActionPerformed

@@ -4,7 +4,6 @@ import banco.Arquivos;
 import entidades.Administrador;
 import entidades.GestorDeEstoque;
 import formularios.jMenu;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import servicos.Administracao;
 import servicos.Estoque;

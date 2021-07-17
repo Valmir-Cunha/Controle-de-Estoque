@@ -31,7 +31,7 @@ public class Arquivos {
     }
 
     public void registrarClientes() throws FileNotFoundException, IOException {
-            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Clientes.dat"),"UTF-8");
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("Clientes.dat"),"UTF-8");
             for (Cliente cliente : administracao.getClientes()) {
                 output.write(cliente.toString());
                 output.flush();
@@ -39,7 +39,7 @@ public class Arquivos {
     }
 
     public void registrarFuncionarios() throws FileNotFoundException, IOException {
-            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Funcionarios.dat"),"UTF-8");
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("Funcionarios.dat"),"UTF-8");
             for (Funcionario funcionario : administracao.getFuncionarios()) {
                 output.write(funcionario.toString());
                 output.flush();
@@ -48,37 +48,22 @@ public class Arquivos {
     }
 
     public void registrarProdutos() throws FileNotFoundException, IOException{
-        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Produtos.dat"),"UTF-8");
+        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("Produtos.dat"),"UTF-8");
             for (Produto produto : estoque.getProdutosCadastrados()) {
                 output.write(produto.toString());
                 output.flush();
             }
     }
     public void registrarCategorias() throws FileNotFoundException, IOException{
-            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\Categorias.dat"),"UTF-8");
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("Categorias.dat"),"UTF-8");
             for (Categoria categoria :estoque.getCategorias()) {
                 output.write(categoria.toString());
                 output.flush();
             } 
     }
 
-    public void registrarProdutosIndisponiveis() {
-            for(Produto produto: estoque.getProdutosCadastrados()){
-                if(produto.getQuantidadeEstoque() == 0){
-                    estoque.getProdutosIndisponiveis().add(produto);                }
-            }
-    }
-    
-    public void registrarProdutosDisponiveis(){
-        for(Produto produto: estoque.getProdutosCadastrados()){
-                if(produto.getQuantidadeEstoque() > 0){
-                    estoque.getProdutosDisponiveis().add(produto);
-                }
-            }
-    }
-
     public void registrarProdutosExcluidos() throws FileNotFoundException, IOException {
-            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\ProdutosExcluidos.dat"),"UTF-8");
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("ProdutosExcluidos.dat"),"UTF-8");
             for (Produto produto : estoque.getProdutosExcluidos()) {
                 output.write(produto.toString());
                 output.flush();
@@ -88,7 +73,7 @@ public class Arquivos {
     }
     
     public void RegistrarVendas() throws FileNotFoundException, UnsupportedEncodingException, IOException{
-        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\TodasVendas.dat"),"UTF-8");
+        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("TodasVendas.dat"),"UTF-8");
         for (Vendas venda : administracao.getListaVendas()) {
             output.write(venda.toString());
             output.flush();
@@ -97,7 +82,7 @@ public class Arquivos {
     }
 
     public void carregarClientes() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\Clientes.dat");
+        File arquivo = new File("Clientes.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String todoscientes;
             while (in.ready()) {
@@ -116,7 +101,7 @@ public class Arquivos {
             }
     }
         public void carregarVendas() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\TodasVendas.dat");
+        File arquivo = new File("TodasVendas.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String todoscientes;
             while (in.ready()) {
@@ -162,7 +147,7 @@ public class Arquivos {
         
 
     public void carregarFuncionarios() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\Funcionarios.dat");
+        File arquivo = new File("Funcionarios.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String todosfuncionarios;
             while (in.ready()) {
@@ -182,7 +167,7 @@ public class Arquivos {
     }
 
     public void carregarProdutos() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\Produtos.dat");
+        File arquivo = new File("Produtos.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {
@@ -205,7 +190,7 @@ public class Arquivos {
         }
     }
         public void carregarCategorias() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\Categorias.dat");
+        File arquivo = new File("Categorias.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {
@@ -224,29 +209,8 @@ public class Arquivos {
         }
     }
 
-    public void carregarProdutosIndisponiveis() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\ProdutosIndisponiveis.dat");
-        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
-            String estoquetotal;
-            while (in.ready()) {
-                Produto produto = new Produto();
-                Categoria categoria = new Categoria();
-                estoquetotal = in.readLine();
-                String separartexto [] = estoquetotal.split(";");
-                produto.setNome(separartexto[0]);
-                produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
-                produto.setMarca(separartexto[2]);
-                produto.setPreco(Double.parseDouble(separartexto[3]));
-                produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
-                categoria.setNomeCategoria(separartexto[5]);
-                produto.setCategoria(categoria);
-                estoque.getProdutosIndisponiveis().add(produto);
-            }
-        }
-    }
-
     public void carregarProdutosExcluidos() throws FileNotFoundException, IOException {
-        File arquivo = new File("dados\\ProdutosExcluidos.dat");
+        File arquivo = new File("ProdutosExcluidos.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {

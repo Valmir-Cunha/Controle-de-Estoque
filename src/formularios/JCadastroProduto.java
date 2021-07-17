@@ -283,11 +283,6 @@ public class JCadastroProduto extends javax.swing.JFrame {
         if(gestor.cadastrarProdutos(produto)){
             gestor.adicionarProdutoCategoria(categoria, produto);
             JOptionPane.showMessageDialog(null, "Produto cadastrado.");
-            if(produto.getQuantidadeEstoque() > 0){
-                est.getProdutosDisponiveis().add(produto);
-            }else{
-                est.getProdutosIndisponiveis().add(produto);
-            }
             est.setIdProdutos();
             resetarCampos();
         }else{

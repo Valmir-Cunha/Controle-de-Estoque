@@ -52,4 +52,13 @@ public class Administrador extends Funcionario implements FuncoesAdministrador{
             return false;
         }
     }
+    
+    public Vendas buscarVenda(int id){
+        for(Vendas venda: gerencia.getListaVendas()){
+            if(venda.getId() == id){
+                return venda;
+            }
+        }
+        return null;
+    }
 }
