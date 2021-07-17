@@ -66,9 +66,13 @@ public class Vendas {
     }   
         @Override
     public String toString() {
-            return "" + cliente
-                            +";" + produtos
+            return "" + cliente.getNome()
+                            +";" + id
                             +";" + precoTotal
+                            +"\n";
+    }
+    public String toString2() {
+            return "" + produtos
                             +"\n";
     }
     
