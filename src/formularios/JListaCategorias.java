@@ -519,20 +519,28 @@ public class JListaCategorias extends javax.swing.JFrame {
              model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
             }
         } else if(jTextFieldNome.getText().isEmpty()){
-            categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
-            if(categoria == null){
-                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
-                jTextFieldCod.requestFocus();
+            if(validarTextFieldNumerica(jTextFieldNome.getText().trim())){
+                categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
+                if(categoria == null){
+                    JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+                    jTextFieldCod.requestFocus();
+                }else{
+                model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+                }
             }else{
-             model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+                JOptionPane.showMessageDialog(null, "Código inválido.");
             }
         } else {
-            categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
-            if(categoria == null){
-                JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
-                jTextFieldCod.requestFocus();
+            if(validarTextFieldNumerica(jTextFieldNome.getText().trim())){
+                categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
+                if(categoria == null){
+                    JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
+                    jTextFieldCod.requestFocus();
+                }else{
+                    model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+                }
             }else{
-             model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
+                JOptionPane.showMessageDialog(null, "Código inválido.");
             }
         }
     }
@@ -588,6 +596,14 @@ public class JListaCategorias extends javax.swing.JFrame {
             }
         }else{
             JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja excluir.");
+        }
+    }
+    
+    public boolean validarTextFieldNumerica(String txt){
+        if(txt.substring(0).matches("[0-9]*")){
+            return true;
+        }else{
+            return false;
         }
     }
 

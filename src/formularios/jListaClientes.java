@@ -743,15 +743,34 @@ public class JListaClientes extends javax.swing.JFrame {
                 jButtonExibirCompras.setEnabled(true);
             }
         } else if(jTextFieldNome.getText().isEmpty()){
-            cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
-            if(cliente == null){
-                JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
-                jTextFieldCod.requestFocus();
+            if(validarTextFieldNumerica(jTextFieldCod.getText().trim())){
+                cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
+                if(cliente == null){
+                    JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+                    jTextFieldCod.requestFocus();
+                }else{
+                    model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});   
+                    jToggleButtonExcluir.setEnabled(true);
+                    jToggleButtonEditar.setEnabled(true);
+                    jButtonExibirCompras.setEnabled(true);
+                }
             }else{
-                model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});   
-                jToggleButtonExcluir.setEnabled(true);
-                jToggleButtonEditar.setEnabled(true);
-                jButtonExibirCompras.setEnabled(true);
+                JOptionPane.showMessageDialog(null, "Código inválido.");
+            }
+        }else{ //Quando os dois campos são preenchidos
+            if(validarTextFieldNumerica(jTextFieldCod.getText().trim())){
+                cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
+                if(cliente == null){
+                    JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+                    jTextFieldCod.requestFocus();
+                }else{
+                    model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});   
+                    jToggleButtonExcluir.setEnabled(true);
+                    jToggleButtonEditar.setEnabled(true);
+                    jButtonExibirCompras.setEnabled(true);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Código inválido.");
             }
         }
     }
@@ -855,6 +874,14 @@ public class JListaClientes extends javax.swing.JFrame {
             System.out.print(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro.");
         } 
+    }
+    
+    public boolean validarTextFieldNumerica(String txt){
+        if(txt.substring(0).matches("[0-9]*")){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

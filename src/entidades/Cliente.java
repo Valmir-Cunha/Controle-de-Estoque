@@ -29,10 +29,16 @@ public class Cliente extends Pessoa{
     }
     
     public Vendas encontrarVenda(int id){
-        for(Vendas venda: this.getCompras() ){
-            if(venda.getId() == id){
-                return venda;
+        try{
+            for(Vendas venda: this.getCompras() ){
+                if(venda.getId() == id){
+                    return venda;
+                }
             }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
         return null;
     }

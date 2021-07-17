@@ -203,7 +203,11 @@ public class JCadastroProduto extends javax.swing.JFrame {
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão cadastrar produto
-        cadastraProduto();
+        if(validarTextFieldNumerica(jTextFieldPreco.getText().trim()) && validarTextFieldNumerica(jTextFieldEstoque.getText().trim())){
+            cadastraProduto();
+        }else{
+            JOptionPane.showMessageDialog(null, "Quantidade ou preço inválidos!");
+        }
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     /**
@@ -296,6 +300,14 @@ public class JCadastroProduto extends javax.swing.JFrame {
         }else{
             produto = null;
             JOptionPane.showMessageDialog(null, "Erro ao cadastra produto.");
+        }
+    }
+    
+    public boolean validarTextFieldNumerica(String txt){
+        if(txt.substring(0).matches("[0-9]*")){
+            return true;
+        }else{
+            return false;
         }
     }
     

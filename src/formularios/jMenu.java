@@ -10,6 +10,7 @@ import entidades.GestorDeEstoque;
 import servicos.Administracao;
 import servicos.Estoque;
 import banco.Arquivos;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -128,8 +129,13 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCaixaActionPerformed
         //Botão do caixa
-        JCaixa caixa = new JCaixa(adm,est,administrador);
-        caixa.setVisible(true);
+        if(adm.getClientes().isEmpty() || est.getProdutosCadastrados().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Não é possível abrir o caixa. Para iniciar uma venda, é necessario ter cadastros de clientes e produtos.");
+        }else{
+            JCaixa caixa = new JCaixa(adm,est,administrador);
+            caixa.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jButtonCaixaActionPerformed
 
     private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed

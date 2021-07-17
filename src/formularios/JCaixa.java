@@ -442,27 +442,33 @@ public class JCaixa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /*
-    *
+    * Evento que carrega um cliente no box pelo codigo fazendo a validação do textfield
     */
     private void jTextFieldCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteFocusLost
-        // Evento que carrega um cliente no box pelo codigo
-        if(!jTextFieldCodCliente.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
-            Cliente cliente;
-            cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
-            if(cliente == null){
-                JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
-            }else{
-                jComboBoxNomeCliente.setSelectedItem(cliente.getNome());
+        try{
+            if(!jTextFieldCodCliente.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
+                if(validarTextFieldNumerica(jTextFieldCodCliente.getText().trim())){
+                    Cliente cliente;
+                    cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
+                    if(cliente == null){
+                        JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
+                    }else{
+                        jComboBoxNomeCliente.setSelectedItem(cliente.getNome());
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "O código do cliente não é válido!");
+                    jTextFieldCodCliente.setText("");
+                }
             }
+        }catch(NumberFormatException ex){
+            System.out.print(ex.getMessage());
         }
-        
     }//GEN-LAST:event_jTextFieldCodClienteFocusLost
     
     /*
-    *
+    *Evento que carrega o codigo de um cliente pelo box
     */
     private void jComboBoxNomeClientePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
-        // Evento que carrega o codigo de um cliente pelo box
         Cliente cliente;
         if(jComboBoxNomeCliente.isPopupVisible()){
             cliente = adm.buscarClienteNome(jComboBoxNomeCliente.getSelectedItem().toString().trim());
@@ -479,24 +485,30 @@ public class JCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /*
-    *
+    *Carrega o nome do produto na jbox pelo código digitado após a perca de focu na caixa de texto fazendo a validação do textfield
     */
     private void jTextFieldCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodProdutoFocusLost
-        // Carrega o nome do produto na jbox pelo código digitado após a perca de focu na caixa de texto
-        if(!jTextFieldCodProduto.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
-            Produto produto;
-            produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText().trim())); //trim elimina espaços
-            if(produto == null){
-                JOptionPane.showMessageDialog(null, "Produto não encontrado.");
-            }else{
-                jComboBoxNomeProduto.setSelectedItem(produto.getNome());
+        try{
+            if(!jTextFieldCodCliente.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
+                if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
+                    Produto produto;
+                    produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText().trim())); //trim elimina espaços
+                    if(produto == null){
+                        JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+                    }else{
+                        jComboBoxNomeProduto.setSelectedItem(produto.getNome());
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "O código do produto não é válido!");
+                    jTextFieldCodProduto.setText("");
+                }
             }
+        }catch(NumberFormatException ex){
+            System.out.print(ex.getMessage());
         }
     }//GEN-LAST:event_jTextFieldCodProdutoFocusLost
 
-    /*
-    *
-    */
+    
     private void jButtonAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarProdutoActionPerformed
         // Botão adicionar protudo
         adicionarProdutoCompra();
@@ -519,15 +531,22 @@ public class JCaixa extends javax.swing.JFrame {
         }else{
             finalizarVenda();
         }
-        
     }//GEN-LAST:event_jButtonFinalizarVendasActionPerformed
 
     private void jComboBoxNomeProdutoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeProdutoPopupMenuWillBecomeInvisible
         // Carrega o cod do produto na txtfield pelo jbox
         Produto produto;
         if(jComboBoxNomeProduto.isPopupVisible()){
-            produto = est.encontrarProdNome(jComboBoxNomeProduto.getSelectedItem().toString().trim());
-            jTextFieldCodCliente.setText(Integer.toString(produto.getCodigoProduto()));
+            try{
+                produto = est.encontrarProdNome(jComboBoxNomeProduto.getSelectedItem().toString().trim());
+                jTextFieldCodProduto.setText(Integer.toString(produto.getCodigoProduto()));
+            }catch(NullPointerException ex){
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao carregar codigo do produto.");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro.");
+            }
         }
     }//GEN-LAST:event_jComboBoxNomeProdutoPopupMenuWillBecomeInvisible
 
@@ -591,8 +610,14 @@ public class JCaixa extends javax.swing.JFrame {
     */
     private void listarClientes(){
         jComboBoxNomeCliente.removeAllItems();
-        for (int i =0 ; i < adm.getClientes().size(); i++){
-            jComboBoxNomeCliente.addItem(adm.getClientes().get(i).getNome());
+        try{
+            for (int i =0 ; i < adm.getClientes().size(); i++){
+                jComboBoxNomeCliente.addItem(adm.getClientes().get(i).getNome());
+            }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
     
@@ -601,9 +626,16 @@ public class JCaixa extends javax.swing.JFrame {
     */
     private void listarProdutos(){
         jComboBoxNomeProduto.removeAllItems();
-        for (int i =0 ; i < est.getProdutosCadastrados().size(); i++){
-            jComboBoxNomeProduto.addItem(est.getProdutosCadastrados().get(i).getNome());
+        try{
+            for (int i =0 ; i < est.getProdutosCadastrados().size(); i++){
+                jComboBoxNomeProduto.addItem(est.getProdutosCadastrados().get(i).getNome());
+            }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
+        
     }
     
     /*
@@ -627,38 +659,43 @@ public class JCaixa extends javax.swing.JFrame {
     *
     */
     public void adicionarProdutoCompra(){
-        if(venda == null){
-            JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
-        }else{
-            int quant =Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim());
-            if(jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
-                JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
-            } else if(quant <= 0){
-                JOptionPane.showMessageDialog(null, "Quantidade inválida.");
+        if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
+            if(venda == null){
+                JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
             }else{
-                Produto produtoLista;
-                int i = Integer.parseInt(jTextFieldCodProduto.getText().trim());
-                produtoLista = est.encontrarProdutoCod(i);
-                if(produtoLista == null){
-                    JOptionPane.showMessageDialog(null, "Produto não encontrado.");
-                    jTextFieldCodProduto.setText("");
-                    jComboBoxNomeProduto.setSelectedItem("");
-                    jTextFieldQuantidadeProduto.setText("");
-                }else if(Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()) > produtoLista.getQuantidadeEstoque()){
-                    JOptionPane.showMessageDialog(null, "Quantidade é maior que a disponível no estoque.");
-                    jTextFieldQuantidadeProduto.setText("");
+                int quant =Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim());
+                if(jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
+                } else if(quant <= 0){
+                    JOptionPane.showMessageDialog(null, "Quantidade inválida.");
                 }else{
-                    Produto produto = new Produto(produtoLista.getCodigoProduto(),produtoLista.getNome(),produtoLista.getMarca(),produtoLista.getPreco(),Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()), produtoLista.getCategoria());
-                    produtoLista.setQuantidadeEstoque(produtoLista.getQuantidadeEstoque()- Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()));
-                    venda.getProdutos().add(produto);
-                    DefaultTableModel model = (DefaultTableModel) jTableListaProdutos.getModel();
-                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getPreco(),produto.getQuantidadeEstoque(), produto.getCategoria()});
-                    double precoTxtField = Double.parseDouble(jTextFieldPrecoTotalCompra.getText().trim());
-                    double soma = precoTxtField + produto.getPreco()*produto.getQuantidadeEstoque();
-                    jTextFieldPrecoTotalCompra.setText(Double.toString(soma));
-                    venda.setPrecoTotal(soma);
-                }
+                    Produto produtoLista;
+                    int i = Integer.parseInt(jTextFieldCodProduto.getText().trim());
+                    produtoLista = est.encontrarProdutoCod(i);
+                    if(produtoLista == null){
+                        JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+                        jTextFieldCodProduto.setText("");
+                        jComboBoxNomeProduto.setSelectedItem("");
+                        jTextFieldQuantidadeProduto.setText("");
+                    }else if(Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()) > produtoLista.getQuantidadeEstoque()){
+                        JOptionPane.showMessageDialog(null, "Quantidade é maior que a disponível no estoque.");
+                        jTextFieldQuantidadeProduto.setText("");
+                    }else{
+                        Produto produto = new Produto(produtoLista.getCodigoProduto(),produtoLista.getNome(),produtoLista.getMarca(),produtoLista.getPreco(),Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()), produtoLista.getCategoria());
+                        produtoLista.setQuantidadeEstoque(produtoLista.getQuantidadeEstoque()- Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim()));
+                        venda.getProdutos().add(produto);
+                        DefaultTableModel model = (DefaultTableModel) jTableListaProdutos.getModel();
+                        model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getPreco(),produto.getQuantidadeEstoque(), produto.getCategoria()});
+                        double precoTxtField = Double.parseDouble(jTextFieldPrecoTotalCompra.getText().trim());
+                        double soma = precoTxtField + produto.getPreco()*produto.getQuantidadeEstoque();
+                        jTextFieldPrecoTotalCompra.setText(Double.toString(soma));
+                        venda.setPrecoTotal(soma);
+                        }
+                    }   
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "A quantidade descrita não é válida!");
+            jTextFieldCodProduto.setText("");
         }
     }
     
@@ -685,12 +722,18 @@ public class JCaixa extends javax.swing.JFrame {
     *
     */
     public void finalizarVenda(){
-        Cliente cliente;
-        cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
-        cliente.getCompras().add(venda);
-        adm.getListaVendas().add(venda);
-        adm.setIdVendas();
-        resetarTela();
+        try{
+            Cliente cliente;
+            cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
+            cliente.getCompras().add(venda);
+            adm.getListaVendas().add(venda);
+            adm.setIdVendas();
+            resetarTela();
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        } 
     }
     
     /*
@@ -707,18 +750,42 @@ public class JCaixa extends javax.swing.JFrame {
         if(adm.getListaVendas().isEmpty()){
             JOptionPane.showMessageDialog(null, "Nenhuma venda foi realizada.");
         }else{
-            for(Vendas venda: adm.getListaVendas() ){
-                model.addRow(new Object[]{venda.getId(),venda.getCliente().getNome(),venda.getPrecoTotal()});
-            }
+            try{
+                for(Vendas venda: adm.getListaVendas() ){
+                    model.addRow(new Object[]{venda.getId(),venda.getCliente().getNome(),venda.getPrecoTotal()});
+                }
+            }catch(NullPointerException ex){
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao acessar dados de venda.");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro.");
+            } 
         }
     }
     
     public void carregarListaProdutos(int id){
         DefaultTableModel model = (DefaultTableModel) jTableProdutosVenda.getModel(); 
-        Vendas venda;
-        venda = administrador.buscarVenda(id); 
-        for(Produto produto: venda.getProdutos() ){
-            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
+        try{
+            Vendas venda;
+            venda = administrador.buscarVenda(id); 
+            for(Produto produto: venda.getProdutos() ){
+                model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
+            }   
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao acessar dados dos produtos.");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro.");
+        } 
+    }
+    
+    public boolean validarTextFieldNumerica(String txt){
+        if(txt.substring(0).matches("[0-9]*")){
+            return true;
+        }else{
+            return false;
         }
     }
 

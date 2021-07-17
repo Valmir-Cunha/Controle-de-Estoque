@@ -40,6 +40,10 @@ public class JListaProduto extends javax.swing.JFrame {
         jButtonSalvar.setVisible(false);
         jToggleButtonExcluir.setEnabled(false);
         jToggleButtonEditar.setEnabled(false);
+        jTextFieldMarca.setEditable(false);
+        jTextFieldPreco.setEditable(false);
+        jTextFieldEstoque.setEditable(false);
+        jComboBoxCategoria.setEditable(false);
     }
     
     
@@ -332,8 +336,7 @@ public class JListaProduto extends javax.swing.JFrame {
         jTextFieldMarca.setText("");
         jComboBoxCategoria.setSelectedItem("");
         jTextFieldPreco.setText("");
-        jTextFieldEstoque.setText("");
-                
+        jTextFieldEstoque.setText("");    
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 
     private void jToggleButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonEditarActionPerformed
@@ -342,6 +345,10 @@ public class JListaProduto extends javax.swing.JFrame {
             jTextFieldCodProduto.setEditable(false);
             jButtonSalvar.setVisible(true);
             jButtonPesquisar.setEnabled(false);
+            jTextFieldMarca.setEditable(true);
+            jTextFieldPreco.setEditable(true);
+            jTextFieldEstoque.setEditable(true);
+            jComboBoxCategoria.setEditable(true);
         }else{
             JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a categoria que deseja editar.");
         } 
@@ -375,7 +382,11 @@ public class JListaProduto extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // Salvar edição produto
-        editarProduto();
+        if(validarTextFieldNumerica( jTextFieldPreco.getText().trim()) && validarTextFieldNumerica(jTextFieldEstoque.getText().trim())){
+            editarProduto();
+        }else{
+            JOptionPane.showMessageDialog(null, "Valores de quantidade ou preço inválidos.");
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonListaProdutosIndisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaProdutosIndisActionPerformed
@@ -526,14 +537,32 @@ public class JListaProduto extends javax.swing.JFrame {
                 jToggleButtonEditar.setEnabled(true);
             }
         } else if(jTextFieldNomeProd.getText().isEmpty()){
-            produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText()));
-            if(produto == null){
-                JOptionPane.showMessageDialog(null, "Produto não encontrado.");
-                jTextFieldCodProduto.requestFocus();
+            if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
+                produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText()));
+                if(produto == null){
+                    JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+                    jTextFieldCodProduto.requestFocus();
+                }else{
+                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco()});                jToggleButtonExcluir.setEnabled(true);
+                    jToggleButtonEditar.setEnabled(true);
+                    jToggleButtonExcluir.setEnabled(true);
+                }
             }else{
-                model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco()});                jToggleButtonExcluir.setEnabled(true);
-                jToggleButtonEditar.setEnabled(true);
-                jToggleButtonExcluir.setEnabled(true);
+                JOptionPane.showMessageDialog(null, "Código inválido.");
+            }
+        }else{ //Quando os dois campos são preenchidos
+            if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
+                produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText()));
+                if(produto == null){
+                    JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+                    jTextFieldCodProduto.requestFocus();
+                }else{
+                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco()});                jToggleButtonExcluir.setEnabled(true);
+                    jToggleButtonEditar.setEnabled(true);
+                    jToggleButtonExcluir.setEnabled(true);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Código inválido.");
             }
         }
     }
@@ -546,7 +575,7 @@ public class JListaProduto extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
         id = (int) jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 0);
         nomeCategoria = String.valueOf(jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 3)); 
-        if(jTextFieldNomeProd.getText().isEmpty() || jTextFieldNomeProd.getText().isEmpty() || jTextFieldMarca.getText().isEmpty() || jTextFieldPreco.getText().isEmpty() || jTextFieldEstoque.getText().isEmpty() ){
+        if(jTextFieldNomeProd.getText().isEmpty() || jTextFieldMarca.getText().isEmpty() || jTextFieldPreco.getText().isEmpty() || jTextFieldEstoque.getText().isEmpty() ){
             JOptionPane.showMessageDialog(null, "Todos os campos tem que ser preenchidos.");
             
         } else{
@@ -583,6 +612,14 @@ public class JListaProduto extends javax.swing.JFrame {
                 System.out.print(e.getMessage());
                 JOptionPane.showMessageDialog(null, "Erro ao preencher tabela.");
             }   
+        }
+    }
+    
+    public boolean validarTextFieldNumerica(String txt){
+        if(txt.substring(0).matches("[0-9]*")){
+            return true;
+        }else{
+            return false;
         }
     }
 
