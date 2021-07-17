@@ -165,11 +165,16 @@ public class JCadastroCliente extends javax.swing.JFrame {
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão de cadastrar
-        cadastrarCliente();
-        jTextFieldNomeCliente.setText("");
-        jTextFieldCelular.setText("");
-        jTextFieldEndereco.setText("");
-        carregarCodigo();
+        if(validarTextFieldNumerica(jTextFieldCelular.getText().trim())){
+            cadastrarCliente();
+            jTextFieldNomeCliente.setText("");
+            jTextFieldCelular.setText("");
+            jTextFieldEndereco.setText("");
+            carregarCodigo();
+        }else{
+            JOptionPane.showMessageDialog(null, "Número de calular inválido.");
+        }
+        
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
     
     /*
@@ -232,7 +237,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
     *Realiza a leitura dos campos e chama a função de cadastro do cliente na classe administrador
     */
     public void cadastrarCliente(){
-        if(jTextFieldNomeCliente.getText().trim().isEmpty() | jTextFieldCelular.getText().trim().isEmpty() | jTextFieldEndereco.getText().trim().isEmpty()){
+        if(jTextFieldNomeCliente.getText().trim().isEmpty() || jTextFieldCelular.getText().trim().isEmpty() || jTextFieldEndereco.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Todos os campos devem está preenchidos");
         }else{
             administrador.cadastrarCliente(Integer.parseInt(jTextFieldCodCliente.getText()),
@@ -242,6 +247,15 @@ public class JCadastroCliente extends javax.swing.JFrame {
         
     }
 
+    public boolean validarTextFieldNumerica(String txt){
+        String caracteres="0987654321.";
+        if(!caracteres.contains(txt+"")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonCancelar;

@@ -620,7 +620,8 @@ public class JListaProduto extends javax.swing.JFrame {
     }
     
     public boolean validarTextFieldNumerica(String txt){
-        if(txt.substring(0).matches("[0-9]*")){
+       String caracteres="0987654321.";
+        if(!caracteres.contains(txt+"")){
             return true;
         }else{
             return false;

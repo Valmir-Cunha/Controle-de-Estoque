@@ -81,7 +81,7 @@ public class JCaixa extends javax.swing.JFrame {
         jTextFieldPrecoTotalCompra = new javax.swing.JTextField();
         jButtonFinalizarVendas = new javax.swing.JButton();
         jButtonCancelarVenda = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonSelecionarCliente = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -303,11 +303,11 @@ public class JCaixa extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButton1.setText("Selecionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSelecionarCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonSelecionarCliente.setText("Selecionar");
+        jButtonSelecionarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSelecionarClienteActionPerformed(evt);
             }
         });
 
@@ -374,7 +374,7 @@ public class JCaixa extends javax.swing.JFrame {
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelQuantidadeProduto)
-                                    .addComponent(jButton1)
+                                    .addComponent(jButtonSelecionarCliente)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jTextFieldQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -410,7 +410,7 @@ public class JCaixa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonSelecionarCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelQuantidadeProduto)
@@ -479,10 +479,10 @@ public class JCaixa extends javax.swing.JFrame {
     /*
     *
     */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonSelecionarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarClienteActionPerformed
         // Botao selecionar cliente
         selecionarClienteCompra();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonSelecionarClienteActionPerformed
 
     /*
     *Carrega o nome do produto na jbox pelo código digitado após a perca de focu na caixa de texto fazendo a validação do textfield
@@ -552,10 +552,14 @@ public class JCaixa extends javax.swing.JFrame {
 
     private void jButtonListaTodasVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaTodasVendasActionPerformed
         // Lista todas as vendas
-        jDialogListaVendas.setVisible(true);
-        jDialogListaVendas.setSize(450, 410);
-        jDialogListaVendas.setLocationRelativeTo(null);
-        listarVendas();
+        //if(adm.getListaVendas().isEmpty()){
+            jDialogListaVendas.setVisible(true);
+            jDialogListaVendas.setSize(480, 340);
+            jDialogListaVendas.setLocationRelativeTo(null);
+            listarVendas();
+        //} else{
+        //    JOptionPane.showMessageDialog(null, "Sem vendas cadastradas.");
+        //}
     }//GEN-LAST:event_jButtonListaTodasVendasActionPerformed
 
     private void jButtonExibirListaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirListaProdutosActionPerformed
@@ -642,7 +646,7 @@ public class JCaixa extends javax.swing.JFrame {
     *
     */
     public void selecionarClienteCompra(){
-        if(jTextFieldCodCliente.getText().trim().equals("") || jComboBoxNomeCliente.getSelectedItem().equals("")){
+        if(jTextFieldCodCliente.getText().trim().isEmpty() || jComboBoxNomeCliente.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para seleção do cliente.");
         }else{
             venda = new Vendas(Integer.parseInt(jTextFieldCodVenda.getText().trim()));
@@ -651,7 +655,7 @@ public class JCaixa extends javax.swing.JFrame {
             this.venda.setCliente(cliente);
             jTextFieldCodCliente.setEditable(false);
             jComboBoxNomeCliente.setEditable(false);
-            jButton1.setEnabled(false);
+            jButtonSelecionarCliente.setEnabled(false);
         }
     }
     
@@ -663,7 +667,7 @@ public class JCaixa extends javax.swing.JFrame {
             if(venda == null){
                 JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
             }else{
-                int quant =Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim());
+                int quant = Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim());
                 if(jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
                 } else if(quant <= 0){
@@ -707,7 +711,7 @@ public class JCaixa extends javax.swing.JFrame {
         ((DefaultTableModel) jTableListaProdutos.getModel()).setRowCount(0);
         jTextFieldCodCliente.setEditable(true);
         jComboBoxNomeCliente.setEditable(true);
-        jButton1.setEnabled(true);
+        jButtonSelecionarCliente.setEnabled(true);
         jTextFieldCodCliente.setText("");
         jComboBoxNomeCliente.setSelectedItem("");
         jTextFieldCodProduto.setText("");
@@ -777,27 +781,32 @@ public class JCaixa extends javax.swing.JFrame {
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao acessar dados dos produtos.");
-        }catch(Exception e){
+        }catch(ArrayIndexOutOfBoundsException a){
+            System.out.println(a.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro,lista de produtos vazia.");
+        } catch(Exception e){
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro.");
         } 
     }
     
     public boolean validarTextFieldNumerica(String txt){
-        if(txt.substring(0).matches("[0-9]*")){
+        String caracteres="0987654321.";
+        if(!caracteres.contains(txt+"")){
             return true;
         }else{
             return false;
         }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAdicionarProduto;
     private javax.swing.JButton jButtonCancelarVenda;
     private javax.swing.JButton jButtonExibirListaProdutos;
     private javax.swing.JButton jButtonFinalizarVendas;
     private javax.swing.JButton jButtonListaTodasVendas;
+    private javax.swing.JButton jButtonSelecionarCliente;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JComboBox<String> jComboBoxNomeCliente;
     private javax.swing.JComboBox<String> jComboBoxNomeProduto;

@@ -152,7 +152,7 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         // Botão fechar
-        arq.carregarArquivos();
+        //arq.carregarArquivos();
         System.exit(0);
     }//GEN-LAST:event_jButtonFecharActionPerformed
 

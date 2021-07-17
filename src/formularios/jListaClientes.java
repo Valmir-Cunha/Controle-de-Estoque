@@ -616,7 +616,7 @@ public class JListaClientes extends javax.swing.JFrame {
     private void jButtonExibirComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirComprasActionPerformed
         // Exibir compras do cliente selecionado
         jFrameListaCompras.setVisible(true);
-        jFrameListaCompras.setSize(450, 410);
+        jFrameListaCompras.setSize(460, 410);
         jFrameListaCompras.setLocationRelativeTo(null);
         Object ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0);
         String texto = ob.toString();
@@ -649,7 +649,7 @@ public class JListaClientes extends javax.swing.JFrame {
     private void jButtonExibirListaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirListaProdutosActionPerformed
         // Botão de exibit lista de produtos das compras
         jDialogListaProdutosCompra.setVisible(true);
-        jDialogListaProdutosCompra.setSize(800, 400);
+        jDialogListaProdutosCompra.setSize(790, 400);
         jDialogListaProdutosCompra.setLocationRelativeTo(null);
         int id = (int) jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0);
         carregarProdutosCompra(id);
@@ -868,7 +868,7 @@ public class JListaClientes extends javax.swing.JFrame {
         try{
             Vendas venda = cliente.encontrarVenda((int) jTableListaCompras.getValueAt(jTableListaCompras.getSelectedRow(), 0));
             for(Produto produto: venda.getProdutos()){
-             model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
+             model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getClass(),produto.getPreco(),produto.getQuantidadeEstoque()});
             }
             jTextFieldPrecoTotalCompra.setText(Double.toString(venda.getPrecoTotal()));
         }catch(NullPointerException ex){
@@ -881,11 +881,17 @@ public class JListaClientes extends javax.swing.JFrame {
     }
     
     public boolean validarTextFieldNumerica(String txt){
-        if(txt.substring(0).matches("[0-9]*")){
+        String caracteres="0987654321.";
+        if(!caracteres.contains(txt+"")){
             return true;
         }else{
             return false;
         }
+//        if(txt.substring(0).matches("[0-9]*")){
+//            return true;
+//        }else{
+//            return false;
+//        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
