@@ -165,6 +165,7 @@ public class JClientesExcluidos extends javax.swing.JFrame {
     */
     public void carregarTabela(){
         DefaultTableModel model = (DefaultTableModel) jTableClientesExcluidos.getModel();
+        ((DefaultTableModel) jTableClientesExcluidos.getModel()).setRowCount(0);
         try{
             for(Cliente cliente: adm.getClientesExcluidos() ){
                 model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});

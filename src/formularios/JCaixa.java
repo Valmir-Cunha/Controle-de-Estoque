@@ -346,11 +346,11 @@ public class JCaixa extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
+                                .addGap(47, 47, 47)
                                 .addComponent(jButtonCancelarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
+                                .addGap(60, 60, 60)
                                 .addComponent(jButtonListaTodasVendas)
-                                .addGap(270, 270, 270)
+                                .addGap(253, 253, 253)
                                 .addComponent(jButtonFinalizarVendas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
@@ -429,12 +429,12 @@ public class JCaixa extends javax.swing.JFrame {
                     .addComponent(jLabelPrecoTotalCompra)
                     .addComponent(jTextFieldPrecoTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelarVenda)
-                    .addComponent(jButtonVoltar)
-                    .addComponent(jButtonFinalizarVendas)
-                    .addComponent(jButtonListaTodasVendas))
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(jButtonCancelarVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonListaTodasVendas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonFinalizarVendas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -690,8 +690,8 @@ public class JCaixa extends javax.swing.JFrame {
                         double soma = precoTxtField + produto.getPreco()*produto.getQuantidadeEstoque();
                         jTextFieldPrecoTotalCompra.setText(Double.toString(soma));
                         venda.setPrecoTotal(soma);
-                        }
-                    }   
+                    }
+                }   
             }
         }else{
             JOptionPane.showMessageDialog(null, "A quantidade descrita não é válida!");
@@ -704,7 +704,7 @@ public class JCaixa extends javax.swing.JFrame {
     */
     public void resetarTela(){
         DefaultTableModel model = (DefaultTableModel) jTableListaProdutos.getModel();
-        model.setRowCount(0);
+        ((DefaultTableModel) jTableListaProdutos.getModel()).setRowCount(0);
         jTextFieldCodCliente.setEditable(true);
         jComboBoxNomeCliente.setEditable(true);
         jButton1.setEnabled(true);
@@ -747,6 +747,7 @@ public class JCaixa extends javax.swing.JFrame {
     
     public void listarVendas(){
         DefaultTableModel model = (DefaultTableModel) jTableListaVendas.getModel();
+        ((DefaultTableModel) jTableListaProdutos.getModel()).setRowCount(0);
         if(adm.getListaVendas().isEmpty()){
             JOptionPane.showMessageDialog(null, "Nenhuma venda foi realizada.");
         }else{
@@ -766,6 +767,7 @@ public class JCaixa extends javax.swing.JFrame {
     
     public void carregarListaProdutos(int id){
         DefaultTableModel model = (DefaultTableModel) jTableProdutosVenda.getModel(); 
+        ((DefaultTableModel) jTableListaProdutos.getModel()).setRowCount(0);
         try{
             Vendas venda;
             venda = administrador.buscarVenda(id); 

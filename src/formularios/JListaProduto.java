@@ -451,6 +451,7 @@ public class JListaProduto extends javax.swing.JFrame {
     public void carregarProdutos(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
+        ((DefaultTableModel) jTableProdutos.getModel()).setRowCount(0);
         if(est.getProdutosCadastrados().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem produtos cadastrados.");
         }else{
@@ -473,6 +474,7 @@ public class JListaProduto extends javax.swing.JFrame {
     public void carregarProdutosDisponiveis(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
+        ((DefaultTableModel) jTableProdutos.getModel()).setRowCount(0);
         if(est.getProdutosCadastrados().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem produtos cadastrados.");
         }else{
@@ -497,6 +499,7 @@ public class JListaProduto extends javax.swing.JFrame {
     public void carregarProdutosIndisponiveis(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
+        ((DefaultTableModel) jTableProdutos.getModel()).setRowCount(0);
         if(est.getProdutosCadastrados().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem produtos cadastrados.");
         }else{
@@ -522,6 +525,7 @@ public class JListaProduto extends javax.swing.JFrame {
     public void pesquisarCliente(){
         Produto produto;
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
+        ((DefaultTableModel) jTableProdutos.getModel()).setRowCount(0);
         model.setRowCount(0);
         if(jTextFieldCodProduto.getText().isEmpty() && jTextFieldNomeProd.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para pesquisa.");

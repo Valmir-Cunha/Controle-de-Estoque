@@ -278,6 +278,7 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
     public void carregarProdutos(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutosExcluidos.getModel();
+        ((DefaultTableModel) jTableProdutosExcluidos.getModel()).setRowCount(0);
         if(est.getProdutosExcluidos().isEmpty()){
             JOptionPane.showMessageDialog(null, "Lista de produtos excluídos está vazia.");
         }else{

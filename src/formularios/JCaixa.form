@@ -197,11 +197,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jButtonVoltar" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                               <Component id="jButtonCancelarVenda" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               <Component id="jButtonListaTodasVendas" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
                               <Component id="jButtonFinalizarVendas" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -303,13 +303,13 @@
                   <Component id="jTextFieldPrecoTotalCompra" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonCancelarVenda" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonFinalizarVendas" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonListaTodasVendas" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jButtonVoltar" alignment="0" pref="34" max="32767" attributes="0"/>
+                  <Component id="jButtonCancelarVenda" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonListaTodasVendas" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jButtonFinalizarVendas" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

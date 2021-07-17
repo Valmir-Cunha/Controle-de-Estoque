@@ -604,6 +604,7 @@ public class JListaClientes extends javax.swing.JFrame {
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // Botao pesquisar cliente
+        ((DefaultTableModel) jTableListaClientes.getModel()).setRowCount(0);
         pesquisarCliente();
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
@@ -701,6 +702,7 @@ public class JListaClientes extends javax.swing.JFrame {
     */
     public void carregarClientes(){
         DefaultTableModel model = (DefaultTableModel) jTableListaClientes.getModel();
+        ((DefaultTableModel) jTableListaClientes.getModel()).setRowCount(0);
         if(adm.getClientes().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem cliente cadastrados.");
         }else{
@@ -838,6 +840,7 @@ public class JListaClientes extends javax.swing.JFrame {
     */
     public void carregarListaCompras(int id){
         DefaultTableModel model = (DefaultTableModel) jTableListaCompras.getModel(); 
+        ((DefaultTableModel) jTableListaCompras.getModel()).setRowCount(0);
         Cliente cliente;
         try{
             cliente = adm.buscarClienteCod(id);  
@@ -858,7 +861,8 @@ public class JListaClientes extends javax.swing.JFrame {
     *
     */
     public void carregarProdutosCompra(int id){
-        DefaultTableModel model = (DefaultTableModel) jTableListaProdCompras.getModel(); 
+        DefaultTableModel model = (DefaultTableModel) jTableListaProdCompras.getModel();
+        ((DefaultTableModel) jTableListaProdCompras.getModel()).setRowCount(0);
         Cliente cliente;
         cliente = adm.buscarClienteCod(id);
         try{

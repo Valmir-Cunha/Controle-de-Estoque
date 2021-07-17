@@ -372,6 +372,7 @@ public class JListaCategorias extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Botao para listar todas as categorias
+        ((DefaultTableModel) jTableCategorias.getModel()).setRowCount(0);
         carregarCategorias();
         jButtonExibirProdutos.setEnabled(true);
         jButtonEditar.setEnabled(true);
@@ -380,6 +381,7 @@ public class JListaCategorias extends javax.swing.JFrame {
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // Botao pesquisar
+        ((DefaultTableModel) jTableCategorias.getModel()).setRowCount(0);
         pesquisarCategoria();
         jButtonExibirProdutos.setEnabled(true);
         jButtonEditar.setEnabled(true);
@@ -417,6 +419,7 @@ public class JListaCategorias extends javax.swing.JFrame {
                 jDialogListaProdutosCategoria.setVisible(true);
                 jDialogListaProdutosCategoria.setSize(700, 350);
                 jDialogListaProdutosCategoria.setLocationRelativeTo(null);
+                ((DefaultTableModel) jTableProdutosCategoria.getModel()).setRowCount(0);
                 exibirListaProdutos();
             }else{
                 JOptionPane.showMessageDialog(null, "A categoria selecionada não possui produtos.");
