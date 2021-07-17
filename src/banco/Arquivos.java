@@ -146,24 +146,7 @@ public class Arquivos {
             for (Categoria categoria :estoque.getCategorias()) {
                 estoque.setIdCategoria();
             }  
-    }
-      
-    public void registrarIdVendas(){ 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter("dados\\IdVendas.txt"))){
-            bw.write(administracao.getIdVendas());
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-    
-//    public void carregarIdVendas(){
-//        try(BufferedReader bw = new BufferedReader(new FileWriter("dados\\IdVendas.txt"))){
-//            bw.write(administracao.getIdVendas());
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//    }
-        
+    } 
 
     public void carregarFuncionarios() throws FileNotFoundException, IOException {
         File arquivo = new File("dados\\Funcionarios.dat");
@@ -177,9 +160,6 @@ public class Arquivos {
                 funcionarios.setNome(separartexto[1]);
                 funcionarios.setNumeroTelefone(separartexto[2]);
                 administracao.getFuncionarios().add(funcionarios);
-                    
-                
-                
             }
             }
 
@@ -277,6 +257,11 @@ public class Arquivos {
                 }
         }
     }
+    
+    public void carregarProdutosVendasCliente(){
+        
+    }
+    
     public void carregarArquivos(){
         try {
             registrarCategorias();
