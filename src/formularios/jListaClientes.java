@@ -813,7 +813,7 @@ public class JListaClientes extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableListaCompras.getModel(); 
         Cliente cliente;
         cliente = adm.buscarClienteCod(id);  
-        for(Vendas venda: cliente.getCompras() ){
+        for(Vendas venda: adm.getListaVendas() ){
             model.addRow(new Object[]{venda.getId(),venda.getPrecoTotal()});
         }
     }
