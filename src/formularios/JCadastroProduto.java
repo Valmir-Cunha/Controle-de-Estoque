@@ -203,7 +203,7 @@ public class JCadastroProduto extends javax.swing.JFrame {
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão cadastrar produto
-        if(validarTextFieldNumerica(jTextFieldPreco.getText().trim()) && validarTextFieldNumerica(jTextFieldEstoque.getText().trim())){
+        if(validarTextFieldNumerica(jTextFieldPreco.getText().trim()) && validarTextFieldNumericaInteira(jTextFieldEstoque.getText().trim())){
             cadastraProduto();
         }else{
             JOptionPane.showMessageDialog(null, "Quantidade ou preço inválidos!");
@@ -304,10 +304,21 @@ public class JCadastroProduto extends javax.swing.JFrame {
     }
     
     public boolean validarTextFieldNumerica(String txt){
-        String caracteres="0987654321.";
-        if(!caracteres.contains(txt+"")){
+        try {
+            Double.parseDouble(txt);
             return true;
-        }else{
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean validarTextFieldNumericaInteira(String txt){
+        try {
+            Integer.parseInt(txt);
+            return true;
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }

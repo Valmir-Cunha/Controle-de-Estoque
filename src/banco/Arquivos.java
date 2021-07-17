@@ -11,8 +11,10 @@ import servicos.Estoque;
 import entidades.Produto;
 import entidades.Vendas;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import javax.swing.JOptionPane;
@@ -121,7 +123,7 @@ public class Arquivos {
                 vend.setPrecoTotal(Double.parseDouble(separartexto[2]));
                 administracao.getListaVendas().add(vend);
             }
-            }
+        }
     }
          public void carregaridProduto() throws FileNotFoundException, IOException {
             for (Produto produto :estoque.getProdutosCadastrados()) {
@@ -147,9 +149,21 @@ public class Arquivos {
             }  
     }
       
-    public void carregarIdVendas(){ 
-        
+    public void registrarIdVendas(){ 
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("dados\\IdVendas.txt"))){
+            bw.write(administracao.getIdVendas());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
+    
+//    public void carregarIdVendas(){
+//        try(BufferedReader bw = new BufferedReader(new FileWriter("dados\\IdVendas.txt"))){
+//            bw.write(administracao.getIdVendas());
+//        } catch (IOException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//    }
         
 
     public void carregarFuncionarios() throws FileNotFoundException, IOException {
@@ -232,7 +246,7 @@ public class Arquivos {
                     categoria.setNomeCategoria(separartexto[5]);
                     produto.setCategoria(categoria);
                     estoque.getProdutosExcluidos().add(produto);
-                }
+            }
         }
     }
     public void carregarVendasProdutos() throws FileNotFoundException, IOException {

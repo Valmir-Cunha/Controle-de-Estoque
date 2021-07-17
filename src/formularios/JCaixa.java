@@ -447,7 +447,7 @@ public class JCaixa extends javax.swing.JFrame {
     private void jTextFieldCodClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodClienteFocusLost
         try{
             if(!jTextFieldCodCliente.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
-                if(validarTextFieldNumerica(jTextFieldCodCliente.getText().trim())){
+                if(validarTextFieldNumericaInteira(jTextFieldCodCliente.getText().trim())){
                     Cliente cliente;
                     cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
                     if(cliente == null){
@@ -490,7 +490,7 @@ public class JCaixa extends javax.swing.JFrame {
     private void jTextFieldCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCodProdutoFocusLost
         try{
             if(!jTextFieldCodCliente.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
-                if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
+                if(validarTextFieldNumericaInteira(jTextFieldCodProduto.getText().trim())){
                     Produto produto;
                     produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText().trim())); //trim elimina espaços
                     if(produto == null){
@@ -511,7 +511,12 @@ public class JCaixa extends javax.swing.JFrame {
     
     private void jButtonAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarProdutoActionPerformed
         // Botão adicionar protudo
-        adicionarProdutoCompra();
+        if(validarTextFieldNumericaInteira(jTextFieldCodProduto.getText().trim())){
+            adicionarProdutoCompra();
+        }else{
+            JOptionPane.showMessageDialog(null, "A quantidade descrita não é válida!");
+            jTextFieldCodProduto.setText("");
+        }
     }//GEN-LAST:event_jButtonAdicionarProdutoActionPerformed
 
     private void jButtonCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarVendaActionPerformed
@@ -663,10 +668,10 @@ public class JCaixa extends javax.swing.JFrame {
     *
     */
     public void adicionarProdutoCompra(){
-        if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
-            if(venda == null){
-                JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
-            }else{
+        if(venda == null){
+            JOptionPane.showMessageDialog(null, "Antes de adicionar produtos, é necessário definir um cliente.");
+        }else{
+            try{
                 int quant = Integer.parseInt(jTextFieldQuantidadeProduto.getText().trim());
                 if(jTextFieldCodProduto.getText().trim().equals("") || jComboBoxNomeProduto.getSelectedItem().equals("") || jTextFieldQuantidadeProduto.getText().trim().equals("")){
                     JOptionPane.showMessageDialog(null, "Para adicionar um produto na venda é necassário todos os campos estarem preenchidos.");
@@ -695,11 +700,15 @@ public class JCaixa extends javax.swing.JFrame {
                         jTextFieldPrecoTotalCompra.setText(Double.toString(soma));
                         venda.setPrecoTotal(soma);
                     }
-                }   
+                } 
+            }catch(NullPointerException ex){
+                System.out.println(ex.getMessage());
+            }catch(NumberFormatException ex){
+                System.out.println(ex.getMessage());
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
             }
-        }else{
-            JOptionPane.showMessageDialog(null, "A quantidade descrita não é válida!");
-            jTextFieldCodProduto.setText("");
+
         }
     }
     
@@ -735,7 +744,7 @@ public class JCaixa extends javax.swing.JFrame {
             resetarTela();
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());
-        }catch(Exception e){
+        }catch(NumberFormatException e){
             System.out.println(e.getMessage());
         } 
     }
@@ -756,8 +765,8 @@ public class JCaixa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nenhuma venda foi realizada.");
         }else{
             try{
-                for(Vendas venda: adm.getListaVendas() ){
-                    model.addRow(new Object[]{venda.getId(),venda.getCliente().getNome(),venda.getPrecoTotal()});
+                for(Vendas vendaTabela: adm.getListaVendas() ){
+                    model.addRow(new Object[]{vendaTabela.getId(),vendaTabela.getCliente().getNome(),vendaTabela.getPrecoTotal()});
                 }
             }catch(NullPointerException ex){
                 System.out.println(ex.getMessage());
@@ -773,9 +782,9 @@ public class JCaixa extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableProdutosVenda.getModel(); 
         ((DefaultTableModel) jTableListaProdutos.getModel()).setRowCount(0);
         try{
-            Vendas venda;
-            venda = administrador.buscarVenda(id); 
-            for(Produto produto: venda.getProdutos() ){
+            Vendas vendaCaixa;
+            vendaCaixa = administrador.buscarVenda(id); 
+            for(Produto produto: vendaCaixa.getProdutos() ){
                 model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
             }   
         }catch(NullPointerException ex){
@@ -791,14 +800,25 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     public boolean validarTextFieldNumerica(String txt){
-        String caracteres="0987654321.";
-        if(!caracteres.contains(txt+"")){
+        try {
+            Double.parseDouble(txt);
             return true;
-        }else{
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }
     
+    public boolean validarTextFieldNumericaInteira(String txt){
+        try {
+            Integer.parseInt(txt);
+            return true;
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdicionarProduto;
