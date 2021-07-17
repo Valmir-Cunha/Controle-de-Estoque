@@ -704,12 +704,20 @@ public class JListaClientes extends javax.swing.JFrame {
         if(adm.getClientes().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem cliente cadastrados.");
         }else{
-            for(Cliente cliente: adm.getClientes()){
-                model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});
-                jToggleButtonExcluir.setEnabled(true);
-                jToggleButtonEditar.setEnabled(true);
-                jButtonExibirCompras.setEnabled(true);
-            }
+            try{
+                for(Cliente cliente: adm.getClientes()){
+                    model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});
+                    jToggleButtonExcluir.setEnabled(true);
+                    jToggleButtonEditar.setEnabled(true);
+                    jButtonExibirCompras.setEnabled(true);
+                }
+            }catch(NullPointerException ex){
+                System.out.print(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Dados dos clientes não foram encontrados");
+            }catch(Exception e){
+                System.out.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro.");
+            } 
         }
     }
     
@@ -812,10 +820,19 @@ public class JListaClientes extends javax.swing.JFrame {
     public void carregarListaCompras(int id){
         DefaultTableModel model = (DefaultTableModel) jTableListaCompras.getModel(); 
         Cliente cliente;
-        cliente = adm.buscarClienteCod(id);  
-        for(Vendas venda: adm.getListaVendas() ){
-            model.addRow(new Object[]{venda.getId(),venda.getPrecoTotal()});
-        }
+        try{
+            cliente = adm.buscarClienteCod(id);  
+            for(Vendas venda: adm.getListaVendas() ){
+                model.addRow(new Object[]{venda.getId(),venda.getPrecoTotal()});
+            }
+        }catch(NullPointerException ex){
+            System.out.print(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Dados de compras não foram encontrados");
+
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro.");
+        } 
     }
     
     /*
@@ -825,11 +842,19 @@ public class JListaClientes extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableListaProdCompras.getModel(); 
         Cliente cliente;
         cliente = adm.buscarClienteCod(id);
-        Vendas venda = cliente.encontrarVenda((int) jTableListaCompras.getValueAt(jTableListaCompras.getSelectedRow(), 0));
-        for(Produto produto: venda.getProdutos()){
-            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
-        }
-        jTextFieldPrecoTotalCompra.setText(Double.toString(venda.getPrecoTotal()));
+        try{
+            Vendas venda = cliente.encontrarVenda((int) jTableListaCompras.getValueAt(jTableListaCompras.getSelectedRow(), 0));
+            for(Produto produto: venda.getProdutos()){
+             model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
+            }
+            jTextFieldPrecoTotalCompra.setText(Double.toString(venda.getPrecoTotal()));
+        }catch(NullPointerException ex){
+            System.out.print(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Dados dos produtos não foram encontrados");
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro.");
+        } 
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

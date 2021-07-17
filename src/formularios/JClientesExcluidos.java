@@ -165,10 +165,18 @@ public class JClientesExcluidos extends javax.swing.JFrame {
     */
     public void carregarTabela(){
         DefaultTableModel model = (DefaultTableModel) jTableClientesExcluidos.getModel();
-        for(Cliente cliente: adm.getClientesExcluidos() ){
-            model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});
-        }
-        
+        try{
+            for(Cliente cliente: adm.getClientesExcluidos() ){
+                model.addRow(new Object[]{cliente.getCodigoCliente(), cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});
+            }
+        }catch(NullPointerException ex){
+            System.out.print(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Dados da tabela não foram encontrados");
+
+        }catch(Exception e){
+            System.out.print(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao preencher tabela.");
+        }        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -281,9 +281,17 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         if(est.getProdutosExcluidos().isEmpty()){
             JOptionPane.showMessageDialog(null, "Lista de produtos excluídos está vazia.");
         }else{
-            for(Produto produto: est.getProdutosExcluidos()){
-            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
-            }
+            try{
+                for(Produto produto: est.getProdutosExcluidos()){
+                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+                }
+            }catch(NullPointerException ex){
+                System.out.print(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Dados da tabela não foram encontrados");
+            }catch(Exception e){
+                System.out.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao preencher tabela.");
+            }   
         }
     }
     

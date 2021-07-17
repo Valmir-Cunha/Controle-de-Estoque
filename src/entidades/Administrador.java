@@ -25,8 +25,13 @@ public class Administrador extends Funcionario implements FuncoesAdministrador{
     @Override
     public void cadastrarCliente(int id,String nome,String numero,String endereco){
         Cliente cliente = new Cliente(nome,numero,endereco,id);
-        gerencia.getClientes().add(cliente);
-        gerencia.setIdClientes();   
+        try{
+            gerencia.getClientes().add(cliente);
+            gerencia.setIdClientes();   
+        }catch(NullPointerException ex){
+            System.out.print(ex.getMessage());
+        }
+        
     }
     
     //Não mexer
@@ -34,10 +39,15 @@ public class Administrador extends Funcionario implements FuncoesAdministrador{
     public boolean excluirCliente(int id) {
         Cliente cliente;
         cliente = gerencia.buscarClienteCod(id);
-        gerencia.getClientes().remove(cliente);
-        gerencia.getClientesExcluidos().add(cliente);
+        try{
+            gerencia.getClientes().remove(cliente);
+            gerencia.getClientesExcluidos().add(cliente);
+        }catch(NullPointerException ex){
+            System.out.print(ex.getMessage());
+        }
         return true;
     }
+    
     //Não mexer
     @Override
     public boolean editarCliente(int id,String nome,String numero,String endereco){
@@ -54,10 +64,14 @@ public class Administrador extends Funcionario implements FuncoesAdministrador{
     }
     
     public Vendas buscarVenda(int id){
-        for(Vendas venda: gerencia.getListaVendas()){
-            if(venda.getId() == id){
-                return venda;
+        try{
+            for(Vendas venda: gerencia.getListaVendas()){
+                if(venda.getId() == id){
+                    return venda;
+                }
             }
+        }catch(NullPointerException ex){
+            System.out.print(ex.getMessage());
         }
         return null;
     }

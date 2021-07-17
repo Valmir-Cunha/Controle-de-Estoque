@@ -254,8 +254,16 @@ public class JCadastroProduto extends javax.swing.JFrame {
         if(est.getCategorias().isEmpty()){
             JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada.");
         }else{
-            for (int i =0 ; i < est.getCategorias().size(); i++){
-                jComboBoxCategoria.addItem(est.getCategorias().get(i).getNomeCategoria());
+            try{
+                for (int i =0 ; i < est.getCategorias().size(); i++){
+                    jComboBoxCategoria.addItem(est.getCategorias().get(i).getNomeCategoria());
+                }
+            }catch(NullPointerException ex){
+                System.out.print(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Categorias não encontradas");
+            }catch(Exception e){
+                System.out.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro.");
             }
         }
     }

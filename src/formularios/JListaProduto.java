@@ -6,7 +6,6 @@
 package formularios;
 
 import entidades.Categoria;
-import entidades.Cliente;
 import entidades.GestorDeEstoque;
 import entidades.Produto;
 import javax.swing.JOptionPane;
@@ -444,11 +443,19 @@ public class JListaProduto extends javax.swing.JFrame {
         if(est.getProdutosCadastrados().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem produtos cadastrados.");
         }else{
-            for(Produto produto: est.getProdutosCadastrados()){
-            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
-            }
-            jToggleButtonExcluir.setEnabled(true);
-            jToggleButtonEditar.setEnabled(true);
+            try{
+                for(Produto produto: est.getProdutosCadastrados()){
+                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+                }
+                jToggleButtonExcluir.setEnabled(true);
+                jToggleButtonEditar.setEnabled(true);
+            }catch(NullPointerException ex){
+                System.out.print(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Dados da tabela não foram encontrados");
+            }catch(Exception e){
+                System.out.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao preencher tabela.");
+            }      
         }
     }
     
@@ -458,13 +465,21 @@ public class JListaProduto extends javax.swing.JFrame {
         if(est.getProdutosCadastrados().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem produtos cadastrados.");
         }else{
-            for(Produto produto: est.getProdutosCadastrados()){
-                if(produto.getQuantidadeEstoque() > 0){
-                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            try{
+                for(Produto produto: est.getProdutosCadastrados()){
+                    if(produto.getQuantidadeEstoque() > 0){
+                        model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+                    }
                 }
+                jToggleButtonExcluir.setEnabled(true);
+                jToggleButtonEditar.setEnabled(true);
+            }catch(NullPointerException ex){
+                System.out.print(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Dados da tabela não foram encontrados");
+            }catch(Exception e){
+                System.out.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao preencher tabela.");
             }
-            jToggleButtonExcluir.setEnabled(true);
-            jToggleButtonEditar.setEnabled(true);
         }
     }
     
@@ -474,13 +489,21 @@ public class JListaProduto extends javax.swing.JFrame {
         if(est.getProdutosCadastrados().isEmpty()){
             JOptionPane.showMessageDialog(null, "Sem produtos cadastrados.");
         }else{
-            for(Produto produto: est.getProdutosCadastrados()){
-                if(produto.getQuantidadeEstoque() == 0){
-                    model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+            try{
+                for(Produto produto: est.getProdutosCadastrados()){
+                    if(produto.getQuantidadeEstoque() == 0){
+                        model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});
+                    }
                 }
+                jToggleButtonExcluir.setEnabled(true);
+                jToggleButtonEditar.setEnabled(true);
+            }catch(NullPointerException ex){
+                System.out.print(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Dados da tabela não foram encontrados");
+            }catch(Exception e){
+                System.out.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao preencher tabela.");
             }
-            jToggleButtonExcluir.setEnabled(true);
-            jToggleButtonEditar.setEnabled(true);
         }
     }
     
@@ -549,9 +572,17 @@ public class JListaProduto extends javax.swing.JFrame {
         if(est.getCategorias().isEmpty()){
             JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada.");
         }else{
-            for (int i =0 ; i < est.getCategorias().size(); i++){
-                jComboBoxCategoria.addItem(est.getCategorias().get(i).getNomeCategoria());
-            }
+            try{
+                for (int i =0 ; i < est.getCategorias().size(); i++){
+                    jComboBoxCategoria.addItem(est.getCategorias().get(i).getNomeCategoria());
+                }
+            }catch(NullPointerException ex){
+                System.out.print(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Dados da tabela não foram encontrados");
+            }catch(Exception e){
+                System.out.print(e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro ao preencher tabela.");
+            }   
         }
     }
 
