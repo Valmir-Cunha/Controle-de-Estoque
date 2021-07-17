@@ -132,6 +132,12 @@ public class Arquivos {
             }
             
     }
+         public void carregaridVendas() throws FileNotFoundException, IOException {
+            for (Vendas venda :administracao.getListaVendas()) {
+                administracao.setIdVendas(); 
+            }
+            
+    }
       public void carregaridCliente() throws FileNotFoundException, IOException { 
             for (Cliente cliente :administracao.getClientes()) {
                 administracao.setIdClientes();
@@ -233,7 +239,7 @@ public class Arquivos {
         }
     }
     public void carregarVendasProdutos() throws FileNotFoundException, IOException {
-        File arquivo = new File("ProdutosExcluidos.dat");
+        File arquivo = new File("TodasVendasProdutos.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             while (in.ready()) {
@@ -243,6 +249,8 @@ public class Arquivos {
                 estoquetotal = in.readLine();
                 String replace = estoquetotal.replace("[", "");
                 String replace1 = estoquetotal.replace("]", "");
+                String replace2= estoquetotal.replace("[]", "");
+                String replace3= estoquetotal.replace(", ", "");
                 String separartexto [] = estoquetotal.split(";");
                     produto.setNome(separartexto[0]);
                     produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
@@ -252,6 +260,7 @@ public class Arquivos {
                     categoria.setNomeCategoria(separartexto[5]);
                     produto.setCategoria(categoria);
                     venda.getProdutos().add(produto);
+                    administracao.getListaVendas().add(venda);
                 }
         }
     }
@@ -283,6 +292,7 @@ public class Arquivos {
             carregaridCategoria();
             carregarVendas();
             carregarVendasProdutos();
+            carregaridVendas();
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
