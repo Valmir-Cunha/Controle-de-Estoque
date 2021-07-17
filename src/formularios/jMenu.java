@@ -62,12 +62,10 @@ public class jMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelMenu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabelMenu.setForeground(new java.awt.Color(255, 255, 255));
         jLabelMenu.setText("Menu");
-        getContentPane().add(jLabelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
 
         jButtonClientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonClientes.setText("Clientes");
@@ -76,7 +74,6 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonClientesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, -1, 30));
 
         jButtonProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonProduto.setText("Produtos");
@@ -85,7 +82,6 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonProdutoActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         jButtonCategorias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonCategorias.setText("Categorias");
@@ -94,7 +90,6 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonCategoriasActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
 
         jButtonCaixa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonCaixa.setText("Caixa");
@@ -103,7 +98,6 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonCaixaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 80, -1));
 
         jButtonFechar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButtonFechar.setText("Fechar");
@@ -112,10 +106,55 @@ public class jMenu extends javax.swing.JFrame {
                 jButtonFecharActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/png-clipart-online-marketplace-marketing-e-commerce-shopping-marketplace-logo-supermarket.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 520));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabelMenu))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(380, 380, 380)
+                .addComponent(jButtonCategorias))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jButtonProduto))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jButtonFechar))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(jButtonClientes))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jButtonCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabelMenu))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addComponent(jButtonCategorias))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addComponent(jButtonProduto))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(430, 430, 430)
+                .addComponent(jButtonFechar))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(jButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jButtonCaixa))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -152,7 +191,7 @@ public class jMenu extends javax.swing.JFrame {
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         // Botão fechar
-        //arq.carregarArquivos();
+        arq.carregarArquivos();
         System.exit(0);
     }//GEN-LAST:event_jButtonFecharActionPerformed
 
