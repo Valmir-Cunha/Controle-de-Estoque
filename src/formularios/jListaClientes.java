@@ -861,25 +861,25 @@ public class JListaClientes extends javax.swing.JFrame {
     *
     */
     public void carregarProdutosCompra(int id){
-        DefaultTableModel model = (DefaultTableModel) jTableListaProdCompras.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTableListaProdCompras.getModel(); 
         ((DefaultTableModel) jTableListaProdCompras.getModel()).setRowCount(0);
-        Cliente cliente;
-        cliente = adm.buscarClienteCod(id);
         try{
-            Vendas venda = cliente.encontrarVenda((int) jTableListaCompras.getValueAt(jTableListaCompras.getSelectedRow(), 0));
-            for(Produto produto: venda.getProdutos()){
-             model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getClass(),produto.getPreco(),produto.getQuantidadeEstoque()});
-            }
-            jTextFieldPrecoTotalCompra.setText(Double.toString(venda.getPrecoTotal()));
+            Vendas vendaCaixa;
+            vendaCaixa = administrador.buscarVenda(id); 
+            for(Produto produto: vendaCaixa.getProdutos() ){
+                model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
+            }   
         }catch(NullPointerException ex){
-            System.out.print(ex.getMessage());
-            JOptionPane.showMessageDialog(null, "Dados dos produtos não foram encontrados");
-        }catch(Exception e){
-            System.out.print(e.getMessage());
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao acessar dados dos produtos.");
+        }catch(ArrayIndexOutOfBoundsException a){
+            System.out.println(a.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro,lista de produtos vazia.");
+        } catch(Exception e){
+            System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro.");
         } 
     }
-    
     public boolean validarTextFieldNumericaInteira(String txt){
         try {
             Integer.parseInt(txt);
