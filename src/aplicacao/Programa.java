@@ -21,6 +21,5 @@ public class Programa {
         jMenu menu = new jMenu(admMercado,estoqueMercado,gestor,adm,arq);
         menu.setVisible(true);
         arq.preencherEstruturas();
-        admMercado.imprimirvendas();
     }
 }

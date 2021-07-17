@@ -615,16 +615,21 @@ public class JListaClientes extends javax.swing.JFrame {
 
     private void jButtonExibirComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirComprasActionPerformed
         // Exibir compras do cliente selecionado
-        jFrameListaCompras.setVisible(true);
-        jFrameListaCompras.setSize(460, 410);
-        jFrameListaCompras.setLocationRelativeTo(null);
-        Object ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0);
-        String texto = ob.toString();
-        jTextFieldCodClient.setText(texto);
-        ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 1);
-        texto = ob.toString();
-        jTextFieldNome1.setText(texto);
-        carregarListaCompras((int) jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0));
+        if(jTableListaClientes.getSelectedRow() != -1){
+            jFrameListaCompras.setVisible(true);
+            jFrameListaCompras.setSize(460, 410);
+            jFrameListaCompras.setLocationRelativeTo(null);
+            Object ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0);
+            String texto = ob.toString();
+            jTextFieldCodClient.setText(texto);
+            ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 1);
+            texto = ob.toString();
+            jTextFieldNome1.setText(texto);
+            carregarListaCompras((int) jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0));
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, o cliente que deseja exibir as compras.");
+        }
+        
     }//GEN-LAST:event_jButtonExibirComprasActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
