@@ -522,7 +522,7 @@ public class JListaCategorias extends javax.swing.JFrame {
              model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});   
             }
         } else if(jTextFieldNome.getText().isEmpty()){
-            if(validarTextFieldNumerica(jTextFieldNome.getText().trim())){
+            if(validarTextFieldNumericaInteira(jTextFieldNome.getText().trim())){
                 categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
                 if(categoria == null){
                     JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
@@ -534,7 +534,7 @@ public class JListaCategorias extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Código inválido.");
             }
         } else {
-            if(validarTextFieldNumerica(jTextFieldNome.getText().trim())){
+            if(validarTextFieldNumericaInteira(jTextFieldNome.getText().trim())){
                 categoria = est.encontrarCategoriaCodigo(Integer.parseInt(jTextFieldCod.getText()));
                 if(categoria == null){
                     JOptionPane.showMessageDialog(null, "Categoria não encontrada.");
@@ -602,11 +602,12 @@ public class JListaCategorias extends javax.swing.JFrame {
         }
     }
     
-    public boolean validarTextFieldNumerica(String txt){
-        String caracteres="0987654321.";
-        if(!caracteres.contains(txt+"")){
+    public boolean validarTextFieldNumericaInteira(String txt){
+        try {
+            Integer.parseInt(txt);
             return true;
-        }else{
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }

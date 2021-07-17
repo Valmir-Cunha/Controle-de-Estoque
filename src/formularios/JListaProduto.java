@@ -382,7 +382,7 @@ public class JListaProduto extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // Salvar edição produto
-        if(validarTextFieldNumerica( jTextFieldPreco.getText().trim()) && validarTextFieldNumerica(jTextFieldEstoque.getText().trim())){
+        if(validarTextFieldNumerica( jTextFieldPreco.getText().trim()) && validarTextFieldNumericaInteira(jTextFieldEstoque.getText().trim())){
             editarProduto();
         }else{
             JOptionPane.showMessageDialog(null, "Valores de quantidade ou preço inválidos.");
@@ -541,7 +541,7 @@ public class JListaProduto extends javax.swing.JFrame {
                 jToggleButtonEditar.setEnabled(true);
             }
         } else if(jTextFieldNomeProd.getText().isEmpty()){
-            if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
+            if(validarTextFieldNumericaInteira(jTextFieldCodProduto.getText().trim())){
                 produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText()));
                 if(produto == null){
                     JOptionPane.showMessageDialog(null, "Produto não encontrado.");
@@ -555,7 +555,7 @@ public class JListaProduto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Código inválido.");
             }
         }else{ //Quando os dois campos são preenchidos
-            if(validarTextFieldNumerica(jTextFieldCodProduto.getText().trim())){
+            if(validarTextFieldNumericaInteira(jTextFieldCodProduto.getText().trim())){
                 produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText()));
                 if(produto == null){
                     JOptionPane.showMessageDialog(null, "Produto não encontrado.");
@@ -620,10 +620,21 @@ public class JListaProduto extends javax.swing.JFrame {
     }
     
     public boolean validarTextFieldNumerica(String txt){
-       String caracteres="0987654321.";
-        if(!caracteres.contains(txt+"")){
+        try {
+            Double.parseDouble(txt);
             return true;
-        }else{
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean validarTextFieldNumericaInteira(String txt){
+        try {
+            Integer.parseInt(txt);
+            return true;
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }

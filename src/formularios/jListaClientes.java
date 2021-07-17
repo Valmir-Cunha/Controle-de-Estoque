@@ -745,7 +745,7 @@ public class JListaClientes extends javax.swing.JFrame {
                 jButtonExibirCompras.setEnabled(true);
             }
         } else if(jTextFieldNome.getText().isEmpty()){
-            if(validarTextFieldNumerica(jTextFieldCod.getText().trim())){
+            if(validarTextFieldNumericaInteira(jTextFieldCod.getText().trim())){
                 cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
                 if(cliente == null){
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
@@ -760,7 +760,7 @@ public class JListaClientes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Código inválido.");
             }
         }else{ //Quando os dois campos são preenchidos
-            if(validarTextFieldNumerica(jTextFieldCod.getText().trim())){
+            if(validarTextFieldNumericaInteira(jTextFieldCod.getText().trim())){
                 cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
                 if(cliente == null){
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
@@ -880,18 +880,14 @@ public class JListaClientes extends javax.swing.JFrame {
         } 
     }
     
-    public boolean validarTextFieldNumerica(String txt){
-        String caracteres="0987654321.";
-        if(!caracteres.contains(txt+"")){
+    public boolean validarTextFieldNumericaInteira(String txt){
+        try {
+            Integer.parseInt(txt);
             return true;
-        }else{
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
-//        if(txt.substring(0).matches("[0-9]*")){
-//            return true;
-//        }else{
-//            return false;
-//        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

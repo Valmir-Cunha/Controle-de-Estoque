@@ -61,7 +61,7 @@ public class Administracao{
     public List<Vendas> getListaVendas() {
             return listaVendas;
     }
-
+    
     public Cliente buscarClienteCod(int i) {
         for (Cliente cliente : clientes) {
             if(cliente.getCodigoCliente() == i){

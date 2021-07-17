@@ -760,7 +760,7 @@ public class JCaixa extends javax.swing.JFrame {
     
     public void listarVendas(){
         DefaultTableModel model = (DefaultTableModel) jTableListaVendas.getModel();
-        ((DefaultTableModel) jTableListaProdutos.getModel()).setRowCount(0);
+        ((DefaultTableModel) jTableListaVendas.getModel()).setRowCount(0);
         if(adm.getListaVendas().isEmpty()){
             JOptionPane.showMessageDialog(null, "Nenhuma venda foi realizada.");
         }else{
@@ -780,7 +780,7 @@ public class JCaixa extends javax.swing.JFrame {
     
     public void carregarListaProdutos(int id){
         DefaultTableModel model = (DefaultTableModel) jTableProdutosVenda.getModel(); 
-        ((DefaultTableModel) jTableListaProdutos.getModel()).setRowCount(0);
+        ((DefaultTableModel) jTableProdutosVenda.getModel()).setRowCount(0);
         try{
             Vendas vendaCaixa;
             vendaCaixa = administrador.buscarVenda(id); 

@@ -17,6 +17,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -101,9 +103,6 @@ public class Arquivos {
                 cliente.setNumeroTelefone(separartexto[2]);
                 cliente.setCodigoCliente(Integer.parseInt(separartexto[3]));
                 administracao.getClientes().add(cliente);
-                    
-                
-         
             }
             }
     }
@@ -253,9 +252,12 @@ public class Arquivos {
         File arquivo = new File("dados\\TodasVendasProdutos.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
-            while (in.ready()) {
+            int max = administracao.getListaVendas().size();
+            int indice = 0;
+            while (in.ready() && indice < max) {
                 Produto produto = new Produto();
-                Vendas venda = new Vendas();
+                List<Vendas> vendas = new ArrayList<>();
+                vendas = administracao.getListaVendas();
                 Categoria categoria = new Categoria();
                 estoquetotal = in.readLine();
                 String replace = estoquetotal.replace("[", "");
@@ -270,8 +272,8 @@ public class Arquivos {
                     produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
                     categoria.setNomeCategoria(separartexto[5]);
                     produto.setCategoria(categoria);
-                    venda.getProdutos().add(produto);
-                    administracao.getListaVendas().add(venda);
+                    vendas.get(indice).getProdutos().add(produto);
+                    indice++;
                 }
         }
     }
