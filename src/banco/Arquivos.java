@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import javax.swing.JOptionPane;
 
 
@@ -72,13 +71,19 @@ public class Arquivos {
 
     }
     
-    public void RegistrarVendas() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+    public void RegistrarVendas() throws FileNotFoundException,IOException{
         OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("TodasVendas.dat"),"UTF-8");
         for (Vendas venda : administracao.getListaVendas()) {
             output.write(venda.toString());
             output.flush();
-            } 
-        
+            }   
+    }
+    public void RegistrarVendasProdutos() throws FileNotFoundException,IOException{
+        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("TodasVendasProdutos.dat"),"UTF-8");
+        for (Vendas venda : administracao.getListaVendas()) {
+            output.write(venda.toString2());
+            output.flush();
+            }   
     }
 
     public void carregarClientes() throws FileNotFoundException, IOException {
@@ -112,8 +117,7 @@ public class Arquivos {
                 String separartexto [] = todoscientes.split(";");
                 cliente.setNome(separartexto[0]);
                 vend.setCliente(cliente);
-                produto.setNome(separartexto[1]);
-                vend.setProduto(produto);
+                vend.setId(Integer.parseInt(separartexto[1]));
                 vend.setPrecoTotal(Double.parseDouble(separartexto[2]));
                 administracao.getListaVendas().add(vend);
                     
@@ -137,11 +141,10 @@ public class Arquivos {
       public void carregaridCategoria() throws FileNotFoundException, IOException {
             for (Categoria categoria :estoque.getCategorias()) {
                 estoque.setIdCategoria();
-            }
-            
+            }  
     }
       
-    public void carregarIdVendas(){
+    public void carregarIdVendas(){ 
         
     }
         
@@ -228,9 +231,30 @@ public class Arquivos {
                     estoque.getProdutosExcluidos().add(produto);
                 }
         }
-
     }
-    
+    public void carregarVendasProdutos() throws FileNotFoundException, IOException {
+        File arquivo = new File("ProdutosExcluidos.dat");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String estoquetotal;
+            while (in.ready()) {
+                Produto produto = new Produto();
+                Vendas venda = new Vendas();
+                Categoria categoria = new Categoria();
+                estoquetotal = in.readLine();
+                String replace = estoquetotal.replace("[", "");
+                String replace1 = estoquetotal.replace("]", "");
+                String separartexto [] = estoquetotal.split(";");
+                    produto.setNome(separartexto[0]);
+                    produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
+                    produto.setMarca(separartexto[2]);
+                    produto.setPreco(Double.parseDouble(separartexto[3]));
+                    produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
+                    categoria.setNomeCategoria(separartexto[5]);
+                    produto.setCategoria(categoria);
+                    venda.getProdutos().add(produto);
+                }
+        }
+    }
     public void carregarArquivos(){
         try {
             registrarCategorias();
@@ -238,6 +262,8 @@ public class Arquivos {
             registrarClientes();
             registrarFuncionarios();
             registrarProdutosExcluidos();
+            RegistrarVendas();
+            RegistrarVendasProdutos();
         } catch(FileNotFoundException  ex){
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao salvar dados do sistema.");
@@ -255,6 +281,8 @@ public class Arquivos {
             carregarProdutosExcluidos();
             carregaridProduto();
             carregaridCategoria();
+            carregarVendas();
+            carregarVendasProdutos();
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
