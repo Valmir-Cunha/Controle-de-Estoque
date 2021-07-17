@@ -49,48 +49,67 @@ public class  Estoque {
     
     
     public Produto encontrarProdutoCod(int i){
-        for (Produto produto : produtosCadastrados) {
+        try{
+            for (Produto produto : produtosCadastrados) {
                 if(produto.getCodigoProduto() == i){
                     return produto;
                 }
             }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
-    
+    // Tentar excluir
     public int encontrarProdutoNome(String nome){
-        for (Produto produto : produtosCadastrados) {
+        try{
+            for (Produto produto : produtosCadastrados) {
                 if(produto.getNome().equals(nome)){
                     return produto.getCodigoProduto();
                 }
             }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }
         return -1;
     }
     
     public Produto encontrarProdNome(String nome){
-        for (Produto produto : produtosCadastrados) {
+        try{
+            for (Produto produto : produtosCadastrados) {
                 if(produto.getNome().equals(nome)){
                     return produto;
                 }
             }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
     
     public Categoria encontrarCategoriaCodigo(int i){
-        for (Categoria categoria : categorias) {
+        try{
+            for (Categoria categoria : categorias) {
                 if(categoria.getCodigoCategoria() == i){
-                    //return produto.getNome();
                     return categoria;
                 }
             }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
     
     public Categoria encontrarCategoriaNome(String nome){
-        for (Categoria categoria : categorias) {
+        try{
+            for (Categoria categoria : categorias) {
                 if(categoria.getNomeCategoria().equals(nome)){
                     return categoria;
                 }
             }
+        }catch(NullPointerException ex){
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
 }

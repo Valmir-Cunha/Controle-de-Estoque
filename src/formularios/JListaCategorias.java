@@ -485,13 +485,22 @@ public class JListaCategorias extends javax.swing.JFrame {
     //Preenchimento da tabela
     public void carregarCategorias(){
         DefaultTableModel model = (DefaultTableModel) jTableCategorias.getModel();
-        for(Categoria categoria: est.getCategorias()){
+        try{
+            for(Categoria categoria: est.getCategorias()){
             if(categoria.getProdutos().isEmpty()){
                 model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),false});
             }else{
                 model.addRow(new Object[]{categoria.getCodigoCategoria(), categoria.getNomeCategoria(),true});
             }
+            }
+        }catch(NullPointerException e){
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Categorias não encontradas");
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro");
         }
+        
     }
     
     public void pesquisarCategoria(){
@@ -532,9 +541,11 @@ public class JListaCategorias extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableProdutosCategoria.getModel();
         Categoria categoria;
         categoria = est.encontrarCategoriaCodigo((int) jTableCategorias.getValueAt(jTableCategorias.getSelectedRow(), 0));
-        if(categoria.getProdutos().isEmpty()){
+        if(categoria == null){
+            JOptionPane.showMessageDialog(null, "Erro.");
+        }
+        else if(categoria.getProdutos().isEmpty()){
             JOptionPane.showMessageDialog(null, "Categoria sem produtos.");
-            
         }else{
             for(Produto produto: categoria.getProdutos()){
                 model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome() ,produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getQuantidadeEstoque(),produto.getPreco(),});

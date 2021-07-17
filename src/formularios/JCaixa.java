@@ -718,7 +718,7 @@ public class JCaixa extends javax.swing.JFrame {
         Vendas venda;
         venda = administrador.buscarVenda(id); 
         for(Produto produto: venda.getProdutos() ){
-            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
+            model.addRow(new Object[]{produto.getCodigoProduto(),produto.getNome(),produto.getMarca(),produto.getCategoria().getNomeCategoria(),produto.getPreco(),produto.getQuantidadeEstoque()});
         }
     }
 
