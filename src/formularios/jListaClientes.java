@@ -739,7 +739,7 @@ public class JListaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para pesquisa.");
         }
         else if(jTextFieldCod.getText().isEmpty()){
-            cliente = adm.buscarClienteNome(jTextFieldNome.getText());
+            cliente = administrador.buscarClienteNome(jTextFieldNome.getText());
             if(cliente == null){
                 JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
                 jTextFieldCod.requestFocus();
@@ -751,7 +751,7 @@ public class JListaClientes extends javax.swing.JFrame {
             }
         } else if(jTextFieldNome.getText().isEmpty()){
             if(validarTextFieldNumericaInteira(jTextFieldCod.getText().trim())){
-                cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
+                cliente = administrador.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
                 if(cliente == null){
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
                     jTextFieldCod.requestFocus();
@@ -766,7 +766,7 @@ public class JListaClientes extends javax.swing.JFrame {
             }
         }else{ //Quando os dois campos são preenchidos
             if(validarTextFieldNumericaInteira(jTextFieldCod.getText().trim())){
-                cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
+                cliente = administrador.buscarClienteCod(Integer.parseInt(jTextFieldCod.getText()));
                 if(cliente == null){
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
                     jTextFieldCod.requestFocus();
@@ -813,7 +813,7 @@ public class JListaClientes extends javax.swing.JFrame {
             if(administrador.editarCliente(id, jTextFieldNomeCliente.getText(),jTextFieldCelular1.getText(), jTextFieldEndereco1.getText())){
                 JOptionPane.showMessageDialog(null, "Cadastro do cliente editado.");
                 model.removeRow(jTableListaClientes.getSelectedRow());
-                cliente = adm.buscarClienteCod(id);
+                cliente = administrador.buscarClienteCod(id);
                 model.addRow(new Object[]{cliente.getCodigoCliente(),cliente.getNome(),cliente.getNumeroTelefone(),cliente.getEndereco()});
                 jButtonSalvar.setEnabled(false);
                 jButtonCancelarEdicao.setEnabled(false);
@@ -848,7 +848,7 @@ public class JListaClientes extends javax.swing.JFrame {
         ((DefaultTableModel) jTableListaCompras.getModel()).setRowCount(0);
         Cliente cliente;
         try{
-            cliente = adm.buscarClienteCod(id);  
+            cliente = administrador.buscarClienteCod(id);  
             for(Vendas venda: adm.getListaVendas() ){
                 model.addRow(new Object[]{venda.getId(),venda.getPrecoTotal()});
             }

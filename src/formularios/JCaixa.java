@@ -449,7 +449,7 @@ public class JCaixa extends javax.swing.JFrame {
             if(!jTextFieldCodCliente.getText().trim().isEmpty()){ //Se o textField estiver vazio, não realiza o evento
                 if(validarTextFieldNumericaInteira(jTextFieldCodCliente.getText().trim())){
                     Cliente cliente;
-                    cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
+                    cliente = administrador.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim())); //trim elimina espaços
                     if(cliente == null){
                         JOptionPane.showMessageDialog(null, "Cliente não encontrado.");
                     }else{
@@ -471,7 +471,7 @@ public class JCaixa extends javax.swing.JFrame {
     private void jComboBoxNomeClientePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
         Cliente cliente;
         if(jComboBoxNomeCliente.isPopupVisible()){
-            cliente = adm.buscarClienteNome(jComboBoxNomeCliente.getSelectedItem().toString().trim());
+            cliente = administrador.buscarClienteNome(jComboBoxNomeCliente.getSelectedItem().toString().trim());
             jTextFieldCodCliente.setText(Integer.toString(cliente.getCodigoCliente()));
         }
     }//GEN-LAST:event_jComboBoxNomeClientePopupMenuWillBecomeInvisible
@@ -656,7 +656,7 @@ public class JCaixa extends javax.swing.JFrame {
         }else{
             venda = new Vendas(Integer.parseInt(jTextFieldCodVenda.getText().trim()));
             Cliente cliente;
-            cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
+            cliente = administrador.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
             this.venda.setCliente(cliente);
             jTextFieldCodCliente.setEditable(false);
             jComboBoxNomeCliente.setEditable(false);
@@ -737,7 +737,7 @@ public class JCaixa extends javax.swing.JFrame {
     public void finalizarVenda(){
         try{
             Cliente cliente;
-            cliente = adm.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
+            cliente = administrador.buscarClienteCod(Integer.parseInt(jTextFieldCodCliente.getText().trim()));
             cliente.getCompras().add(venda);
             adm.getListaVendas().add(venda);
             adm.setIdVendas();

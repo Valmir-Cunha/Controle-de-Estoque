@@ -38,7 +38,7 @@ public class Administrador extends Funcionario implements FuncoesAdministrador{
     @Override
     public boolean excluirCliente(int id) {
         Cliente cliente;
-        cliente = gerencia.buscarClienteCod(id);
+        cliente = buscarClienteCod(id);
         try{
             gerencia.getClientes().remove(cliente);
             gerencia.getClientesExcluidos().add(cliente);
@@ -52,7 +52,7 @@ public class Administrador extends Funcionario implements FuncoesAdministrador{
     @Override
     public boolean editarCliente(int id,String nome,String numero,String endereco){
         Cliente cliente;
-        cliente = gerencia.buscarClienteCod(id);
+        cliente = buscarClienteCod(id);
         if(cliente != null){
             cliente.setNome(nome);
             cliente.setNumeroTelefone(numero);
@@ -61,6 +61,32 @@ public class Administrador extends Funcionario implements FuncoesAdministrador{
         }else{
             return false;
         }
+    }
+    
+    public Cliente buscarClienteCod(int i) {
+        try{
+            for (Cliente cliente : gerencia.getClientes()) {
+                if(cliente.getCodigoCliente() == i){
+                    return cliente;
+                }
+            }
+        }catch(NullPointerException ex){
+         return null;   
+        }
+        return null;
+    }
+    
+    public Cliente buscarClienteNome(String nome) {
+        try{
+            for (Cliente cliente : gerencia.getClientes()) {
+                if(cliente.getNome().equals(nome)){
+                    return cliente;
+                }
+            }
+        }catch(NullPointerException ex){
+         return null;   
+        }
+        return null;
     }
     
     public Vendas buscarVenda(int id){

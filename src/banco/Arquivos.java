@@ -11,10 +11,8 @@ import servicos.Estoque;
 import entidades.Produto;
 import entidades.Vendas;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -164,7 +162,6 @@ public class Arquivos {
             }
 
     }
-
     public void carregarProdutos() throws FileNotFoundException, IOException {
         File arquivo = new File("dados\\Produtos.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
@@ -182,10 +179,7 @@ public class Arquivos {
                     categoria.setNomeCategoria(separartexto[5]);
                     produto.setCategoria(categoria);
                     estoque.getProdutosCadastrados().add(produto);
-                    
-                }
-                
-            
+            }
         }
     }
         public void carregarCategorias() throws FileNotFoundException, IOException {

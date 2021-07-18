@@ -390,10 +390,25 @@ public class JListaCategorias extends javax.swing.JFrame {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // Botão excluir categotia
-        excluirCategoria();
-        jTextFieldCod.setText("");
-        jTextFieldNome.setText("");
-        carregarCategorias();
+        if(jTextFieldCod.getText().trim().equals("1")){
+            if(est.getCategorias().size() == 1){
+                if(est.getCategorias().get(1).getProdutos().isEmpty()){
+                    excluirCategoria();
+                    jTextFieldCod.setText("");
+                    jTextFieldNome.setText("");
+                    carregarCategorias();
+                }else{
+                    JOptionPane.showMessageDialog(null, "É necessário excluir todos os produtos da categoria antes de excluí-la.");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Essa é a categoria padão, ela não pode ser excluída a menos qeu seja a única existente e esteja sem produtos cadastrados.");
+            }
+        }else{
+            excluirCategoria();
+            jTextFieldCod.setText("");
+            jTextFieldNome.setText("");
+            carregarCategorias();
+        }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
