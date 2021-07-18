@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -73,19 +74,27 @@ public class Arquivos {
 
     }
     
-    public void RegistrarVendas() throws FileNotFoundException,IOException{
+    public void registrarVendas() throws FileNotFoundException,IOException{
         OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\TodasVendas.dat"),"UTF-8");
         for (Vendas venda : administracao.getListaVendas()) {
             output.write(venda.toString());
             output.flush();
             }   
     }
-    public void RegistrarVendasProdutos() throws FileNotFoundException,IOException{
+    public void registrarVendasProdutos() throws FileNotFoundException,IOException{
         OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\TodasVendasProdutos.dat"),"UTF-8");
         for (Vendas venda : administracao.getListaVendas()) {
             output.write(venda.toString2());
             output.flush();
             }   
+    }
+    
+    public void registrarProdutosCategoria() throws FileNotFoundException, IOException{
+        OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream("dados\\ProdutosCategorias.dat"),"UTF-8");
+        for (Categoria categoria : estoque.getCategorias()) {
+            output.write(categoria.toString2());
+            output.flush();
+            } 
     }
 
     public void carregarClientes() throws FileNotFoundException, IOException {
@@ -194,8 +203,7 @@ public class Arquivos {
                 categoria.setNomeCategoria(separartexto[0]);
                 categoria.setCodigoCategoria(Integer.parseInt(separartexto[1]));
                 produto.setCategoria(categoria);
-                    estoque.getCategorias().add(categoria);
-                    
+                estoque.getCategorias().add(categoria);
                 }
                 
             
@@ -211,49 +219,81 @@ public class Arquivos {
                 Categoria categoria = new Categoria();
                 estoquetotal = in.readLine();
                 String separartexto [] = estoquetotal.split(";");
-                    produto.setNome(separartexto[0]);
-                    produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
-                    produto.setMarca(separartexto[2]);
-                    produto.setPreco(Double.parseDouble(separartexto[3]));
-                    produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
-                    categoria.setNomeCategoria(separartexto[5]);
-                    produto.setCategoria(categoria);
-                    estoque.getProdutosExcluidos().add(produto);
+                produto.setNome(separartexto[0]);
+                produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
+                produto.setMarca(separartexto[2]);
+                produto.setPreco(Double.parseDouble(separartexto[3]));
+                produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
+                categoria.setNomeCategoria(separartexto[5]);
+                produto.setCategoria(categoria);
+                estoque.getProdutosExcluidos().add(produto);
             }
         }
     }
-    public void carregarVendasProdutos() throws FileNotFoundException, IOException {
+    public void carregarVendasProdutos() throws FileNotFoundException, IOException, NullPointerException {
         File arquivo = new File("dados\\TodasVendasProdutos.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
             String estoquetotal;
             int max = administracao.getListaVendas().size();
             int indice = 0;
-            while (in.ready() && indice < max) {
+            while (in.ready()) {
                 Produto produto = new Produto();
-                List<Vendas> vendas = new ArrayList<>();
+                List<Vendas> vendas;
                 vendas = administracao.getListaVendas();
-                Categoria categoria = new Categoria();
+                Categoria categoria;
                 estoquetotal = in.readLine();
-                String replace = estoquetotal.replace("[", "");
-                String replace1 = estoquetotal.replace("]", "");
-                String replace2= estoquetotal.replace("[]", "");
-                String replace3= estoquetotal.replace(", ", "");
                 String separartexto [] = estoquetotal.split(";");
-                    produto.setNome(separartexto[0]);
-                    produto.setCodigoProduto(Integer.parseInt(separartexto[1]));
-                    produto.setMarca(separartexto[2]);
-                    produto.setPreco(Double.parseDouble(separartexto[3]));
-                    produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4]));
-                    categoria.setNomeCategoria(separartexto[5]);
+                produto.setNome(separartexto[0].replace("[", "").replace("]", "").replace("[]", "").replace(",", ""));
+                produto.setCodigoProduto(Integer.parseInt(separartexto[1].replace("[", "").replace("]", "").replace("[]", "").replace(",", "")));
+                produto.setMarca(separartexto[2].replace("[", "").replace("]", "").replace("[]", "").replace(",", ""));
+                produto.setPreco(Double.parseDouble(separartexto[3].replace("[", "").replace("]", "").replace("[]", "").replace(",", "")));
+                produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4].replace("[", "").replace("]", "").replace("[]", "").replace(",", "")));
+                String nome = separartexto[5].replace("[", "").replace("[]", "").replace(",", "");
+                if(nome.contains("]")){
+                    categoria = estoque.encontrarCategoriaNome(nome.replace("]", ""));                
                     produto.setCategoria(categoria);
                     vendas.get(indice).getProdutos().add(produto);
                     indice++;
+                }else{
+                    categoria = estoque.encontrarCategoriaNome(separartexto[5].replace("[", "").replace("[]", "").replace(",", ""));                
+                    produto.setCategoria(categoria);
+                    vendas.get(indice).getProdutos().add(produto);
                 }
+            }
         }
     }
     
-    public void carregarProdutosVendasCliente(){
-        
+    public void carregarProdutosCategoria() throws FileNotFoundException, IOException,NullPointerException{
+        File arquivo = new File("dados\\ProdutosCategorias.dat");
+        try (BufferedReader in = new BufferedReader(new FileReader(arquivo))) {
+            String estoquetotal;
+            int max = estoque.getCategorias().size();
+            int indice = 0;
+            while (in.ready() && indice < max) {
+                Produto produto = new Produto();
+                List<Categoria> categorias;
+                categorias = estoque.getCategorias();
+                Categoria categoria;
+                estoquetotal = in.readLine();
+                String separartexto [] = estoquetotal.split(";");
+                produto.setNome(separartexto[0].replace("[", "").replace("]", "").replace("[]", "").replace(",", ""));
+                produto.setCodigoProduto(Integer.parseInt(separartexto[1].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").replace(" ", "")));
+                produto.setMarca(separartexto[2].replace("[", "").replace("]", "").replace("[]", "").replace(",", ""));
+                produto.setPreco(Double.parseDouble(separartexto[3].replace("[", "").replace("]", "").replace("[]", "").replace(",", "")));
+                produto.setQuantidadeEstoque(Integer.parseInt(separartexto[4].replace("[", "").replace("]", "").replace("[]", "").replace(",", "")));
+                String nome = separartexto[5].replace("[", "").replace("]", "").replace("[]", "").replace(",", "");
+                if(nome.contains("]")){
+                    categoria = estoque.encontrarCategoriaNome(nome.replace("]", ""));
+                    produto.setCategoria(categoria);
+                    categorias.get(indice).getProdutos().add(produto);
+                    indice++;
+                }else{
+                    categoria = estoque.encontrarCategoriaNome(nome.replace("]", ""));
+                    produto.setCategoria(categoria);
+                    categorias.get(indice).getProdutos().add(produto);
+                }
+            }
+        }
     }
     
     public void carregarArquivos(){
@@ -261,16 +301,17 @@ public class Arquivos {
             registrarCategorias();
             registrarProdutos();
             registrarClientes();
+            registrarProdutosCategoria();
             registrarFuncionarios();
             registrarProdutosExcluidos();
-            RegistrarVendas();
-            RegistrarVendasProdutos();
+            registrarVendas();
+            registrarVendasProdutos();
         } catch(FileNotFoundException  ex){
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao salvar dados do sistema.");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage()); 
-            JOptionPane.showMessageDialog(null, "Erro ao salvar dados do sistema.");
+        }catch (IOException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
+            ex.getMessage();
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
         }
     }
     
@@ -282,6 +323,7 @@ public class Arquivos {
             carregarProdutosExcluidos();
             carregaridProduto();
             carregaridCategoria();
+            carregarProdutosCategoria();
             carregarVendas();
             carregarVendasProdutos();
             carregaridVendas();
@@ -289,9 +331,9 @@ public class Arquivos {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
             //System.exit(0);
-        }catch (IOException ex) {
+        }catch (IOException | NullPointerException ex) {
             ex.getMessage();
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados do sistema.");
-        }
+        } 
     }
 }

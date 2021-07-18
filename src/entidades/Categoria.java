@@ -40,10 +40,15 @@ public class Categoria{
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-        @Override
+    @Override
     public String toString() {
             return "" + nomeCategoria 
                             +";" + codigoCategoria 
                             +"\n";
     }
+    public String toString2() {
+            return "" + produtos
+                            +"\n";
+    }
+    
 }

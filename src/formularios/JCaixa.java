@@ -569,11 +569,15 @@ public class JCaixa extends javax.swing.JFrame {
 
     private void jButtonExibirListaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirListaProdutosActionPerformed
         // Botão de exibit lista de produtos das compras
-        jDialogListaProdutosVenda.setVisible(true);
-        jDialogListaProdutosVenda.setSize(800, 400);
-        jDialogListaProdutosVenda.setLocationRelativeTo(null);
-        int id = (int) jTableListaVendas.getValueAt(jTableListaVendas.getSelectedRow(), 0);
-        carregarListaProdutos(id);
+        if(jTableListaVendas.getSelectedRow() != -1){
+            jDialogListaProdutosVenda.setVisible(true);
+            jDialogListaProdutosVenda.setSize(800, 400);
+            jDialogListaProdutosVenda.setLocationRelativeTo(null);
+            int id = (int) jTableListaVendas.getValueAt(jTableListaVendas.getSelectedRow(), 0);
+            carregarListaProdutos(id);
+        }else{
+            JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, a venda que deseja mostrar os produtos.");
+        }
     }//GEN-LAST:event_jButtonExibirListaProdutosActionPerformed
 
     /**
