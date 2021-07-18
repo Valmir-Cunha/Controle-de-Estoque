@@ -323,9 +323,10 @@ public class Arquivos {
             carregarProdutosExcluidos();
             carregaridProduto();
             carregaridCategoria();
-            carregarProdutosCategoria();
             carregarVendas();
             carregarVendasProdutos();
+            carregarProdutosCategoria();
+            
             carregaridVendas();
         }catch(FileNotFoundException e){
             System.out.println(e.getMessage());

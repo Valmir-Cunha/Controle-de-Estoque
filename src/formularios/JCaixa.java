@@ -456,7 +456,7 @@ public class JCaixa extends javax.swing.JFrame {
                         jComboBoxNomeCliente.setSelectedItem(cliente.getNome());
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "O código do cliente não é válido!");
+                    //JOptionPane.showMessageDialog(null, "O código do cliente não é válido!");
                     jTextFieldCodCliente.setText("");
                 }
             }
@@ -495,11 +495,15 @@ public class JCaixa extends javax.swing.JFrame {
                     produto = est.encontrarProdutoCod(Integer.parseInt(jTextFieldCodProduto.getText().trim())); //trim elimina espaços
                     if(produto == null){
                         JOptionPane.showMessageDialog(null, "Produto não encontrado.");
-                    }else{
+                    }else if(produto.getQuantidadeEstoque() == 0){
+                        JOptionPane.showMessageDialog(null, "O produto do código selecionado está fora de estoque.");
+                        jTextFieldCodProduto.setText("");
+                    }
+                    else{
                         jComboBoxNomeProduto.setSelectedItem(produto.getNome());
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "O código do produto não é válido!");
+                    //JOptionPane.showMessageDialog(null, "O código do produto não é válido!");
                     jTextFieldCodProduto.setText("");
                 }
             }
@@ -513,6 +517,7 @@ public class JCaixa extends javax.swing.JFrame {
         // Botão adicionar protudo
         if(validarTextFieldNumericaInteira(jTextFieldCodProduto.getText().trim())){
             adicionarProdutoCompra();
+            listarProdutos();
         }else{
             JOptionPane.showMessageDialog(null, "A quantidade descrita não é válida!");
             jTextFieldCodProduto.setText("");
@@ -624,8 +629,8 @@ public class JCaixa extends javax.swing.JFrame {
     private void listarClientes(){
         jComboBoxNomeCliente.removeAllItems();
         try{
-            for (int i =0 ; i < adm.getClientes().size(); i++){
-                jComboBoxNomeCliente.addItem(adm.getClientes().get(i).getNome());
+            for (Cliente cliente: adm.getClientes()){
+                jComboBoxNomeCliente.addItem(cliente.getNome());
             }
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());
@@ -640,8 +645,12 @@ public class JCaixa extends javax.swing.JFrame {
     private void listarProdutos(){
         jComboBoxNomeProduto.removeAllItems();
         try{
-            for (int i =0 ; i < est.getProdutosCadastrados().size(); i++){
-                jComboBoxNomeProduto.addItem(est.getProdutosCadastrados().get(i).getNome());
+            for(Produto produto: est.getProdutosCadastrados()){
+                if(produto.getQuantidadeEstoque() == 0){
+                    
+                }else{
+                    jComboBoxNomeProduto.addItem(produto.getNome());
+                }
             }
         }catch(NullPointerException ex){
             System.out.println(ex.getMessage());
