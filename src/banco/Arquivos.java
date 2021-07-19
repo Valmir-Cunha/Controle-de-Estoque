@@ -243,7 +243,12 @@ public class Arquivos {
                 Categoria categoria;
                 estoquetotal = in.readLine();
                 String separartexto [] = estoquetotal.split(";");
-                produto.setNome(separartexto[0].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim());
+                String nome1 = separartexto[0];
+                if(nome1.contains("]")){
+                    indice++;
+                    continue;
+                }
+                produto.setNome(nome1.replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim());
                 produto.setCodigoProduto(Integer.parseInt(separartexto[1].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim()));
                 produto.setMarca(separartexto[2].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim());
                 produto.setPreco(Double.parseDouble(separartexto[3].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim()));
@@ -276,7 +281,12 @@ public class Arquivos {
                 Categoria categoria;
                 estoquetotal = in.readLine();
                 String separartexto[] = estoquetotal.split(";");
-                produto.setNome(separartexto[0].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim());
+                String nome1 = separartexto[0];
+                if(nome1.contains("]")){
+                    indice++;
+                    continue;
+                }
+                produto.setNome(nome1.replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim());
                 produto.setCodigoProduto(Integer.parseInt(separartexto[1].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").replace(" ", "").trim()));
                 produto.setMarca(separartexto[2].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim());
                 produto.setPreco(Double.parseDouble(separartexto[3].replace("[", "").replace("]", "").replace("[]", "").replace(",", "").trim()));
