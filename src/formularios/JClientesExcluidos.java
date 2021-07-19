@@ -161,7 +161,7 @@ public class JClientesExcluidos extends javax.swing.JFrame {
         });
     }
     /*
-    *Ler a List de cliente e preenche a tabela;
+    *Ler a lista de cliente excluidos e preenche a tabela;
     */
     public void carregarTabela(){
         DefaultTableModel model = (DefaultTableModel) jTableClientesExcluidos.getModel();

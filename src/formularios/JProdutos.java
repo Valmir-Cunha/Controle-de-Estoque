@@ -25,6 +25,8 @@ public class JProdutos extends javax.swing.JFrame {
     
     /**
      * Creates new form JProdutos
+     * @param est
+     * @param gestor
      */
     public JProdutos(Estoque est, GestorDeEstoque gestor) {
         initComponents();
@@ -123,7 +125,11 @@ public class JProdutos extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+        
+    /*
+    Testa se possui categoria cadastradas, caso sim, abre a tela de cadastro de produtos.
+    Se não ouver categorias cadastradas mostra ao usuário uma mensagem
+    */
     private void jButtonProdutosCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutosCadastradosActionPerformed
         // Botao lista de produtos:
         if(est.getCategorias().isEmpty()){
@@ -135,11 +141,17 @@ public class JProdutos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonProdutosCadastradosActionPerformed
 
+    /*
+    Chama a função que testa sem tem produtos excluidos
+    */
     private void jButtonProdutosExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutosExcluidosActionPerformed
-        // Botão proddutos excluídos
+        // Botão produtos excluídos
         inicializarListaExcluidos();
     }//GEN-LAST:event_jButtonProdutosExcluidosActionPerformed
 
+    /*
+    Chama a tela  cadastro de produtos
+    */
     private void jButtonCadastroProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroProdutosActionPerformed
         // Botao cadastro de produtos
         if(est.getCategorias().isEmpty()){
@@ -191,7 +203,9 @@ public class JProdutos extends javax.swing.JFrame {
         });
     }
 
-    
+    /*
+    Caso tenha produtos excluidos abre a tela
+    */
     public void inicializarListaExcluidos(){
         if(est.getProdutosExcluidos().isEmpty()){
             JOptionPane.showMessageDialog(null, "A lista de produtos excluídos está vazia.");

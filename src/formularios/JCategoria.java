@@ -112,18 +112,25 @@ public class JCategoria extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    Chama a tela de cadastro de categoria
+    */
     private void jButtonCadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarCategoriaActionPerformed
         // Botao cadastrar categoria
         JCadastroCategoria cadastroCategoria = new JCadastroCategoria(est,gestor);
         cadastroCategoria.setVisible(true);
     }//GEN-LAST:event_jButtonCadastrarCategoriaActionPerformed
 
+    /*
+    Chama a tela de listagens das categoria
+    */
     private void jButtonCategoriasCadastradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriasCadastradasActionPerformed
         // Botao categoria cadastradas
         JListaCategorias listaCategoria = new JListaCategorias(est, gestor);
         listaCategoria.setVisible(true);
     }//GEN-LAST:event_jButtonCategoriasCadastradasActionPerformed
 
+    
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // Boao voltar
         dispose();

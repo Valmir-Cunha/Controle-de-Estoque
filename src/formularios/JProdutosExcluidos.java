@@ -224,6 +224,10 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
+    /*
+    Evento de click do mouse em uma linha da tabela, onde os dados do produto serão enviados para os 
+    txtField para melhor visualização.
+    */
     private void jTableProdutosExcluidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutosExcluidosMouseClicked
         // Carregar campos ao clicar em um na jtable
         Object ob = jTableProdutosExcluidos.getValueAt(jTableProdutosExcluidos.getSelectedRow(), 0);
@@ -275,6 +279,9 @@ public class JProdutosExcluidos extends javax.swing.JFrame {
         });
     }
     
+    /*
+    Busca os produtos excluidos e cria uma linha na tabela para cada um deles
+    */
     public void carregarProdutos(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutosExcluidos.getModel();

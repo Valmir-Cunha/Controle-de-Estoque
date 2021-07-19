@@ -25,8 +25,9 @@ public class JClientes extends javax.swing.JFrame {
     /**
      * Creates new form JClientes
      * @param adm
+     * @param administrador
      */
-    public JClientes(Administracao adm,Administrador administrador) {
+    public JClientes(Administracao adm, Administrador administrador) {
         initComponents();
         this.adm = adm;
         this.administrador = administrador;
@@ -124,18 +125,27 @@ public class JClientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    Chama a tela de cadastro de clientes
+    */
     private void jButtonCadastrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarClientesActionPerformed
         // Botao de cadastrar clientes
         JCadastroCliente cliente = new JCadastroCliente(adm, administrador);
         cliente.setVisible(true);
     }//GEN-LAST:event_jButtonCadastrarClientesActionPerformed
 
+    /*
+    Chama a tela de listagens de clientes
+    */
     private void jButtonClientesCadastradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesCadastradosActionPerformed
         // Botao lista clientes cadastrados
         JListaClientes listaCliente = new JListaClientes(adm, administrador);
         listaCliente.setVisible(true);
     }//GEN-LAST:event_jButtonClientesCadastradosActionPerformed
 
+    /*
+    Chama a tela de clientes excluídos
+    */
     private void jButtonClientesExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesExcluidosActionPerformed
         // Botao lista excluidos
         inicializarListaExcluidos();

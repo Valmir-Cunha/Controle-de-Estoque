@@ -34,6 +34,7 @@ public class JCaixa extends javax.swing.JFrame {
      * Creates new form JVendas
      * @param adm
      * @param est
+     * @param administrador
      */
     public JCaixa(Administracao adm, Estoque est,Administrador administrador) {
         initComponents();
@@ -517,10 +518,12 @@ public class JCaixa extends javax.swing.JFrame {
         // Botão adicionar protudo
         if(validarTextFieldNumericaInteira(jTextFieldCodProduto.getText().trim())){
             adicionarProdutoCompra();
+            jTextFieldCodProduto.setText("");
+            jTextFieldQuantidadeProduto.setText("");
             listarProdutos();
         }else{
             JOptionPane.showMessageDialog(null, "A quantidade descrita não é válida!");
-            jTextFieldCodProduto.setText("");
+            jTextFieldQuantidadeProduto.setText("");
         }
     }//GEN-LAST:event_jButtonAdicionarProdutoActionPerformed
 
@@ -562,14 +565,10 @@ public class JCaixa extends javax.swing.JFrame {
 
     private void jButtonListaTodasVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaTodasVendasActionPerformed
         // Lista todas as vendas
-        //if(adm.getListaVendas().isEmpty()){
-            jDialogListaVendas.setVisible(true);
-            jDialogListaVendas.setSize(480, 340);
-            jDialogListaVendas.setLocationRelativeTo(null);
-            listarVendas();
-        //} else{
-        //    JOptionPane.showMessageDialog(null, "Sem vendas cadastradas.");
-        //}
+        jDialogListaVendas.setVisible(true);
+        jDialogListaVendas.setSize(480, 340);
+        jDialogListaVendas.setLocationRelativeTo(null);
+        listarVendas();
     }//GEN-LAST:event_jButtonListaTodasVendasActionPerformed
 
     private void jButtonExibirListaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirListaProdutosActionPerformed
@@ -624,7 +623,7 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     /*
-    *
+    *Lista os clientes  na jbox dos clientes
     */
     private void listarClientes(){
         jComboBoxNomeCliente.removeAllItems();
@@ -640,7 +639,7 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     /*
-    *
+    *Lista os produttos disponiveis na jbox dos produtos
     */
     private void listarProdutos(){
         jComboBoxNomeProduto.removeAllItems();
@@ -661,10 +660,10 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     /*
-    *
+    * Busca o cliente selecionado e instancia a classe de venda com id
     */
     public void selecionarClienteCompra(){
-        if(jTextFieldCodCliente.getText().trim().isEmpty() || jComboBoxNomeCliente.getSelectedItem().equals("")){
+        if(jTextFieldCodCliente.getText().trim().isEmpty() && jComboBoxNomeCliente.getSelectedItem().equals("")){
             JOptionPane.showMessageDialog(null, "Por favor, preencha algum campo para seleção do cliente.");
         }else{
             venda = new Vendas(Integer.parseInt(jTextFieldCodVenda.getText().trim()));
@@ -678,7 +677,8 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     /*
-    *
+    *Testa se o cliente foi selecionado, caso sim, testa se a quantidade do produto é valida e se sim adiciona o produto 
+    na lista de produtos da venda e cria uma linha na tabela
     */
     public void adicionarProdutoCompra(){
         if(venda == null){
@@ -745,7 +745,7 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     /*
-    *
+    *Testa se tem produtos na venda, se sim, finaliza a venda
     */
     public void finalizarVenda(){
         try{
@@ -763,14 +763,16 @@ public class JCaixa extends javax.swing.JFrame {
     }
     
     /*
-    *
+    *Carrega id da venda
     */
     public void carregarCodigo(){
         String texto = String.valueOf(adm.getIdVendas());
         jTextFieldCodVenda.setText(texto);
     }
     
-    
+    /*
+    Busca na administtração a lista de vendas, e imprime cada venda na tabela
+    */
     public void listarVendas(){
         DefaultTableModel model = (DefaultTableModel) jTableListaVendas.getModel();
         ((DefaultTableModel) jTableListaVendas.getModel()).setRowCount(0);
@@ -791,6 +793,9 @@ public class JCaixa extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Exibe a lista de produtos da venda selecionada na tabela
+    */
     public void carregarListaProdutos(int id){
         DefaultTableModel model = (DefaultTableModel) jTableProdutosVenda.getModel(); 
         ((DefaultTableModel) jTableProdutosVenda.getModel()).setRowCount(0);

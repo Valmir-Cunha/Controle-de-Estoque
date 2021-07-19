@@ -1,3 +1,13 @@
-[q;1;q;12.0;1;teste
-,  q;1;q;12.0;10;teste
+[Coca cola 1L;2;Coca cola;5.0;2;Bebidas
+, Presunto 250g;3;x;5.0;2;Frios
+, Mussarela 250g;4;x;5.0;2;Frios
+, Pacote bala maca verde;6;x;15.0;1;Doces
+, Feijao;7;x;10.0;5;Diversos
+, Arroz;8;x;7.0;5;Diversos
+]
+[Coca cola 1L;2;Coca cola;5.0;3;Bebidas
+, Mussarela 250g;4;x;5.0;2;Frios
+, Bala fini banana;5;fini;5.0;3;Doces
+, Arroz;8;x;7.0;5;Diversos
+, Feijao;7;x;10.0;5;Diversos
 ]

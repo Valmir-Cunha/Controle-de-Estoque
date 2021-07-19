@@ -559,6 +559,10 @@ public class JListaClientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    Evento de click do mouse em uma linha da tabela, onde os dados do cliente serão enviados para os 
+    txtField para melhor visualização.
+    */
     private void jTableListaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaClientesMouseClicked
         // Carregando dados da tabela
         Object ob = jTableListaClientes.getValueAt(jTableListaClientes.getSelectedRow(), 0);
@@ -575,11 +579,18 @@ public class JListaClientes extends javax.swing.JFrame {
         jTextFieldEndereco.setText(texto);
     }//GEN-LAST:event_jTableListaClientesMouseClicked
 
+    /*
+    Ao clicar no botao, testa se alguma linha da tabela foi selecionada e ativa a edição dos txtField para alteração do produto
+    */
     private void jToggleButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonExcluirActionPerformed
         // Botão excluir
         excluirCliente();
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 
+    /*
+    Ao clicar no botao, testa se alguma linha da tabela foi selecionada e ativa a tela de edição dos txtField 
+    para alteração do cliente
+    */
     private void jToggleButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonEditarActionPerformed
         // Botão editar
         if(jTableListaClientes.getSelectedRow() != -1){
@@ -602,6 +613,7 @@ public class JListaClientes extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jToggleButtonVoltarActionPerformed
 
+    
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
         // Botao pesquisar cliente
         ((DefaultTableModel) jTableListaClientes.getModel()).setRowCount(0);
@@ -613,6 +625,9 @@ public class JListaClientes extends javax.swing.JFrame {
         carregarClientes();
     }//GEN-LAST:event_jButtonCarregarClientesActionPerformed
 
+    /*
+    Ao clicar no botao, testa se alguma linha da tabela foi selecionada e ativa a tela de comprar do cliente
+    */
     private void jButtonExibirComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirComprasActionPerformed
         // Exibir compras do cliente selecionado
         if(jTableListaClientes.getSelectedRow() != -1){
@@ -632,6 +647,9 @@ public class JListaClientes extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonExibirComprasActionPerformed
 
+    /*
+    Botão de cancelar a edição
+    */
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // Botão voltar
         jFrameEditar.setVisible(false);
@@ -703,7 +721,7 @@ public class JListaClientes extends javax.swing.JFrame {
     }
     
     /*
-    *
+    * Carrega lista de clientes na tabela
     */
     public void carregarClientes(){
         DefaultTableModel model = (DefaultTableModel) jTableListaClientes.getModel();
@@ -730,6 +748,9 @@ public class JListaClientes extends javax.swing.JFrame {
     
     /*
     *
+    Pega os dados dos txtField codigo e nome, validando os dados, e busca por caso o outro esteja vazio, caso os dois estejam preenchidos,
+    busca pelo id.Caso encontre o produtos, ativa os botoes de edição e exclusão, limpa a tabela, 
+    cria uma linha para o produto e o exibe. 
     */
     public void pesquisarCliente(){
         Cliente cliente;
@@ -783,7 +804,8 @@ public class JListaClientes extends javax.swing.JFrame {
     }
     
     /*
-    *
+    Pega o id de produo da linha selecionada da tabela e o exclui dos clientes cadastrados 
+    e adiciona na lista de clientes excluidos. Apos a exclusao, remove a linha do cliente da tabela
     */
     private void excluirCliente(){
         if(jTableListaClientes.getSelectedRow() != -1){
@@ -800,7 +822,7 @@ public class JListaClientes extends javax.swing.JFrame {
     }
 
     /*
-    *
+    Pegas os dados dos txtField, busca o cliente pelo id, que nao pode ser alterado, e atualiza os dados
     */
     public void editarCliente(){
         int id;
@@ -825,10 +847,7 @@ public class JListaClientes extends javax.swing.JFrame {
             }
         }
     }
-    
-    /*
-    *
-    */
+
     public void restaurarTelaEdicao(){
         jButtonSalvar.setEnabled(true);
         jButtonCancelarEdicao.setEnabled(true);
@@ -841,7 +860,7 @@ public class JListaClientes extends javax.swing.JFrame {
     }
     
     /*
-    *
+    * Carrega a lista de compras do cliente selecionado na tabela
     */
     public void carregarListaCompras(int id){
         DefaultTableModel model = (DefaultTableModel) jTableListaCompras.getModel(); 
@@ -862,8 +881,8 @@ public class JListaClientes extends javax.swing.JFrame {
         } 
     }
     
-    /*
-    *
+    /* 
+    * Carrega a lista de produtos da compra selecionado na tabela
     */
     public void carregarProdutosCompra(int id){
         DefaultTableModel model = (DefaultTableModel) jTableListaProdCompras.getModel(); 
@@ -885,6 +904,8 @@ public class JListaClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro.");
         } 
     }
+    
+    
     public boolean validarTextFieldNumericaInteira(String txt){
         try {
             Integer.parseInt(txt);

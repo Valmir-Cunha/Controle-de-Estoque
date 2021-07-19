@@ -200,7 +200,10 @@ public class JCadastroProduto extends javax.swing.JFrame {
         // Botão voltar
         dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
-
+    /*
+    Antes de chamar a função de cadastro, valida se a entrada passada no preco e quantidade são validas, 
+    caso sejam, chamam a funcao de cadastro de produtos
+    */
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão cadastrar produto
         if(validarTextFieldNumerica(jTextFieldPreco.getText().trim()) && validarTextFieldNumericaInteira(jTextFieldEstoque.getText().trim())){
@@ -248,20 +251,27 @@ public class JCadastroProduto extends javax.swing.JFrame {
         });
     }
 
+    /*
+    Pega o id de produto disponível no estoque e carregar no txtFielad codigo
+    */
     public void carregarCodigo(){
         String texto = String.valueOf(est.getIdProdutos());
         jTextFieldCodProduto.setText(texto);
     }
     
+    /*
+    Carrega a lista de categoria no Jbox, caso a lista esteja vazia informa ao usuário
+    */
     public void listarCategorias(){
         jComboBoxCategoria.removeAllItems();
         if(est.getCategorias().isEmpty()){
             JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada.");
         }else{
             try{
-                for (int i =0 ; i < est.getCategorias().size(); i++){
-                    jComboBoxCategoria.addItem(est.getCategorias().get(i).getNomeCategoria());
+                for(Categoria categoria: est.getCategorias()){
+                    jComboBoxCategoria.addItem(categoria.getNomeCategoria());
                 }
+
             }catch(NullPointerException ex){
                 System.out.print(ex.getMessage());
                 JOptionPane.showMessageDialog(null, "Categorias não encontradas");
@@ -272,6 +282,9 @@ public class JCadastroProduto extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Limpa os dados dos campos
+    */
     public void resetarCampos() {
         jTextFieldNomeProd.setText("");
         jTextFieldMarca.setText("");
@@ -281,6 +294,9 @@ public class JCadastroProduto extends javax.swing.JFrame {
         carregarCodigo();
     }    
     
+    /*
+    Pega os parâmetretos dos txField, instancia um produto e o adiciona ele na lista de produtos cadastrados da categoria
+    */
     public void cadastraProduto(){
         int id = Integer.parseInt(jTextFieldCodProduto.getText().trim());
         Categoria categoria;
@@ -303,6 +319,9 @@ public class JCadastroProduto extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Valida se o txtfield possui somente numeros, sejam eles inteiros ou reais
+    */
     public boolean validarTextFieldNumerica(String txt){
         try {
             Double.parseDouble(txt);
@@ -313,6 +332,9 @@ public class JCadastroProduto extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Valida se o txtfield possui somente numeros inteiros, usada para validar a entrada da quantidade de produtos
+    */
     public boolean validarTextFieldNumericaInteira(String txt){
         try {
             Integer.parseInt(txt);

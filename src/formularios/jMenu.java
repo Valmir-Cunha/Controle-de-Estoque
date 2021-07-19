@@ -33,6 +33,8 @@ public class jMenu extends javax.swing.JFrame {
      * @param adm
      * @param estoque
      * @param gestor
+     * @param administrador
+     * @param arq
      */
     public jMenu(Administracao adm,Estoque estoque,GestorDeEstoque gestor,Administrador administrador, Arquivos arq) {
         initComponents();
@@ -159,13 +161,19 @@ public class jMenu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /*
+    Chama a tela de opcoes das categorias
+    */
     private void jButtonCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCategoriasActionPerformed
         // Botão categoria
         JCategoria categoria = new JCategoria(est, gestor);
         categoria.setVisible(true);
     }//GEN-LAST:event_jButtonCategoriasActionPerformed
 
+    /*
+    Chama a tela do caixa aja clientes e produtos cadastrados
+    */
     private void jButtonCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCaixaActionPerformed
         //Botão do caixa
         if(adm.getClientes().isEmpty() || est.getProdutosCadastrados().isEmpty()){
@@ -177,12 +185,18 @@ public class jMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonCaixaActionPerformed
 
+    /*
+    Chama a tela de opcoes dos clientes
+    */
     private void jButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClientesActionPerformed
         // Botão cliente
         JClientes clientes = new JClientes(adm,administrador);
         clientes.setVisible(true);
     }//GEN-LAST:event_jButtonClientesActionPerformed
 
+    /*
+    Chama a tela de opcoes dos produtos
+    */
     private void jButtonProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProdutoActionPerformed
         // Botão produtos
         JProdutos produtos = new JProdutos(est,gestor);

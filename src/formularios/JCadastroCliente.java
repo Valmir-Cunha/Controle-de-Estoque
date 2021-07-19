@@ -66,7 +66,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
         jLabelNomeCliente.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabelNomeCliente.setText("Nome:");
 
-        jTextFieldCodCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextFieldCodCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTextFieldCodCliente.setEnabled(false);
 
         jLabelCelular.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
@@ -163,6 +163,9 @@ public class JCadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    Le o txtField do numero de celular, caso só possua numero, chama a função de cadasttro, caso contrário, mostra uma mensagem na tela
+    */
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão de cadastrar
         if(validarTextFieldNumerica(jTextFieldCelular.getText().trim())){
@@ -178,7 +181,7 @@ public class JCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
     
     /*
-    *Limpa os campos e fecha tela;
+    *Limpa os campos;
     */
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // Botão cancelar
@@ -246,12 +249,15 @@ public class JCadastroCliente extends javax.swing.JFrame {
         }
         
     }
-
+    /*
+    Valida se o txtfield possui somente numeros
+    */
     public boolean validarTextFieldNumerica(String txt){
-        String caracteres="0987654321.";
-        if(!caracteres.contains(txt+"")){
+        try {
+            Double.parseDouble(txt);
             return true;
-        }else{
+        }catch(NumberFormatException ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }

@@ -155,6 +155,10 @@ public class JCadastroCategoria extends javax.swing.JFrame {
         jTextFieldNomeCategoria.setText("");
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    
+    /*
+    Le os txtField do jframe, se todos estiverem preenchidos, cadastra, senão, mostrar mensagem
+    */
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         // Botão cadastro
         if(jTextFieldNomeCategoria.getText().isEmpty()){
@@ -211,6 +215,9 @@ public class JCadastroCategoria extends javax.swing.JFrame {
         });
     }
     
+    /*
+    Pega o id de categoria disponível na adminisração e carregar no txtFielad codigo
+    */
     public void carregarCodigo(){
         String texto = String.valueOf(est.getIdCategoria());
         jTextFieldCodCategoria.setText(texto);

@@ -77,7 +77,7 @@ public class JListaProduto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProdutos = new javax.swing.JTable();
         jButtonSalvar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonCarregarTodosProdutos = new javax.swing.JButton();
         jButtonListarProdDisponiveis = new javax.swing.JButton();
         jButtonListaProdutosIndis = new javax.swing.JButton();
 
@@ -186,11 +186,11 @@ public class JListaProduto extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jButton2.setText("Carregar todos os produtos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCarregarTodosProdutos.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jButtonCarregarTodosProdutos.setText("Carregar todos os produtos");
+        jButtonCarregarTodosProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonCarregarTodosProdutosActionPerformed(evt);
             }
         });
 
@@ -268,7 +268,7 @@ public class JListaProduto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jToggleButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2))
+                                    .addComponent(jButtonCarregarTodosProdutos))
                                 .addGap(10, 10, 10)))))
                 .addContainerGap())
         );
@@ -306,7 +306,7 @@ public class JListaProduto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonListaProdutosIndis, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCarregarTodosProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonListarProdDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,6 +328,9 @@ public class JListaProduto extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
+    /*
+    Chama a função de excluir produto e limpa os campos
+    */
     private void jToggleButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonExcluirActionPerformed
         //Botão Excluir
         excluirProduto();
@@ -339,6 +342,9 @@ public class JListaProduto extends javax.swing.JFrame {
         jTextFieldEstoque.setText("");    
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 
+    /*
+    Ao clicar no botao, testa se alguma linha da tabela foi selecionada e ativa a edição dos txtField para alteração do produto
+    */
     private void jToggleButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonEditarActionPerformed
         // Botão editar
         if(jTableProdutos.getSelectedRow() != -1){
@@ -359,6 +365,10 @@ public class JListaProduto extends javax.swing.JFrame {
         pesquisarCliente();
     }//GEN-LAST:event_jButtonPesquisarActionPerformed
 
+    /*
+    Evento de click do mouse em uma linha da tabela, onde os dados do produto serão enviados para os 
+    txtField para melhor visualização.
+    */
     private void jTableProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutosMouseClicked
         // Carregar campos ao clicar em um na jtable
         Object ob = jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 0);
@@ -375,11 +385,15 @@ public class JListaProduto extends javax.swing.JFrame {
         jTextFieldPreco.setText(ob.toString());
     }//GEN-LAST:event_jTableProdutosMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonCarregarTodosProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarregarTodosProdutosActionPerformed
         // Botão de carregar todos os produtos
         carregarProdutos();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+        
+    }//GEN-LAST:event_jButtonCarregarTodosProdutosActionPerformed
+    
+    /*
+    Valida os campos da edicao e chama a funcao para editar caso sejam validos
+    */
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // Salvar edição produto
         if(validarTextFieldNumerica( jTextFieldPreco.getText().trim()) && validarTextFieldNumericaInteira(jTextFieldEstoque.getText().trim())){
@@ -389,14 +403,30 @@ public class JListaProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
+    /*
+    Chama a funcao de listagem e caso ela não coloque nenhum produto na tabela a lista estava vazia
+    */
     private void jButtonListaProdutosIndisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaProdutosIndisActionPerformed
         // Lista produto indisponiveis
         carregarProdutosIndisponiveis();
+        if(jTableProdutos.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Sem produtos fora de estoque.");
+            jToggleButtonExcluir.setEnabled(false);
+            jToggleButtonEditar.setEnabled(false);   
+        }
     }//GEN-LAST:event_jButtonListaProdutosIndisActionPerformed
 
+    /*
+    Chama a funcao de listagem e caso ela não coloque nenhum produto na tabela a lista estava vazia
+    */
     private void jButtonListarProdDisponiveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarProdDisponiveisActionPerformed
         // Lista produtos disponiveis
         carregarProdutosDisponiveis();
+        if(jTableProdutos.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "Sem produtos no estoque.");
+            jToggleButtonExcluir.setEnabled(false);
+            jToggleButtonEditar.setEnabled(false);   
+        }
     }//GEN-LAST:event_jButtonListarProdDisponiveisActionPerformed
 
     /**
@@ -432,7 +462,12 @@ public class JListaProduto extends javax.swing.JFrame {
             }
         });
     }
-      private void excluirProduto(){
+    
+    /*
+    Pega o id de produo da linha selecionada da tabela e o exclui dos produtos cadastrados 
+    e adiciona na lista de produtos excluidos. Apos a exclusao, remove a linha do produto da tabela
+    */
+    public void excluirProduto(){
         if(jTableProdutos.getSelectedRow() != -1){
             DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
             Produto produto;
@@ -447,7 +482,9 @@ public class JListaProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "É necessário selecionar, na tabela, o produto que deseja excluir.");
         }
     }
-    
+    /*
+    Carrega todos os produtos na tabela
+    */
     public void carregarProdutos(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
@@ -470,7 +507,10 @@ public class JListaProduto extends javax.swing.JFrame {
             }      
         }
     }
-    
+    /*
+    Pega a lista de produtos cadastrados e imprime na table os que possuiem estoque > 0. Caso possua produtos, ativa os
+    botoes de edição e exclusão.
+    */
     public void carregarProdutosDisponiveis(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
@@ -496,6 +536,10 @@ public class JListaProduto extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Pega a lista de produtos cadastrados e imprime na table os que possuiem estoque = 0. Caso possua produtos, ativa os
+    botoes de edição e exclusão.
+    */
     public void carregarProdutosIndisponiveis(){
         //carregarProdutos();
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
@@ -521,7 +565,11 @@ public class JListaProduto extends javax.swing.JFrame {
         }
     }
     
-    
+    /*
+    Pega os dados dos txtField codigo e nome, validando os dados, e busca por caso o outro esteja vazio, caso os dois estejam preenchidos,
+    busca pelo id.Caso encontre o produtos, ativa os botoes de edição e exclusão, limpa a tabela, 
+    cria uma linha para o produto e o exibe. 
+    */
     public void pesquisarCliente(){
         Produto produto;
         DefaultTableModel model = (DefaultTableModel) jTableProdutos.getModel();
@@ -570,7 +618,9 @@ public class JListaProduto extends javax.swing.JFrame {
             }
         }
     }
-    
+    /*
+    Pegas os dados dos txtField, busca o produto pelo id, que nao pode ser alterado, e atualiza os dados
+    */
     public void editarProduto(){
         int id;
         String nomeCategoria;
@@ -580,8 +630,7 @@ public class JListaProduto extends javax.swing.JFrame {
         id = (int) jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 0);
         nomeCategoria = String.valueOf(jTableProdutos.getValueAt(jTableProdutos.getSelectedRow(), 3)); 
         if(jTextFieldNomeProd.getText().isEmpty() || jTextFieldMarca.getText().isEmpty() || jTextFieldPreco.getText().isEmpty() || jTextFieldEstoque.getText().isEmpty() ){
-            JOptionPane.showMessageDialog(null, "Todos os campos tem que ser preenchidos.");
-            
+            JOptionPane.showMessageDialog(null, "Todos os campos tem que ser preenchidos.");   
         } else{
             categoria = est.encontrarCategoriaNome(String.valueOf(jComboBoxCategoria.getSelectedItem()));
             boolean teste = gestor.editarProduto(id,jTextFieldNomeProd.getText(),jTextFieldMarca.getText(),Double.parseDouble(jTextFieldPreco.getText()), Integer.parseInt(jTextFieldEstoque.getText()), categoria);
@@ -600,6 +649,9 @@ public class JListaProduto extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Carrega a lista de categoria no Jbox, caso a lista esteja vazia informa ao usuário
+    */
     public void listarCategorias(){
         jComboBoxCategoria.removeAllItems();
         if(est.getCategorias().isEmpty()){
@@ -619,6 +671,9 @@ public class JListaProduto extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Valida se o txtfield possui somente numeros, sejam eles inteiros ou reais
+    */
     public boolean validarTextFieldNumerica(String txt){
         try {
             Double.parseDouble(txt);
@@ -629,6 +684,9 @@ public class JListaProduto extends javax.swing.JFrame {
         }
     }
     
+    /*
+    Valida se o txtfield possui somente numeros inteiros, usada para validar a entrada da quantidade de produtos
+    */
     public boolean validarTextFieldNumericaInteira(String txt){
         try {
             Integer.parseInt(txt);
@@ -640,7 +698,7 @@ public class JListaProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonCarregarTodosProdutos;
     private javax.swing.JButton jButtonListaProdutosIndis;
     private javax.swing.JButton jButtonListarProdDisponiveis;
     private javax.swing.JButton jButtonPesquisar;
